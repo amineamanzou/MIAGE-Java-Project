@@ -1,3 +1,6 @@
+package comptebanquaire;
+
+
 /**
  *
  * @author Amanzou Amine
@@ -37,16 +40,17 @@ public class AppBanque {
         
         affiche(c1);
         affiche(c2);
+        
     }
     
     public static void affiche(Compte c){
         System.out.println("––––––––––––––––––––––––––––––");
-        System.out.println("Numero de compte : \t\t" + c.getNumCompte() + "€");
+        System.out.println("Numero de compte : \t\t" + c.getNumCompte());
         System.out.println("Nom du titulaire : \t\t" + c.getNomTitulaire());
-        System.out.println("Decouvert Maximal autorise : \t" + c.getDecouvertMax() + "€");
-        System.out.println("Debit Maximal autorise : \t" + c.getDebitMax() + "€");
-        System.out.println("Solde du compte : \t\t" + c.getSolde() + "€");
-        if(c.getSituationDecouvert()!=0) {
+        System.out.println("Decouvert Maximal autorise : \t" + c.getDecouvertMax() + Compte.DEVISE_SIGNE);
+        System.out.println("Debit Maximal autorise : \t" + c.getDebitMax() + Compte.DEVISE_SIGNE);
+        System.out.println("Solde du compte : \t\t" + c.getSolde() + Compte.DEVISE_SIGNE);
+        if(c.getSituationDecouvert()!=false) {
             System.out.println("\tAttention ce compte est a decouvert !");
         }
         System.out.println("––––––––––––––––––––––––––––––");

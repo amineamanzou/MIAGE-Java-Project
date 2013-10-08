@@ -1,4 +1,5 @@
-import java.util.Random;
+package comptebanquaire;
+
 
 /**
  *
@@ -6,44 +7,41 @@ import java.util.Random;
  */
 public class Compte {
     
+    /* Final sur une methode rend cette derniere impossible a surcharger */
+    public static final String DEVISE_SIGNE = "€";
+    public static final String DEVISE_LIBELLE = "Euros";
+    public static final double DEFAULT_MAX_DECOUVERT = 1000;
+    public static final double DEFAULT_MAX_DEBIT = 800;
+    static private int NUM_COMPTE = 0;
     private int numCompte;
     private String nomTitulaire;
-    private float decouvertMax;
-    private float debitMax;
-    private float situationDecouvert;
-    private float debitAutorisee;
-    private float solde;
+    private double decouvertMax;
+    private double debitMax;
+    private double debitAutorisee;
+    private double solde;
     
-    /*
-     * Constructeur initialisant le compte au valeur souhaité
-     */
-    public Compte(String nom, float depotInitial, float decouvertMax, float debitMax) {
-        Random r = new Random();
-        this.numCompte = r.nextInt();
-        if( this.numCompte < 0 ) {
-            this.numCompte*=-1;
-        }
-        this.nomTitulaire = nom;
-        this.solde = depotInitial;
-        this.decouvertMax = decouvertMax;
-        this.debitMax = debitMax;
-        this.situationDecouvert = 0;
-    }
     
     /*
      * Constructeur initialisant le compte au valeur par défaut
      */
     public Compte(String nom){
-        Random r = new Random();
-        this.numCompte = r.nextInt();
-        if( this.numCompte < 0 ) {
-            this.numCompte*=-1;
-        }
+        this(nom,0.0,DEFAULT_MAX_DECOUVERT,DEFAULT_MAX_DEBIT);
+    }
+    
+    /**
+     * Constructeur initialisant le compte au valeur souhaite
+     * 
+     * @param nom Nom du titulaire du compte
+     * @param depotInitial Depot a la creation du compte
+     * @param decouvertMax Decouvert maximum autorise
+     * @param debitMax Debit maximal autorise
+     */
+    public Compte(String nom, double depotInitial, double decouvertMax, double debitMax) {
+        this.numCompte = NUM_COMPTE++;
         this.nomTitulaire = nom;
-        this.solde = 0;
-        this.debitMax = 1000;
-        this.decouvertMax = 800;
-        this.situationDecouvert = 0;
+        this.solde = depotInitial;
+        this.decouvertMax = decouvertMax;
+        this.debitMax = debitMax;
     }
 
     public int getNumCompte() {
@@ -54,69 +52,62 @@ public class Compte {
         return this.nomTitulaire;
     }
     
-    public float getDecouvertMax() {
+    public double getDecouvertMax() {
         return this.decouvertMax;
     }
     
-    public void setDecouvertMax(float value) {
+    public void setDecouvertMax(double value) {
         this.decouvertMax = value;
     }
     
-    public float getDebitMax() {
+    public double getDebitMax() {
         return this.debitMax;
     }
     
-    public void setDebitMax(float value) {
+    public void setDebitMax(double value) {
         this.debitMax = value;
     }
 
-    public float getSolde() {
+    public double getSolde() {
         return this.solde;
     }
     
-    public void setSolde(float value) {
-        this.solde = value;
+    public boolean getSituationDecouvert() {
+        if(this.solde < 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
-    public float getSituationDecouvert() {
-        return this.situationDecouvert;
-    }
-    
-    /*
+    /**
      * Operation consistant a ajouter un montant positif au solde du compte
      * 
      * @return boolean Succes ou echec de l'operation
      */
-    public boolean crediter(float value) {
+    public boolean crediter(double value) {
         if ( value > 0 ) {
             this.solde += value;
-            if ( this.solde >= 0) {
-                this.situationDecouvert = 0;
-            }
-            else {
-                this.situationDecouvert = this.solde*-1;
-            }
             return true;
         }
         return false;
     }
     
-    /*
+    /**
      * Operation consistant a soustraire un montant positif au solde tout en respectant le debit maximal
      * ainsi que le découvert maximal autorise
      * 
+     * @param double value Montant a debiter
      * @return boolean Succes ou echec de l'operation
      */
-    public boolean debiter(float value) {
-        float soldeResultant;
+    public boolean debiter(double value) {
+        double soldeResultant;
         if ( value > 0 ) {
             soldeResultant = this.solde - value;
             if ( value <= this.debitMax ) {
                 if ( soldeResultant > this.decouvertMax*-1 ) {
-                    this.setSolde(soldeResultant);
-                    if (this.solde < 0) {
-                        this.situationDecouvert = this.solde*-1;
-                    }
+                    this.solde = soldeResultant;
                     return true;
                 }
             }
@@ -125,14 +116,26 @@ public class Compte {
     }
     
     /*
+     * Calcul le montant max pouvant etre retire
+     * 
+     * @return Montant maximum
+     */
+    public double montantMaxADebiter() {
+        return Math.min(this.debitMax,this.decouvertMax+this.solde);
+    }
+    
+    /*
      * Operation consistant a effectuer un virement d'une somme vers un autre compte
      * 
      * @return boolean Succes ou echec de l'operation
      */
-    public boolean virerSomme(Compte dest, float value) {
-        boolean result;
-        result = this.debiter(value);
-        dest.crediter(value);
-        return result;
+    public boolean virerSomme(Compte dest, double value) {
+        if ( this.debiter(value) ) {
+            return false;
+        }
+        if ( dest.crediter(value) ) {
+            return false;
+        }
+        return true;
     }
 }
