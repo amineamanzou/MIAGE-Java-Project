@@ -24,7 +24,7 @@ public class PolygoneTest {
         System.out.println("size");
         Polygone instance = new Polygone(5);
         int expResult = 5;
-        int result = instance.getLength();
+        int result = instance.size();
         assertEquals(expResult, result);
     }
 

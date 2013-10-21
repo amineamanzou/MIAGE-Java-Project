@@ -26,7 +26,7 @@ public class TriangleTest {
         Point p2 = new Point(0.0,0.0);
         Point p3 = new Point(3.0,0.0);
         Triangle instance = new Triangle(p1,p2,p3);
-        Polygone other = new Triangle(p1,p2,p3);
+        Polygone other = new Polygone(p1,p2,p3);
         double expResult = other.surface();
         double result = instance.surface();
         assertEquals(expResult, result, 1e-10);

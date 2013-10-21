@@ -24,7 +24,7 @@ public class RectangleTest {
         System.out.println("surface");
         Point sg = new Point(0.0,3.0);
         Point id = new Point(6.0,0.0);
-        Polygone other = new Rectangle(sg,id);
+        Polygone other = new Polygone(sg,id);
         Rectangle instance = new Rectangle(sg,id);
         double expResult = other.surface();
         double result = instance.surface();

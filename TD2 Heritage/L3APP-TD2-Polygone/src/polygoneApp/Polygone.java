@@ -12,8 +12,8 @@ import java.util.Arrays;
  */
 public class Polygone {
     
-    private int length;                  // Number of Points in the polygon
-    private Point[] sommets;        // P[0] = P[length] f
+    private int N;                  // Number of Points in the polygon
+    private Point[] sommets;        // P[0] = P[N] f
 
     /**
      * Construct a polygon using an array of Point
@@ -21,9 +21,9 @@ public class Polygone {
      */
     public Polygone(Point[] t) {
         int i;
-        this.length = t.length;
-        this.sommets = new Point[length];
-        for (i=0; i < this.length; i++) {
+        this.N = t.length;
+        this.sommets = new Point[N];
+        for (i=0; i < this.N; i++) {
             this.sommets[i] = t[i];
         }
     }
@@ -34,11 +34,39 @@ public class Polygone {
      */
     public Polygone(int size) {
         int i;
-        this.length = size;
-        this.sommets = new Point[length];
-        for (i=0; i < this.length; i++) {
+        this.N = size;
+        this.sommets = new Point[N];
+        for (i=0; i < this.N; i++) {
             this.sommets[i] = new Point();
         }
+    }
+    
+    /**
+     * Construct a polygon with 3 points. Constructor used by Triangle Class.
+     * @param Point p1
+     * @param Point p2
+     * @param Point p3 
+     */
+    public Polygone(Point p1, Point p2, Point p3) {
+        this.N = 3;
+        this.sommets = new Point[N];
+        this.sommets[0] = p1;
+        this.sommets[1] = p2;
+        this.sommets[2] = p3;
+    }
+    
+    /**
+     * Construct a polygon with 3 points. Constructor used by Rectangle Class.
+     * @param Point sg
+     * @param Point id 
+     */
+    public Polygone(Point sg, Point id) {
+        this.N = 4;
+        this.sommets = new Point[N];
+        this.sommets[0] = sg;
+        this.sommets[2] = id;
+        this.sommets[1] = new Point(id.getX(),sg.getY());
+        this.sommets[3] = new Point(sg.getX(),id.getY());
     }
     
     /**
@@ -50,27 +78,11 @@ public class Polygone {
     }
     
     /**
-     * Set all the array containing the points of the current polygon.
-     * @param sommets 
-     */
-    public void setSommets(Point[] sommets){
-        this.sommets = sommets;
-    }
-    
-    public void setSommet(int i, Point p){
-        this.sommets[i] = p;
-    }
-    
-    /**
      * Return the number of point in the current polygon.
-     * @return int length
+     * @return int size
      */
-    public int getLength() { 
-        return this.length; 
-    }
-    
-    public void setLength(int size){
-        this.length = size;
+    public int size() { 
+        return N; 
     }
     
     /**
@@ -80,10 +92,10 @@ public class Polygone {
     public double perimetre() {
         int i;
         double result = 0;
-        for (i=0; i < this.length-1; i++) {
+        for (i=0; i < this.N-1; i++) {
             result += this.sommets[i].distance(this.sommets[i+1]);
         }
-        result += this.sommets[this.length-1].distance(this.sommets[0]);
+        result += this.sommets[this.N-1].distance(this.sommets[0]);
         return result;
     }
     
@@ -94,12 +106,12 @@ public class Polygone {
     public double surface() {
         int i;
         double result = 0.0;
-        for (i = 0; i < this.length-1; i++) {
+        for (i = 0; i < this.N-1; i++) {
             result += (this.sommets[i].getX() * this.sommets[i+1].getY()) 
                         - (this.sommets[i].getY() * this.sommets[i+1].getX());
         }
-        result += (this.sommets[this.length-1].getX() * this.sommets[0].getY()) 
-                        - (this.sommets[this.length-1].getY() * this.sommets[0].getX());
+        result += (this.sommets[this.N-1].getX() * this.sommets[0].getY()) 
+                        - (this.sommets[this.N-1].getY() * this.sommets[0].getX());
         result *= 0.5;
         return Math.abs(result);
     }
@@ -141,37 +153,40 @@ public class Polygone {
         }
         
         final Polygone other = (Polygone) obj;
-        if (this.length != other.length) {
+        if (!Arrays.deepEquals(this.sommets, other.sommets)) {
+            return false;
+        }
+        else if (this.N != other.N) {
             return false;
         }
         
         int startSommet = -1;
-        for (i=0; i <= this.length; i++) {
-            if(i == this.length){
+        for (i=0; i <= this.N; i++) {
+            if(i == this.N){
                 return false;
             }
             // Searching for the same starting 
             if (this.sommets[0].equals(other.sommets[i])){
                 startSommet = i;
-                i = this.length;
+                i = this.N;
             }
             
         }
-        for(i=0,j=startSommet; i < this.length; i++,j++){
+        for(i=0,j=startSommet; i < this.N; i++,j++){
             if (!this.sommets[i].equals(other.sommets[j])){
                 return false;
             }
-            if (j == this.length-1){
+            if (j == this.N-1){
                 j = 0;
             }
         }
         i = 0;
         j = startSommet;
-        while(i < this.length){
+        while(i < this.N){
             if (!this.sommets[i].equals(other.sommets[j])){
                 return false;
             }
-            if (j == this.length-1){
+            if (j == this.N-1){
                 j = 0;
             }
             else {
@@ -189,7 +204,7 @@ public class Polygone {
      */
     @Override
     public String toString() {
-        return "Polygone à " + this.length + " sommets";
+        return "Polygone à " + this.N + " sommets";
     }
     
 }

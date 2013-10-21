@@ -10,9 +10,6 @@ package polygoneApp;
  */
 public class Point {
     
-    // Constant
-    public final static double EPSILON = 1e-10;
-    
     // Coordinates
     private double x;
     private double y;
@@ -72,7 +69,7 @@ public class Point {
      * @return 
      */
     public static boolean memeReel(double r1, double r2) {
-        return Math.abs(r1-r2) < EPSILON ;
+        return Math.abs(r1-r2) < 1e-10 ;
     } 
     
     /**

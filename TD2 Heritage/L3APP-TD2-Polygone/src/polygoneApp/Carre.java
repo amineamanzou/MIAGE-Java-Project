@@ -19,14 +19,10 @@ public class Carre extends Rectangle {
      * @param longueur 
      */
     public Carre ( Point sg, double longueur ) {
-        super(sg,new Point(sg.getX()+longueur,sg.getY()-longueur));
-        Point[] sommets = this.getSommets();
-        double distance1 = sommets[0].distance(sommets[1]);
-        this.setSideLong(distance1);
-        this.setSideLarg(distance1);
+        super(sg,longueur);
         this.side = longueur;
     }
-
+    
     /**
      * Return the surface of the squarre
      * @return double surface
@@ -34,15 +30,6 @@ public class Carre extends Rectangle {
     @Override
     public double surface() {
         return this.side*this.side;
-    }
-    
-    /**
-     * Return the perimeter of the square.
-     * @return double perimeter
-     */
-    @Override
-    public double perimetre() {
-        return side*4;
     }
 
     /**

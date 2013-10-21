@@ -5,7 +5,6 @@
 package polygoneApp;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -14,10 +13,10 @@ import java.util.List;
 public class ListPolygone {
     
     // List of polygone
-    private List<Polygone> list;
+    private ArrayList list;
 
     /**
-     * Construct a list of polygone creating an empty Arraylist class
+     * Construt a list of polygone creating an empty Arraylist class
      */
     public ListPolygone() {
         this.list = new ArrayList();

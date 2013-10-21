@@ -20,12 +20,7 @@ public class Rectangle extends Polygone {
      * @param Point id 
      */
     public Rectangle ( Point sg, Point id ) {
-        super(new Point[4]);
-        this.setLength(4);
-        this.setSommet(0,sg);
-        this.setSommet(2,id);
-        this.setSommet(1,new Point(id.getX(),sg.getY()));
-        this.setSommet(3,new Point(sg.getX(),id.getY()));
+        super(sg,id);
         Point[] sommets = this.getSommets();
         double distance1 = sommets[0].distance(sommets[1]);
         double distance2 = sommets[1].distance(sommets[2]);
@@ -38,13 +33,18 @@ public class Rectangle extends Polygone {
             this.sideLarg = distance1;
         }
     }
-
-    public void setSideLong(double sideLong) {
-        this.sideLong = sideLong;
-    }
-
-    public void setSideLarg(double sideLarg) {
-        this.sideLarg = sideLarg;
+    
+    /**
+     * 
+     * @param sg
+     * @param longueur 
+     */
+    public Rectangle ( Point sg, double longueur ) {
+        this(sg,new Point(sg.getX()+longueur,sg.getY()-longueur));
+        Point[] sommets = this.getSommets();
+        double distance1 = sommets[0].distance(sommets[1]);
+        this.sideLong = distance1;
+        this.sideLarg = distance1;
     }
     
     /**
