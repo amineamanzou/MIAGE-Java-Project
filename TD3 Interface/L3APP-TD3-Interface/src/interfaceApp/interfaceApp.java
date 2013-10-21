@@ -14,7 +14,17 @@ public class interfaceApp {
      */
     public static void main(String[] args) {
         
-
+         /** A faire :
+         *      - Parcours dans le meme sens pour l'iterateur
+         *      - Implem remove
+         *      - Factoriser le code tabdynamique herite de tabstatic
+         *      - return (E[]) Array.newInstance(Object.class, taille);
+         *      - Arrays.fill(pile, 0, sommet, null); pour vider et size = 0;
+         *      - Pas de copy dans iterator
+         *      - Arrays.copyOf(pile, pile.length + increment);
+         *      - Ajouter precedent dans iterator de ListeChainee
+         * 
+         */
         System.out.println("–––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
         System.out.println("Creation d'une pile statique de String de taille 10 : ");
         Pile<String> tabtest = new TabStatiquePile<String>(10);
