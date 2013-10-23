@@ -118,15 +118,88 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
 
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(this.racine == null){
+            return null;
+        }
+        else {
+            int cmp = key.compareTo(this.racine.key);
+            if(cmp == 0) {
+                return this.removeHelper(key);
+            }
+            else if(cmp < 0){
+                return this.racine.fg.remove(key);
+            }
+            else {
+                return this.racine.fd.remove(key);
+            }
+        }
     }
-
+    
+    private V removeHelper(K key){
+        if(this.racine == null ){
+            return null;
+        }
+        else {
+            // Case where it is at the end of the tree 
+            if(this.racine.fd == null && this.racine.fg == null) {
+                V tmp = this.racine.value;
+                this.racine = null;
+                return tmp;
+            }
+            // Case where the fd is null and fg exist
+            if(this.racine.fd == null && this.racine.fg != null) {
+                V tmp = this.racine.value;
+                this.racine = this.racine.fg.racine;
+                return tmp;
+            }
+            // Case where the fg is null and fd exist
+            if(this.racine.fd != null && this.racine.fg == null) {
+                V tmp = this.racine.value;
+                this.racine = this.racine.fd.racine;
+                return tmp;
+            }
+            if(this.racine.fd != null && this.racine.fg != null) {
+                if(this.racine.fd.racine == null || this.racine.fg.racine == null){
+                    if(this.racine.fd.racine == null && this.racine.fg.racine != null) {
+                        V tmp = this.racine.value;
+                        this.racine = this.racine.fg.racine;
+                        return tmp;
+                    }
+                    // Case where the fg is null and fd exist
+                    if(this.racine.fd.racine != null && this.racine.fg.racine == null) {
+                        V tmp = this.racine.value;
+                        this.racine = this.racine.fd.racine;
+                        return tmp;
+                    }
+                }
+                V tmp = this.racine.value;
+                ABR<K,V> arbreMax = this.racine.fg.getMax();
+                this.racine.key = arbreMax.racine.key;
+                this.racine.value = arbreMax.racine.value;
+                this.racine.fg.removeHelper(arbreMax.racine.key);
+                return tmp;
+            }
+        }
+        return null;
+    }
+    
+    public ABR<K,V> getMax(){
+        if(this.racine == null){
+            return null;
+        }
+        else {
+            if(this.racine.fd != null){
+                return this.racine.fd.getMax();
+            }
+            else {
+                return this;
+            }
+        }
+    }
+    
     @Override
     public boolean isEmpty() {
-        if(this.racine == null){
-            return true;
-        }
-        return false;
+        return (this.racine == null);
     }
 
     @Override
@@ -161,16 +234,16 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
         else {
             int heightD = 0, heightG = 0;
             if(arbre.racine.fg != null){
-                heightD = heightHelper(arbre.racine.fg,degres+1);
-            }
-            else {
-                heightD = degres;
-            }
-            if(arbre.racine.fd != null){
-                heightG = heightHelper(arbre.racine.fd,degres+1);
+                heightG = heightHelper(arbre.racine.fg,degres+1);
             }
             else {
                 heightG = degres;
+            }
+            if(arbre.racine.fd != null){
+                heightD = heightHelper(arbre.racine.fd,degres+1);
+            }
+            else {
+                heightD = degres;
             }
             return Math.max(heightD, heightG);
         }
@@ -222,6 +295,7 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
             return result;
         }
         else {
+            if(arbre.racine != null) {
             result += arbre.racine.key + "="+ arbre.racine.value + "\n";
             if(arbre.racine.fg != null){
                 result = result + tab + "|- ";
@@ -238,6 +312,11 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
                 result = result + tab + "+- vide\n";
             }
             return result;
+            }
+            else {
+                result = result + "vide\n";
+                return result;
+            }
         }
     }
 }
