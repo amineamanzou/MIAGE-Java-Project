@@ -66,6 +66,29 @@ public class mapApp {
 //        System.out.println(dico);
 //        System.out.println("Testing isBalanced method : " + dico.isBalanced() + '\n');
         
+        System.out.println("Testing method max : ");
+        System.out.println(
+            dico.getMax()
+        );
+        System.out.println(dico);
+        
+        System.out.println("Testing the method remove : ");
+        System.out.println("Remove 100 at the end of the tree.");
+        System.out.println(dico.remove(new Integer(100)));
+        System.out.println(dico);
+        System.out.println("Remove 69 to test if there is no fg the fd goes up.");
+        System.out.println('\t' + dico.remove(new Integer(69)));
+        System.out.println(dico);
+        System.out.println("Putting 69 to test the case where there is no fd and the fg goes up.");
+        dico.put(new Integer(69),"info de 69");
+        System.out.println(dico);
+        System.out.println("Remove 70 :");
+        System.out.println('\t' + dico.remove(new Integer(70)));
+        System.out.println(dico);
+        System.out.println("Remove 45 to test the case where the both of fg and fd exist.");
+        System.out.println('\t' + dico.remove(new Integer(45)));
+        System.out.println(dico);
+        
         System.out.println("#bangbang");
     }
 }
