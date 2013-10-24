@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package l3app.td4.map;
 
 import java.util.Scanner;
 
 /**
- *
+ * Main testing class.
  * @author Amine Amanzou <amineamanzou@gmail.com>
+ * @author Eva Blot <eva.blot.eb@gmail.com>
  */
 public class mapApp {
 
@@ -60,20 +57,22 @@ public class mapApp {
         System.out.println("Height : " + dico.height() + '\n');
         
         // Not working yet. Work in progress
-//        System.out.println("At this moment the tree is balanced.");
-//        System.out.println("Testing isBalanced method : " + dico.isBalanced());
-//        System.out.println("Put 101");
-//        System.out.println(dico);
-//        System.out.println("Testing isBalanced method : " + dico.isBalanced() + '\n');
+        System.out.println("At this moment the tree is balanced.");
+        System.out.println("Testing isBalanced method : " + dico.isBalanced());
+        System.out.println("Put 101");
+        dico.put(new Integer(101), "info de 101");
+        System.out.println(dico);
+        System.out.println("Testing isBalanced method : " + dico.isBalanced() + '\n');
         
         System.out.println("Testing method max : ");
-        System.out.println(
-            dico.getMax()
-        );
+        System.out.println(dico.getMax());
+        System.out.println("Testing method min : ");
+        System.out.println(dico.getMin());
         System.out.println(dico);
         
         System.out.println("Testing the method remove : ");
-        System.out.println("Remove 100 at the end of the tree.");
+        System.out.println("Remove 101 at the end of the tree. And 100.");
+        System.out.println(dico.remove(new Integer(101)));
         System.out.println(dico.remove(new Integer(100)));
         System.out.println(dico);
         System.out.println("Remove 69 to test if there is no fg the fd goes up.");
@@ -89,6 +88,5 @@ public class mapApp {
         System.out.println('\t' + dico.remove(new Integer(45)));
         System.out.println(dico);
         
-        System.out.println("#bangbang");
     }
 }

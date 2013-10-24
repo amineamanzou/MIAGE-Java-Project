@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package l3app.td4.map;
 
 /**
  * Interface that Map key to value. A key is unique in a map.
  * @author Amine Amanzou <amineamanzou@gmail.com>
+ * @author Eva Blot <eva.blot.eb@gmail.com>
  */
 public interface Dictionnaire<K,V> {
     
@@ -66,12 +63,12 @@ public interface Dictionnaire<K,V> {
     K[] getAll();
     
     /**
-     * Test if the map need to be reorganised in case we use a structure that
+     * Test if the map is balanced in case we use a structure that
      * slowdown the traitement when it's not well organised.
      * For example : Binary tree ABR.
      * @return true if the structure need to be organised.
      */
-    boolean needReorganisation();
+    boolean isBalanced();
     
     /**
      * Reorganise the structure and balance data to increase the cost of time
