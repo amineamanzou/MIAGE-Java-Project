@@ -64,12 +64,6 @@ public class mapApp {
         System.out.println(dico);
         System.out.println("Testing isBalanced method : " + dico.isBalanced() + '\n');
         
-        System.out.println("Testing method max : ");
-        System.out.println(dico.getMax());
-        System.out.println("Testing method min : ");
-        System.out.println(dico.getMin());
-        System.out.println(dico);
-        
         System.out.println("Testing the method remove : ");
         System.out.println("Remove 101 at the end of the tree. And 100.");
         System.out.println(dico.remove(new Integer(101)));

@@ -19,27 +19,24 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
         public Node(K key, V value){
             this.key = key;
             this.value = value;
-            fg = null;
-            fd = null;
+            fg = new ABR<K,V>();
+            fd = new ABR<K,V>();
         }
     }
     
     private Node racine;
-    private int size;
     
     public ABR(){
         this.racine = null;
-        this.size = 0;
     }
     
     public ABR(K key, V value){
         this.racine = new Node(key,value);
-        this.size = 1;
     }
     
     /**
      * Put a key-value in the map.
-     * method "put" will add a node if the racine is empty, and will increment "size"
+     * method "put" will add a node if the racine is empty,
      * the method will compare the key put in arguement with the key of the racine
      * if they are eguals we will keep the racine value in temporary variable (that will be return at the end)
      * and we replace the previous key (the racine one) by the key in argument
@@ -47,7 +44,7 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      * if the two key aren't eguals (it's the same treatement for superior and inferior) 
      * we will test if the fg is empty at first (if it's the case, we creat a new tree 
      * that will be the fg tree, if it's not the case, we call the methode for the fg tree)
-     * and in second if fd is empty (same process for fd). And the method increment size
+     * and in second if fd is empty (same process for fd). 
      * 
      * @param key key that we want to insert.
      * @param value value that we want to insert.
@@ -55,37 +52,21 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      */
     @Override
     public V put(K key, V value) {
-        if(isEmpty()){
+        if(this.isEmpty()){
             this.racine = new Node(key,value);
-            this.size++;
             return this.racine.value;
         }
         int cmp = key.compareTo(this.racine.key);
         if (cmp == 0){
-            V tmp = this.racine.value;
             this.racine.key = key;
             this.racine.value = value;
-            return tmp;
+            return null;
         }
         if (cmp < 0) {
-            if(this.racine.fg == null){
-                this.racine.fg = new ABR(key,value);
-            }
-            else {
-                this.racine.fg.put(key,value);
-            }
-            this.size++;
-            return null;
+            return this.racine.fg.put(key,value);
         }
         else {
-            if(this.racine.fd == null){
-                this.racine.fd = new ABR(key,value);
-            }
-            else {
-                this.racine.fd.put(key,value);
-            }
-            this.size++;
-            return null;
+            return this.racine.fd.put(key,value);
         }
     }
 
@@ -102,7 +83,7 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      */
     @Override
     public V get(K key) {
-        if(isEmpty()){
+        if(this.isEmpty()){
             return null;
         }
         int cmp = key.compareTo(this.racine.key);
@@ -119,7 +100,7 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
 
     @Override
     public boolean exist(K key) {
-        if(isEmpty()){
+        if(this.isEmpty()){
             return false;
         }
         int cmp = key.compareTo(this.racine.key);
@@ -127,20 +108,11 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
             return true;
         }
         if (cmp < 0) {
-            if(this.racine.fg != null){
-                if(this.racine.fg.exist(key)){
-                    return true;
-                }
-            }
+            return this.racine.fg.exist(key);
         }
         else {
-            if(this.racine.fd != null){
-                if(this.racine.fd.exist(key)){
-                    return true;
-                }
-            }
+            return this.racine.fd.exist(key);
         }
-        return false;
     }
 
     /**
@@ -157,113 +129,42 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      */
     @Override
     public V remove(K key) {
-        if(this.racine == null){
+        if(this.isEmpty()){
             return null;
         }
-        else {
-            int cmp = key.compareTo(this.racine.key);
-            if(cmp == 0) {
-                return this.removeHelper(key);
-            }
-            else if(cmp < 0){
-                return this.racine.fg.remove(key);
+        int cmp = key.compareTo(this.racine.key);
+        if(cmp == 0) {
+            V tmp = this.racine.value;
+            // Case where the fg is null and fd exist
+            if(this.racine.fg.isEmpty()) {
+                this.racine = this.racine.fd.racine;
             }
             else {
-                return this.racine.fd.remove(key);
-            }
-        }
-    }
-    
-    /**
-     * Helper for the method remove that treat all different cases
-     * when it's just node that we want to remove
-     * when the fg or the fd exist
-     * and when fg and the fd exist (the method will call the fonction getMax() to 
-     * help)
-
-     * @param key that we want to remove.
-     * @return a value
-     */
-    private V removeHelper(K key){
-        if(this.racine == null ){
-            return null;
-        }
-        else {
-            // Case where it is at the end of the tree 
-            if(this.racine.fd == null && this.racine.fg == null) {
-                V tmp = this.racine.value;
-                this.racine = null;
-                return tmp;
-            }
-            // Case where the fd is null and fg exist
-            if(this.racine.fd == null && this.racine.fg != null) {
-                V tmp = this.racine.value;
-                this.racine = this.racine.fg.racine;
-                return tmp;
-            }
-            // Case where the fg is null and fd exist
-            if(this.racine.fd != null && this.racine.fg == null) {
-                V tmp = this.racine.value;
-                this.racine = this.racine.fd.racine;
-                return tmp;
-            }
-            if(this.racine.fd != null && this.racine.fg != null) {
-                if(this.racine.fd.racine == null && this.racine.fg.racine != null) {
-                    V tmp = this.racine.value;
-                    this.racine = this.racine.fg.racine;
-                    return tmp;
-                }
-                // Case where the fg is null and fd exist
-                if(this.racine.fd.racine != null && this.racine.fg.racine == null) {
-                    V tmp = this.racine.value;
-                    this.racine = this.racine.fd.racine;
-                    return tmp;
-                }
-                V tmp = this.racine.value;
+                // Case where both exist
                 ABR<K,V> arbreMax = this.racine.fg.getMax();
                 this.racine.key = arbreMax.racine.key;
                 this.racine.value = arbreMax.racine.value;
-                this.racine.fg.removeHelper(arbreMax.racine.key);
-                return tmp;
+                arbreMax.racine = arbreMax.racine.fg.racine;
             }
+            return tmp;
         }
-        return null;
+        if(cmp < 0){
+            return this.racine.fg.remove(key);
+        }
+        else {
+            return this.racine.fd.remove(key);
+        }
     }
     
     /**
      * Find the value maximal in the tree
      * @return a tree
      */
-    public ABR<K,V> getMax(){
-        if(this.racine == null){
-            return null;
+    private ABR<K,V> getMax(){
+        if(!this.racine.fd.isEmpty()){
+            return this.racine.fd.getMax();
         }
-        else {
-            if(this.racine.fd != null){
-                return this.racine.fd.getMax();
-            }
-            else {
-                return this;
-            }
-        }
-    }
-    
-    /**
-     * Find the value minimal in the tree
-     * @return a tree
-     */
-    public ABR<K,V> getMin(){
-        if(this.racine == null){
-            return null;
-        }
-        else {
-            if(this.racine.fg != null){
-                return this.racine.fg.getMin();
-            }
-            else {
-                return this;
-            }
-        }
+        return this;
     }
     
     /**
@@ -281,7 +182,10 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      */
     @Override
     public int size() {
-        return this.size;
+        if(this.isEmpty()){
+            return 0;
+        }
+        return this.racine.fg.size() + 1 + this.racine.fd.size() ;
     }
 
     /**
@@ -290,7 +194,6 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
     @Override
     public void clear() {
         this.racine = null;
-        this.size = 0;
     }
 
     @Override
@@ -299,33 +202,38 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
     }
     
     /**
-     * 
+     * Calcul the height of the current tree.
      * @return the height of the tree
      */
     public int height(){
-        return heightHelper(this,0);
-    }
-    
-    private int heightHelper(ABR<K,V> arbre, int degres){
-        if(arbre.racine == null){
-            return degres;
+        if(this.isEmpty()){
+            return 0;
         }
         else {
-            int heightD = 0, heightG = 0;
-            if(arbre.racine.fg != null){
-                heightG = heightHelper(arbre.racine.fg,degres+1);
-            }
-            else {
-                heightG = degres;
-            }
-            if(arbre.racine.fd != null){
-                heightD = heightHelper(arbre.racine.fd,degres+1);
-            }
-            else {
-                heightD = degres;
-            }
-            return Math.max(heightD, heightG);
+            return Math.max(this.racine.fg.height(),this.racine.fd.height())+1;
         }
+    }
+    
+    /**
+     * Calcul the height of the current tree. And test if is balanced.
+     * @return -1 if not balanced or the height
+     */
+    private int heightifBalanced(){
+        if(this.isEmpty()){
+            return 0;
+        }
+        int heightG = racine.fg.heightifBalanced();
+        if(heightG == -1){
+            return -1;
+        }
+        int heightD = racine.fd.heightifBalanced();
+        if(heightD == -1){
+            return -1;
+        }
+        if(Math.abs(heightG-heightD) > 1){
+            return -1;
+        }
+        return 1+Math.max(heightD, heightD);
     }
     
     /**
@@ -334,32 +242,13 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
      */
     @Override
     public boolean isBalanced(){
-        if(this.racine == null){
+        if(this.isEmpty()){
             return true;
         }
-        else {
-            int heightD = 0, heightG = 0;
-            if(this.racine.fg != null && this.racine.fg.racine != null){
-                heightG = this.racine.fg.height();
-            }
-            else {
-                heightG = 0;
-            }
-            if(this.racine.fd != null && this.racine.fd.racine != null){
-                heightD = this.racine.fd.height();
-            }
-            else {
-                heightD = 0;
-            }
-            if(Math.abs(heightD-heightG) > 1){
-                return false;
-            }
-            
-            if(this.racine.fd != null && this.racine.fg != null){
-                return this.racine.fd.isBalanced() && this.racine.fg.isBalanced();
-            }
-            return true;
+        if(Math.abs(this.racine.fd.height()-this.racine.fg.height()) > 1){
+            return false;
         }
+        return this.racine.fd.isBalanced() && this.racine.fg.isBalanced();
     }
     
     /**
@@ -409,7 +298,7 @@ public class ABR<K extends Comparable<K>, V> implements Dictionnaire<K,V> {
     }
     
     private String toStringHelper(ABR<K,V> arbre, int degres, String result, boolean isDroit) {
-        String tab = new String("    ");
+        String tab = "    ";
         for(int i = 0; i < degres; i++){
             if(isDroit){
                 tab += "    ";
