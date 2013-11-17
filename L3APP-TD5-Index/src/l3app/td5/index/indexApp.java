@@ -1,6 +1,9 @@
 package l3app.td5.index;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 /*
  * To change this template, choose Tools | Templates
@@ -17,6 +20,8 @@ public class indexApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Index idx;
+        idx = new IndexTreeMap<String, Integer>();
         String text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
                 + " sed do eiusmod tempor incididunt ut labore et dolore magna "
                 + "aliqua.\n Ut enim ad minim veniam, quis nostrud exercitation "
@@ -35,6 +40,11 @@ public class indexApp {
         Iterator iStr = lexStr.iterator();
         Lexer lexFp = new LexerFromFile("src/l3app/td5/index/lorem.txt");
         Iterator iFp = lexFp.iterator();
+        
+//        InfoWord word = lexStr.nextWord();
+//        idx.add(word.toString(), new Integer(word.getNumLine()));
+//        System.out.println(idx);
+        
         while(iStr.hasNext() || iFp.hasNext()) {
             System.out.println("\t - " + iStr.next() + "\t\t - " + iFp.next());
         }

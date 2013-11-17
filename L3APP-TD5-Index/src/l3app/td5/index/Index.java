@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
-public interface Index<K extends Comparable<K>, V extends Comparable<K>> {
+public interface Index<K extends Comparable<K>, V extends Comparable<V>> {
     
     Set<V> add(K key, V value);
     
