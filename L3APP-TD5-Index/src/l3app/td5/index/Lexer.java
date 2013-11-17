@@ -1,5 +1,7 @@
 package l3app.td5.index;
 
+import java.util.Iterator;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,8 +12,15 @@ package l3app.td5.index;
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
-public interface Lexer<TOKEN> {
+public interface Lexer {
     
-    TOKEN nextWord();
+    InfoWord nextWord();
+    
+    /**
+     * Method that allow to move throught the stack.
+     * Implements Iterable.
+     * @return 
+     */
+    Iterator iterator();
     
 }

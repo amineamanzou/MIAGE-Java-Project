@@ -16,6 +16,12 @@ public class InfoWord {
     private int numLine;
     private int numCol;
 
+    public InfoWord(String word, int numLine, int numCol) {
+        this.word = word;
+        this.numLine = numLine;
+        this.numCol = numCol;
+    }
+    
     public String getWord() {
         return word;
     }
@@ -38,6 +44,11 @@ public class InfoWord {
 
     public void setNumCol(int numCol) {
         this.numCol = numCol;
+    }
+
+    @Override
+    public String toString() {
+        return "InfoWord{" + "word=" + word + ", numLine=" + numLine + ", numCol=" + numCol + '}';
     }
     
 }
