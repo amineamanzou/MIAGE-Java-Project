@@ -4,6 +4,8 @@
  */
 package l3app.td5.index;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -16,61 +18,88 @@ import java.util.TreeSet;
  */
 public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> implements Index<K, V> {
     
-    private SortedMap content;
+    private SortedMap<K, TreeSet<V>> tree;
     
     IndexTreeMap() {
-        this.content = new TreeMap<K, TreeSet<V>>();
+        this.tree = new TreeMap<K, TreeSet<V>>();
     }
     
     @Override
     public Set<V> add(K key, V value){
-        this.content.put(key,value);
-        return (Set<V>) this.content.get(key);
+        Set<V> listLine;
+        if(isEmpty()){
+            listLine = new TreeSet<V>();
+            listLine.add(value);
+            tree.put(key, (TreeSet<V>)listLine);
+            return listLine;
+        }
+        listLine = search(key);
+        if(listLine == null){
+            listLine = new TreeSet<V>();
+            listLine.add(value);
+            tree.put(key, (TreeSet<V>)listLine);
+            return listLine;
+        }
+        listLine.add(value);
+        tree.put(key, (TreeSet<V>)listLine);
+//      listLine.remove(value);
+        return listLine ;
     }
     
     @Override
     public boolean search(K key, V value){
-        throw new UnsupportedOperationException("Not supported yet.");
+       Set<V> listLine = new TreeSet<V>(search(key));
+       return listLine.contains(value);
     }
     
     @Override
     public Set<V> search(K key){
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tree.get(key);
     }
     
     @Override
     public Set<K> getKeys(){
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tree.keySet();
     }
     
     @Override
     public Set<V> remove(K key){
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tree.remove(key);
     }
     
     @Override
     public Set<V> remove(K key, V value){
-        throw new UnsupportedOperationException("Not supported yet.");
+       Set<V> listLine = new TreeSet<V>(search(key));
+       listLine.remove(value);
+       tree.put(key, (TreeSet<V>) listLine);
+     // listLine.add(value);
+       return listLine;
     }
     
     @Override
     public int nbKeys(){
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tree.size() ;
     }
     
     @Override
     public boolean isEmpty(){
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ( tree.size() == 0) ;
     }
     
     @Override
-    public boolean clear(){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void clear(){
+       tree.clear();
     }
 
     @Override
     public String toString() {
-        return "IndexTreeMap{" + "content=" + content + '}';
+        String result = new String();
+        Collection entrySet = this.tree.entrySet();
+        Iterator it = entrySet.iterator();
+        while(it.hasNext()){
+            result += "\t" + it.next() + "\n";
+        }
+        return result;
     }
-
+    
 }

@@ -1,5 +1,6 @@
 package l3app.td5.index;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /*
@@ -30,6 +31,6 @@ public interface Index<K extends Comparable<K>, V extends Comparable<V>> {
     
     boolean isEmpty();
     
-    boolean clear();
-    
+    void clear();
+        
 }

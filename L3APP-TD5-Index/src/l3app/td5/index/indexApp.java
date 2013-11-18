@@ -1,9 +1,6 @@
 package l3app.td5.index;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
 
 /*
  * To change this template, choose Tools | Templates
@@ -41,17 +38,22 @@ public class indexApp {
         Lexer lexFp = new LexerFromFile("src/l3app/td5/index/lorem.txt");
         Iterator iFp = lexFp.iterator();
         
-//        InfoWord word = lexStr.nextWord();
-//        idx.add(word.toString(), new Integer(word.getNumLine()));
-//        System.out.println(idx);
+        InfoWord word;
         
         while(iStr.hasNext() || iFp.hasNext()) {
-            System.out.println("\t - " + iStr.next() + "\t\t - " + iFp.next());
+            word = (InfoWord) iStr.next();
+            System.out.println("\t - " + word + "\t\t - " + iFp.next());
+            if(word != null){
+                idx.add(word.getWord(), new Integer(word.getNumLine()));
+            }
         }
         System.out.println("\n\tTesting an other nextWord :");
         System.out.println("\t - " + lexStr.nextWord());
         System.out.println("\t - " + lexFp.nextWord());
         
-        
+        System.out.println("–––––––––––––––––––––– Indexation –––––––––––––––––––––––––");
+        System.out.println(idx);
+        idx.remove("ut",new Integer(2));
+        System.out.println(idx);
     }
 }
