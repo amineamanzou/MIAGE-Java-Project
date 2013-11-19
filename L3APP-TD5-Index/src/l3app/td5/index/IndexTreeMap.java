@@ -98,6 +98,9 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
      */
     @Override
     public Set<V> search(K key){
+        if(isEmpty()){
+            return null;
+        }
         key = checkSensitive(key);
         Set<V> listLine = tree.get(key);
         return listLine;
@@ -127,15 +130,18 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
      * @param key key used to find the pair key/value
      * @param value value used to search and remove
      * @return the updated list of value or null if the key doesn't exist in the
-     * index
+     * index or if the value is not associated with this key
      */
     @Override
     public Set<V> remove(K key, V value){
+        if(isEmpty()){
+            return null;
+        }
         key = checkSensitive(key);
         Set<V> listLine = search(key);
-        if (listLine == null)
+        if (listLine == null || (!listLine.remove(value) ) ){
             return null;
-        listLine.remove(value);
+        }
         tree.put(key, (TreeSet<V>) listLine);
         return listLine;
     }
@@ -180,26 +186,24 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * Set if case sensitivity is enabled or disabled
-     * @param caseSensitive 
-     */
-    public void setCaseSensitive(boolean caseSensitive){
-        this.caseSensitive = caseSensitive ;
-    }
-    
-    /**
      * String representation of a pair of key/value in the index
      * @param key searched key
      * @return String representing an entry of the index or null if the key
      * doesn't exist
      */
     public String getStringOf(K key){
+        if(isEmpty()){
+            return "empty";
+        }
         Set<V> listValue = search(key);
         if (listValue == null){
             return null;
         }
         String result = key + " : ";
         Iterator<V> itr = listValue.iterator();
+        if(listValue.isEmpty()){
+            return (result + "--- no value ---");  
+        }
         while(itr.hasNext()){
             result += itr.next() + " ";
         }
@@ -212,6 +216,9 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
      */
     @Override
     public String toString() {
+        if(isEmpty()){
+            return "empty";
+        }
         Set<K> listKey = getKeys();
         Iterator<K> itr = listKey.iterator();
         String result = "" ;
