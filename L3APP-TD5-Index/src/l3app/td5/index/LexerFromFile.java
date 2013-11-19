@@ -18,9 +18,11 @@ import java.util.Iterator;
 public class LexerFromFile implements Lexer {
 
     FileInputStream fp;
-    private boolean endOfFile;
-    private int numLine;
-    private int numCol;
+    private boolean endOfFile = false;
+    private int numLine = 1;
+    private int numCol = 1;
+    private String delimiter = "";
+    private String lineSeparator = "[\n]";
     
     public LexerFromFile(String filename) {
         try {
@@ -29,9 +31,16 @@ public class LexerFromFile implements Lexer {
             System.err.println("Error : " + e);
             System.exit(1);
         }
-        this.numLine = 1;
-        this.numCol = 1;
-        this.endOfFile = false;
+    }
+    
+    public LexerFromFile(String filename, String delimiter) {
+        try {
+            this.fp = new FileInputStream(filename);
+        } catch (FileNotFoundException e) {
+            System.err.println("Error : " + e);
+            System.exit(1);
+        }
+        this.delimiter = delimiter;
     }
     
     @Override
@@ -42,13 +51,14 @@ public class LexerFromFile implements Lexer {
         
         try {
             current = this.fp.read();
-        } catch (IOException e) {
+        } catch (IOException e){
             System.err.println("Error : " + e);
             System.exit(1);
         }
         this.numCol++;
-        while(!Character.isLetterOrDigit(current) && current != -1){
-            if(current == '\n'){
+        while(  (this.isDelimiter(current) || this.isLineSeparator(Character.toString((char)current)))
+                && current != -1){
+            if( this.isLineSeparator(Character.toString((char)current))){
                 this.numLine++;
                 this.numCol = 1;
             }
@@ -61,7 +71,8 @@ public class LexerFromFile implements Lexer {
             this.numCol++;
         }
         
-        while(Character.isLetterOrDigit(current) && current != -1){
+        while(  !this.isDelimiter(current) && !this.isLineSeparator(Character.toString((char)current))
+                && current != -1){
             word.append((char)current);
             try {
                 current = this.fp.read();
@@ -81,6 +92,55 @@ public class LexerFromFile implements Lexer {
         }
         
         return result;
+    }
+    
+    public String addDelimiter(String delimiter){
+        StringBuilder result = new StringBuilder(this.delimiter);
+        result.append(delimiter);
+        this.delimiter = result.toString();
+        return this.delimiter;
+    }
+    
+    public String useDelimiter(String delimiter){
+        this.delimiter = delimiter;
+        return this.delimiter;
+    }
+    
+    public String addLineSeparator(String lineSeparator){
+        StringBuilder result = new StringBuilder(this.lineSeparator);
+        result.append(lineSeparator);
+        this.lineSeparator = result.toString();
+        return this.lineSeparator;
+    }
+    
+    public String useLineSeparator(String separator){
+        this.lineSeparator = separator;
+        return this.delimiter;
+    }
+    
+    public boolean isDelimiter(int character){
+        // if delimiter is set
+        if(this.delimiter.length() > 0){
+            // The character in Delimiter String are delimiter
+            if(this.delimiter.contains(Character.toString((char)character))){
+                return true;
+            }
+            return false;
+        }
+        else { // If delimiter is not set
+            // All thing that are not LetterOrDigit are delimiter
+            if(!Character.isLetterOrDigit((char)character)){
+                return true;
+            }
+            return false;
+        }
+    }
+    
+    public boolean isLineSeparator(String character){
+        if(character.matches(this.lineSeparator)){
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -127,7 +187,6 @@ public class LexerFromFile implements Lexer {
         public void remove() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
-
 
     }
 }

@@ -33,9 +33,9 @@ public class indexApp {
         
         System.out.println("––––––––––––––––––––––From a String–––––––––––––––––––––––––"
                 + "|–––––––––––––––––––––––From a File––––––––––––––––––––––––––");
-        Lexer lexStr = new LexerFromString(text);
+        Lexer lexStr = new LexerFromString(text," \t,;.");
         Iterator iStr = lexStr.iterator();
-        Lexer lexFp = new LexerFromFile("src/l3app/td5/index/lorem.txt");
+        Lexer lexFp = new LexerFromFile("src/l3app/td5/index/lorem.txt"," \t,;.");
         Iterator iFp = lexFp.iterator();
         
         InfoWord word;
@@ -53,7 +53,6 @@ public class indexApp {
         
         System.out.println("–––––––––––––––––––––– Indexation –––––––––––––––––––––––––");
         System.out.println(idx);
-        idx.remove("ut",new Integer(2));
-        System.out.println(idx);
+
     }
 }

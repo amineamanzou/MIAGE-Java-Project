@@ -14,18 +14,20 @@ import java.util.Iterator;
  */
 public class LexerFromString implements Lexer {
     
-    public static final boolean caseSensitive = false;
-    
     private String text;
-    private int position;
-    private int numLine;
-    private int numCol;
+    private int position = 0;
+    private int numLine = 1;
+    private int numCol = 1;
+    private String delimiter = "";
+    private String lineSeparator = "[\n]";
     
     public LexerFromString(String text) {
         this.text = text;
-        this.position = 0;
-        this.numLine = 1;
-        this.numCol = 1;
+    }
+    
+    public LexerFromString(String text, String delimiter) {
+        this.text = text;
+        this.delimiter = delimiter;
     }
     
     @Override
@@ -35,24 +37,25 @@ public class LexerFromString implements Lexer {
         this.numCol++;
         position++;
         InfoWord result;
-        
-        while(!Character.isLetterOrDigit(current) && position+1 < this.text.length()){
-            if(current == '\n'){
+        while( (this.isDelimiter(current) || this.isLineSeparator(Character.toString(current)))
+                && position+1 < this.text.length() ){
+            if( this.isLineSeparator(Character.toString(current))){
                 this.numLine++;
                 this.numCol = 1;
             }
-            current = this.text.charAt(position);
             this.numCol++;
+            current = this.text.charAt(position);
             position++;
         }
-        while(Character.isLetterOrDigit(current) && position+1 < this.text.length()){
+        while( !this.isDelimiter(current) && !this.isLineSeparator(Character.toString(current))
+                && position+1 < this.text.length()){
             word.append(current);
             current = this.text.charAt(position);
             this.numCol++;
             position++;
         }
         result = new InfoWord(word.toString(),this.numLine,this.numCol-word.length()-1);
-        
+
         if(word.length() == 0){
             return null;
         }
@@ -60,9 +63,58 @@ public class LexerFromString implements Lexer {
         return result;
     }
     
+    public String addDelimiter(String delimiter){
+        StringBuilder result = new StringBuilder(this.delimiter);
+        result.append(delimiter);
+        this.delimiter = result.toString();
+        return this.delimiter;
+    }
+    
+    public String useDelimiter(String delimiter){
+        this.delimiter = delimiter;
+        return this.delimiter;
+    }
+    
+    public String addLineSeparator(String lineSeparator){
+        StringBuilder result = new StringBuilder(this.lineSeparator);
+        result.append(lineSeparator);
+        this.lineSeparator = result.toString();
+        return this.lineSeparator;
+    }
+    
+    public String useLineSeparator(String separator){
+        this.lineSeparator = separator;
+        return this.delimiter;
+    }
+    
+    public boolean isDelimiter(char character){
+        // if delimiter is set
+        if(this.delimiter.length() > 0){
+            // The character in Delimiter String are delimiter
+            if(this.delimiter.contains(Character.toString(character))){
+                return true;
+            }
+            return false;
+        }
+        else { // If delimiter is not set
+            // All thing that are not LetterOrDigit are delimiter
+            if(!Character.isLetterOrDigit(character)){
+                return true;
+            }
+            return false;
+        }
+    }
+    
+    public boolean isLineSeparator(String character){
+        if(character.matches(this.lineSeparator)){
+            return true;
+        }
+        return false;
+    }
+    
     /**
-     * An iterator over the static stack.
-     * @return E - the type of elements returned by this iterator
+     * An iterator over the String.
+     * @return InfoWord - the type of elements returned by this iterator
      */
     @Override
     public Iterator iterator(){
