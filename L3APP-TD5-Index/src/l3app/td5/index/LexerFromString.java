@@ -3,7 +3,9 @@ package l3app.td5.index;
 import java.util.Iterator;
 
 /**
- *
+ * This class implements Lexer and allow to tokenize a text from a String according
+ * to delimiters and line breaker.
+ * 
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
@@ -16,15 +18,30 @@ public class LexerFromString implements Lexer {
     private String delimiter = "";
     private String lineSeparator = "[\n]";
     
+    /**
+     * Initialise the text String and prepare for reading.
+     * @param text String containing the text to index
+     */
     public LexerFromString(String text) {
         this.text = text;
     }
     
+    /**
+     * Initialise the test String and Setup the delimiters and prepare for 
+     * reading.
+     * @param text String containing the text to index
+     * @param delimiter contain the delimiters characters
+     */
     public LexerFromString(String text, String delimiter) {
         this.text = text;
         this.delimiter = delimiter;
     }
     
+    /**
+     * Tokenize the next word by passing throught the delimiter or character that
+     * are not letter or digit and by fetching after the letterOrDigit.
+     * @return 
+     */
     @Override
     public InfoWord nextWord(){
         StringBuilder word = new StringBuilder();
@@ -58,6 +75,11 @@ public class LexerFromString implements Lexer {
         return result;
     }
     
+    /**
+     * Add a String of new delimiters to the existing delimiters
+     * @param delimiter String containing delimiter character
+     * @return new delimiter
+     */
     public String addDelimiter(String delimiter){
         StringBuilder result = new StringBuilder(this.delimiter);
         result.append(delimiter);
@@ -65,23 +87,33 @@ public class LexerFromString implements Lexer {
         return this.delimiter;
     }
     
+    /**
+     * Reset the existing delimiters and use a particular String of delimiters
+     * @param delimiter String containing delimiter character
+     * @return new delimiter
+     */
     public String useDelimiter(String delimiter){
         this.delimiter = delimiter;
         return this.delimiter;
     }
     
-    public String addLineSeparator(String lineSeparator){
-        StringBuilder result = new StringBuilder(this.lineSeparator);
-        result.append(lineSeparator);
-        this.lineSeparator = result.toString();
-        return this.lineSeparator;
-    }
-    
+    /**
+     * Reset the existing lineSeparator and use a particular Regex
+     * @param lineSeparator String containing lineSeparator Regex
+     * @return new lineSeparator 
+     */
     public String useLineSeparator(String separator){
         this.lineSeparator = separator;
         return this.delimiter;
     }
     
+    /**
+     * Test if Delimiter is set.
+     * In this case we test if the character is in the list
+     * Otherwise we test if the character is a Letter or Digit
+     * @param character
+     * @return true if the character is a delimiter
+     */
     public boolean isDelimiter(char character){
         // if delimiter is set
         if(this.delimiter.length() > 0){
@@ -100,6 +132,11 @@ public class LexerFromString implements Lexer {
         }
     }
     
+    /**
+     * Test if the character is matching the LineSeparator Regex.
+     * @param character
+     * @return true if the character is a line separator.
+     */
     public boolean isLineSeparator(String character){
         if(character.matches(this.lineSeparator)){
             return true;
@@ -109,7 +146,7 @@ public class LexerFromString implements Lexer {
     
     /**
      * An iterator over the String.
-     * @return InfoWord - the type of elements returned by this iterator
+     * @return Info - the information about the indexed key.
      */
     @Override
     public Iterator iterator(){
@@ -120,7 +157,7 @@ public class LexerFromString implements Lexer {
         InfoWord current;
         
         /**
-         * Test if the next element exist and can return an Element.
+         * Test if the next element exist.
          * @return true if and only if next element is not null
          */
         @Override
@@ -133,7 +170,7 @@ public class LexerFromString implements Lexer {
         
         /**
          * Get the next element in the iteration.
-         * @return E return the next element of the iteration
+         * @return Info about the next element of the iteration
          */
         @Override
         public InfoWord next() {
@@ -145,7 +182,7 @@ public class LexerFromString implements Lexer {
         }
         
         /**
-         * Not implemented because doesn't have sense in a stack data structure.
+         * Not implemented because doesn't need it necessarely.
          */
         @Override
         public void remove() {
