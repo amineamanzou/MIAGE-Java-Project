@@ -2,11 +2,6 @@ package l3app.td5.index;
 
 import java.util.Iterator;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
