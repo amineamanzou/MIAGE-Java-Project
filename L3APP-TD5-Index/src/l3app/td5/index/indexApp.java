@@ -2,11 +2,6 @@ package l3app.td5.index;
 
 import java.util.Iterator;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
@@ -53,6 +48,20 @@ public class indexApp {
         
         System.out.println("–––––––––––––––––––––– Indexation –––––––––––––––––––––––––");
         System.out.println(idx);
+        
+        idx.remove("ut",new Integer(2));
+        System.out.println(idx);
+        System.out.println(idx.remove("ut", new Integer(1)));
+        
+        
+        idx.remove("ut");
+        idx.remove("voluptate"); 
+        idx.remove("velit");
+        idx.remove("ullamco");
+        System.out.println(idx);
+        System.out.println(idx.remove("QEUYHRTKSDTK"));
+        
+        System.out.println(((IndexTreeMap)idx).getStringOf("Duis"));
 
     }
 }
