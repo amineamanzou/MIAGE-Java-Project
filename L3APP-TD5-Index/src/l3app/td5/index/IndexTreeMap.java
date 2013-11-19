@@ -1,6 +1,5 @@
 package l3app.td5.index;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedMap;
@@ -8,29 +7,28 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
- * 
+ * This Class is an implementation of an index that offer the possibilitie to
+ * store the number of the lines where the word appear in a texte.
  *
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
  * @author Amine Amanzou <amineamanzou@gmail.com>
- * @param <K> les cles utilisé pour stocker les données, dans notre cas ce sont 
- * les chaines de caractere que nous indexons
- * @param <V> les valeurs associées aux cles, dans notre cas ce sont les lignes 
- * ou apparais la chaine de caractere associe c'est ce qui nous permet d'indexer
- * la chaine de caractère cette classe est l'implementation d'un index qui offre
- * a son utilisateur la possibilite d'indexer un texte entier et de trier les 
- * cles de façon constructive afin d'accelerer les recherches.
+ * @param <K> the used key to store data in this implementation it's a String 
+ * that we index
+ * @param <V> the value associated to the key, in our implementation it's a ordred
+ * list of line where the key appear in the source texte.
  */
 public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> implements Index<K, V> {
     
-    // l'arbre qui permet de trier les cles ainsi que les valeurs associes.
-    // dans notre cas on associe a une cle une liste contenant les valeurs V 
+    /* The tree that allow to order and store keys
+     * In our cas we associate a key to a list of Element V
+     */
     private SortedMap<K, TreeSet<V>> tree;
-    // permet a l'utilisateur de decider s'il veut respecter la case ou pas
+    /* Allow to choose if the index is case sensitive or not */
     private boolean caseSensitive ;
     
     /**
-     * constructeur par defaut : on initialise l'arbre contenant les cles et valeurs 
-     * ainsi que la varible caseSensitive
+     * Default Constructor : initialise the tree 
+     * By default case sensitive is activated
      */
     IndexTreeMap() {
         this.tree = new TreeMap<K, TreeSet<V>>();
@@ -38,9 +36,8 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * 
-     * @param caseSensitive choix de l'utilisateur : respecter la case ou non
-     * on initialise l'arbre comme le constructeur par defaut et variable caseSensitive avec le parametre.
+     * Default Constructor : initialise the tree 
+     * @param caseSensitive define if the index is case sensitive or not
      */
     IndexTreeMap(boolean caseSensitive) {
         this.tree = new TreeMap<K, TreeSet<V>>();
@@ -49,10 +46,10 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     
     
     /**
-     * cette méthode permet de completer l'arbre de façon construite et garder les cles trier
-     * @param key la cle que l'on veut ajouter a l'arbre ou modifier la valeur associe a cette cle
-     * @param value la valeur que l'on ajoute a la cle associe
-     * @return la nouvelle liste de valeur associe a la cle 
+     * Method that allow to add a key/value to the collection
+     * @param key key that we want to add or update
+     * @param value value that we want to add the the existing List of value
+     * @return the updated list of value 
      */
     @Override
     public Set<V> add(K key, V value){
@@ -75,11 +72,11 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * cette méthode permet de savoir si une valeur existe pour une cle donne,
-     * donc de verifier a la fois si cette cle existe et si la valeur existe
-     * @param key la cle utilise pour la recherche 
-     * @param value la valeur rechercher
-     * @return true si la valeur  et la cle existe
+     * Test if a pair of key/value exist
+     * So it's verifying if the key and the value for this key exist.
+     * @param key key to search
+     * @param value value searched in the list
+     * @return true if the key and the value in this key exist
      */
     @Override
     public boolean search(K key, V value){
@@ -95,9 +92,9 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet d'obtenir la liste contenant l'ensemble des valeurs associe a la cle donnee en parametre
-     * @param key la cle utilisee pour la recherche
-     * @return le liste des valeurs, null si la cle utilise n'existe pas dans l'arbre
+     * Allow to get the list of value associated to a specific key
+     * @param key key that we want to get
+     * @return list of value if the key exist, null if not
      */
     @Override
     public Set<V> search(K key){
@@ -107,8 +104,8 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet d'obtenir l'ensemble des cles stockees dans l'arbre
-     * @return la liste des cles
+     * Allow to get all the key of the collection.
+     * @return List of key
      */
     @Override
     public Set<K> getKeys(){
@@ -116,9 +113,9 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet de retirer un enregistrement : cle\valeur
-     * @param key la cle utiliser pour trouver l'enregistrement a suprimmer
-     * @return la liste des valeurs associe a la cle, retourne null si la cle n'existe pas l'arbre;
+     * Remove a pair : key/value
+     * @param key key used to search and remove
+     * @return  list of value that was associated to the key
      */
     @Override
     public Set<V> remove(K key){
@@ -126,11 +123,11 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * retire une valeur precise associe a une cle donner
-     * @param key cle utilise pour la recherche de l'enregistrement
-     * @param value la valeur a supprimer de la liste associee a la cle donnee
-     * @return la nouvelle liste de valeur associee a la cle donnee, 
-     * retourne null si la cle utilise n'existe pas dans l'arbre
+     * Removing a specific value associated with a key
+     * @param key key used to find the pair key/value
+     * @param value value used to search and remove
+     * @return the updated list of value or null if the key doesn't exist in the
+     * index
      */
     @Override
     public Set<V> remove(K key, V value){
@@ -145,7 +142,7 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     
     /**
      *
-     * @return le nombre de cle enregistrer dans l'arbre
+     * @return the number of key stored in the index
      */
     @Override
     public int nbKeys(){
@@ -153,8 +150,8 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * 
-     * @return permet de savoir si l'arbre de donnee est vide
+     * Test if the index is empty or not
+     * @return true if the index is empty
      */
     @Override
     public boolean isEmpty(){
@@ -162,7 +159,7 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet de vider l'arbre de donnee
+     * Remove all the key stored in the index
      */
     @Override
     public void clear(){
@@ -170,10 +167,10 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
 
     /**
-     * permet de verifier si l'on respecte la case ou pas, et dans le cas ou on ne la respecte pas
-     * on renvoi la chaine de caractere en parametre en minuscule.
+     * Test if case sensitivity is activated and treat the passed key :
+     * if it's disabled the key is passed to lower case
      * @param key
-     * @return la chaine de caractere final : respectant la case ou non
+     * @return the final trated key
      */
     public K checkSensitive(K key){
         if( !caseSensitive ){
@@ -183,7 +180,7 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet de choisir si on respecte la case ou non
+     * Set if case sensitivity is enabled or disabled
      * @param caseSensitive 
      */
     public void setCaseSensitive(boolean caseSensitive){
@@ -191,10 +188,10 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-     * permet d'avoir la representation d'une partie de l'arbre : obtenue grace a la cle en parametre
-     * @param key cle utilise pour la recherche
-     * @return return la chaine de caractere representant la partie de l'arbre,
-     * return null si la cle n'existe pas dans l'arbre
+     * String representation of a pair of key/value in the index
+     * @param key searched key
+     * @return String representing an entry of the index or null if the key
+     * doesn't exist
      */
     public String getStringOf(K key){
         Set<V> listValue = search(key);
@@ -210,9 +207,9 @@ public class IndexTreeMap<K extends Comparable<K>, V extends Comparable<V>> impl
     }
     
     /**
-    * permet de representer l'arbre de donne via une chaine de caractere
-    * @return la chaine de caractere representant l'arbre de donnee
-    */
+     * String representation of all the index content.
+     * @return String representing the index content.
+     */
     @Override
     public String toString() {
         Set<K> listKey = getKeys();

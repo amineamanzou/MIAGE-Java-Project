@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 /**
  * Main of the application where the different class are tested.
- * Alternative to JUnit Test.
  * 
  * @author Ramy Al Aloocy <ramy.aloocy@gmail.com>
  * @author Amine Amanzou <amineamanzou@gmail.com>
