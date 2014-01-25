@@ -7,11 +7,14 @@ import java.util.List;
  */
 public class Contact implements Entity{
     private Integer id;
+    private String surnom;
     private String nom;
     private String prenom;
     private Sexe sexe;
-    private List<String> mail;
-    private List<String> telephone;
+    private String adresse;
+    private List<Mail> mail;
+    private List<Phone> telephone;
+    private List<Tag> tags;
 
     /**
      * @return the id
@@ -27,6 +30,20 @@ public class Contact implements Entity{
     @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return the surnom
+     */
+    public String getSurnom() {
+        return surnom;
+    }
+
+    /**
+     * @param surnom 
+     */
+    public void setSurnom(String surnom) {
+        this.surnom = surnom;
     }
 
     /**
@@ -72,30 +89,54 @@ public class Contact implements Entity{
     }
 
     /**
+     * @return the adress
+     */
+    public String getAdresse() {
+        return adresse;
+    }
+
+    /**
+     * @param adresse 
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+    
+    /**
      * @return the mail
      */
-    public List<String> getMail() {
+    public List<Mail> getMail() {
         return mail;
     }
 
     /**
      * @param mail the mail to set
      */
-    public void setMail(List<String> mail) {
+    public void setMail(List<Mail> mail) {
         this.mail = mail;
     }
 
     /**
      * @return the telephone
      */
-    public List<String> getTelephone() {
+    public List<Phone> getTelephone() {
         return telephone;
     }
 
     /**
      * @param telephone the telephone to set
      */
-    public void setTelephone(List<String> telephone) {
+    public void setTelephone(List<Phone> telephone) {
         this.telephone = telephone;
+    }
+    
+    /**
+     * Contact validator
+     * 
+     * @return true because no validation on this item
+     */
+    @Override
+    public boolean isValide(){
+        return true;
     }
 }
