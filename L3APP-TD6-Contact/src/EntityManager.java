@@ -12,6 +12,7 @@ public interface EntityManager<E extends Entity> {
     void save(E entity) throws NoSuchEntityException;
     void remove(E entity) throws NoSuchEntityException;
     List<E> findAll();
+    boolean validate(E entity) throws NoSuchEntityException;
     void flush();
     
 }

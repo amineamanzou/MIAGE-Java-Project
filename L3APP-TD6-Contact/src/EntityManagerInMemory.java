@@ -31,12 +31,16 @@ public class EntityManagerInMemory<E extends Entity> implements EntityManager<E>
     @Override
     public void save(E entity) throws NoSuchEntityException {
         if(entity.getId() == null){
-            count++;    
-            entity.setId(count);
+            if(entity.isValide()){
+                count++;   
+                entity.setId(count);
+            }
         }else{
-           exists(entity);        
-        }        
-        liste.put(count, entity);
+           exists(entity);      
+        }
+        if(entity.isValide()){
+            liste.put(count, entity);
+        }
     }
 
     @Override
@@ -53,9 +57,16 @@ public class EntityManagerInMemory<E extends Entity> implements EntityManager<E>
     }
     
     @Override
+    public boolean validate(E entity) throws NoSuchEntityException{
+        exists(entity);
+        return entity.isValide();
+    }
+    
+    @Override
     public void flush() {
         
     }
+    
     private void exists(E entity) throws NoSuchEntityException{
          exists(entity.getId());
     }
