@@ -239,5 +239,26 @@ public class ContactManagerInMemory extends EntityManagerInMemory<Contact> imple
 
         return finale;
     }
+    
+    @Override
+    public List<Contact> findBy(Integer field,String search) throws NoSuchEntityException {
+        switch(field){
+            
+            case ContactAction.NOM :
+                return this.findByName(search);
+            case ContactAction.PRENOM :
+                return this.findByName(search);
+            case ContactAction.SURNOM :
+                return this.findByName(search);
+            case ContactAction.MAIL :
+                return this.findByMail(search);
+            case ContactAction.PHONE :
+                return this.findByPhone(search);
+            case ContactAction.TAG :
+                return this.findByTag(search);
+            
+        }
+        return null;
+    }
 
 }

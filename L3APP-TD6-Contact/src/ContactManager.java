@@ -14,5 +14,6 @@ public interface ContactManager extends EntityManager<Contact> {
     List<Contact> findByMail(String mail) throws NoSuchEntityException;
     List<Contact> findByPhone(String tel) throws NoSuchEntityException;
     List<Contact> findByTag(String tag) throws NoSuchEntityException;
-    
+    List<Contact> findBy(Integer field,String search) throws NoSuchEntityException;
+
 }
