@@ -1,5 +1,7 @@
 package util;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,6 +27,11 @@ public class ConsoleReader {
     public String readString(){
         Scanner sc = new Scanner(System.in);
         return sc.next();
+    }
+    
+    public String readLine(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
     public void read(boolean clean){
@@ -53,4 +60,5 @@ public class ConsoleReader {
             read();
         }
     }
+    
 }

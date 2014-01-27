@@ -25,6 +25,26 @@ public class ConsoleWriter {
     };
     
     /**
+     * Méthode d'affichage d'une ligne d'un tableau
+     * @param id
+     * @param nom
+     * @param prenom
+     * @param surnom
+     * @param sexe
+     * @param adresse
+     */
+    public void printTab(
+            String id, 
+            String nom, 
+            String prenom, 
+            String surnom, 
+            String sexe, 
+            String adresse
+    ){
+        System.out.printf("%-2s| %-10s%-10s%-10s%-7s%s%n",id,nom,prenom,surnom,sexe,adresse);
+    }
+    
+    /**
      * Méthode d'affichage classique sans saut de ligne
      * @param msg 
      */
