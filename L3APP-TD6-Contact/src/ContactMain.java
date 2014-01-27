@@ -43,6 +43,10 @@ public class ContactMain {
                         cm.flush();
                         iu.afficherSauvegarde();                    
                         break;
+                    case Action.LOAD :
+                       String path = iu.saisirPath();
+                       cm.importCsv(path);
+                       break;  
                     case Action.EXIT :
                         cm.flush();
                         iu.afficherSauvegarde();

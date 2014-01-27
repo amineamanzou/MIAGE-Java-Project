@@ -13,6 +13,7 @@ public class Action {
     public static final int READ = 5;
     public static final int SEARCH = 6;
     public static final int SAVE = 7;
+    public static final int LOAD = 8;
     public static final int EXIT = 0;
     
 }

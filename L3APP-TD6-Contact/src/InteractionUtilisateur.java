@@ -15,7 +15,8 @@ public interface InteractionUtilisateur {
     void attenteUtilisateur();
     String saisirFieldRecherche ();
     String saisirMotCleRecherche();
-
+    String saisirPath();
+    
     /*
      * Ecriture
      */
