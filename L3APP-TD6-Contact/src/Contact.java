@@ -129,6 +129,20 @@ public class Contact implements Entity{
     public void setTelephone(List<Phone> telephone) {
         this.telephone = telephone;
     }
+
+    /**
+     * @return the tags
+     */
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    /**
+     * @param tags the tag to set
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
     
     /**
      * Contact validator
