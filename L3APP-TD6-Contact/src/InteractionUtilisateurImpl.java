@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import util.*;
@@ -44,24 +45,33 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
     @Override
     public void afficherContact (Contact contact) {
         writer.println("########################################");
-        writer.println("\t\tCreation d'un contact");
+        writer.println("\t" + contact.getNom() + " " + contact.getPrenom());
         writer.println("########################################");
-        writer.println("Nom :"+contact.getNom());
-        writer.println("Prénom :"+contact.getPrenom());        
-        writer.println("Sexe :"+contact.getSexe());
-        writer.println("Adresses Mail (csv):"+contact.getMail());
-        writer.println("Numéros de Télephone (csv):"+contact.getTelephone());
+        writer.println("Surnom : "+contact.getSurnom());
+        writer.println("Sexe : "+contact.getSexe());
+        writer.println("Adresse : "+contact.getAdresse());        
+        writer.println("Emails : "+contact.getMail());
+        writer.println("Télephones : "+contact.getTelephone());
+        writer.println("Tags : \n\t"+contact.getTags());
         writer.println("########################################");
     }
 
     @Override
     public void afficherListeContact (List<Contact> liste) {
         writer.println("########################################");
-        writer.println("Id\t Nom\t Prénom\t Sexe\t|");
-        writer.println("––––––––––––––––––––––––––––––––––");
+        writer.println("–––––––––––––––––––––––––––––––––––––––––––––––––––");
+        writer.printTab("Id","Nom","Prénom","Surnom","Sexe","Adresse |");
+        writer.println("–––––––––––––––––––––––––––––––––––––––––––––––––––");
         if(!liste.isEmpty()){
             for(Contact c : liste){
-                writer.println(c.getId() +"\t "+ c.getNom()+"\t "+c.getPrenom() +"\t "+c.getSexe()+"\t|");
+                writer.printTab(
+                        c.getId().toString(),
+                        c.getNom(),
+                        c.getPrenom(),
+                        c.getSurnom(),
+                        c.getSexe().toString(),
+                        c.getAdresse() + "\t|"
+                );
            }
         }
         else {
@@ -73,20 +83,64 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
     public Contact saisirContact () {
         Contact c = new Contact();
         writer.println("########################################");
-        writer.println("Creation d'un contact");
+        writer.println("\tCreation d'un contact");
         writer.println("########################################");
         writer.println("Nom :");
-        c.setNom(reader.readString());
+        c.setNom(reader.readLine());
         writer.println("Prénom :");
-        c.setPrenom(reader.readString());
+        c.setPrenom(reader.readLine());
+        writer.println("Surnom :");
+        c.setSurnom(reader.readLine());
+        writer.println("Adresse :");
+        c.setAdresse(reader.readLine());
+        // Sexe is a required field
         do{
             writer.println("Sexe (H/F):");
             c.setSexe( Sexe.fromString(reader.readString()));
         }while(c.getSexe() == null);
-        writer.println("Adresses Mail (csv):");        
-        c.setMail(Arrays.asList(reader.readString().split(",")));
-        writer.println("Numéros de Télephone (csv):");
-        c.setTelephone(Arrays.asList(reader.readString().split(",")));
+        // Adding mail to the contact
+        writer.println("Adresses Mail:");
+        String mailEntry = "";
+        List<Mail> mailList = new ArrayList<Mail>();
+        while(!mailEntry.equals("0")){
+            writer.println("\tType(P/M/F),Mail : (P,mail@gmail.com)");
+            mailEntry = reader.readLine();
+            String mailString[] = mailEntry.split(",");
+            if(mailString.length > 1){
+                Mail e = new Mail();
+                e.setType(Type.fromString(mailString[0]));
+                e.setEmail(mailString[1]);
+                mailList.add(e);
+            }
+        }
+        c.setMail(mailList);
+        // Adding phone to the contact
+        writer.println("Numéros de Télephone:");
+        String phoneEntry = "";
+        List<Phone> phoneList = new ArrayList<Phone>();
+        while(!phoneEntry.equals("0")){
+            writer.println("\tType(P/M/F),Phone: (P,+332344244)");
+            phoneEntry = reader.readLine();
+            String phoneString[] = phoneEntry.split(",");
+            if(phoneString.length > 1){
+                Phone e = new Phone();
+                e.setType(Type.fromString(phoneString[0]));
+                e.setNumber(phoneString[1]);
+                phoneList.add(e);
+            }
+        }
+        c.setTelephone(phoneList);
+        // Adding tag to the contact
+        writer.println("Tags (csv):");
+        String tagEntry = reader.readLine();
+        List<Tag> tagList = new ArrayList<Tag>();
+        String tagString[] = tagEntry.split(",");
+        for(String tmp:tagString){
+            Tag e = new Tag();
+            e.setTag(tmp);
+            tagList.add(e);
+        }
+        c.setTags(tagList);
         return c;
     }
 
@@ -94,6 +148,12 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
     public Integer saisirContactId () {
         writer.print("Veuillez saisir l'id du contact à sélectionner : ");
         return reader.readInt();
+    }
+    
+    @Override
+    public String saisirRecherche () {
+        writer.print("Veuillez saisir le mot recherché : ");
+        return reader.readLine();
     }
 
     public void afficherMessageErreurMenu(){

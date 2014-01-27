@@ -13,7 +13,8 @@ public interface InteractionUtilisateur {
     Integer saisirContactId();    
     int getChoixUtilisateur();
     void attenteUtilisateur();
-    
+    String saisirRecherche ();
+
     /*
      * Ecriture
      */
