@@ -78,4 +78,9 @@ public class Phone implements Entity{
         return this.number.matches("^\\+?\\d+$");
     }
     
+    @Override
+    public String toString() {
+        return  number + "[" + type + ']';
+    }
+    
 }

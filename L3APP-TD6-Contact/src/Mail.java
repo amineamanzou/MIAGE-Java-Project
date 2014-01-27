@@ -77,5 +77,10 @@ public class Mail implements Entity{
     public boolean isValide(){
         return this.email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$");
     }
+
+    @Override
+    public String toString() {
+        return  email + "[" + type + ']';
+    }
     
 }

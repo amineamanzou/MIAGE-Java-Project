@@ -63,4 +63,9 @@ public class Tag implements Entity{
         return this.tag.matches("^[a-zA-Z\\s]+$");
     }
     
+    @Override
+    public String toString() {
+        return "[" + tag + ']';
+    }
+    
 }
