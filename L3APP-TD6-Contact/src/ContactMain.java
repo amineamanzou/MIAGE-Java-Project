@@ -7,7 +7,7 @@ public class ContactMain {
     
     public static void main(String[] args) {
         InteractionUtilisateur iu = new InteractionUtilisateurImpl();
-        EntityManager<Contact> cm = new EntityManagerInMemory();
+        ContactManager cm = new ContactManagerInMemory();
         
         do{
             try{
