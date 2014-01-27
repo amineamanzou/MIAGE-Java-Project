@@ -35,7 +35,10 @@ public class ContactMain {
                     case Action.DELETE :
                         Integer id3 = iu.saisirContactId();
                         cm.remove(cm.findById(id3));
-                        break;  
+                        break;
+                    case Action.SEARCH :
+                        String search = iu.saisirMotCleRecherche();
+                        break;
                     case Action.SAVE :
                         cm.flush();
                         iu.afficherSauvegarde();                    

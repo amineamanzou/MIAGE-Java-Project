@@ -150,12 +150,24 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
         return reader.readInt();
     }
     
-    @Override
+    
     public String saisirRecherche () {
         writer.print("Veuillez saisir le mot recherché : ");
         return reader.readLine();
     }
 
+    @Override
+    public String saisirFieldRecherche (){
+        writer.print("Veuillez saisir le type de votre recherche : ");
+        return reader.readString();
+    }
+    
+    @Override
+    public String saisirMotCleRecherche(){
+        writer.print("Veuiller saisir le mot cle recherché : ");
+        return reader.readLine();
+    }
+    
     public void afficherMessageErreurMenu(){
         writer.println("########################################");
         writer.println("ERREUR : Cette option n'existe pas.");
