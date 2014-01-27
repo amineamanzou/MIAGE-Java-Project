@@ -7,6 +7,7 @@ import java.util.List;
 public interface ContactManager extends EntityManager<Contact> {
     
     void importCsv(String path);
+    void writeToCSV(List<Contact> contactList);
     List<Contact> findByName(String name) throws NoSuchEntityException;
     List<Contact> findByPrenom(String prenom) throws NoSuchEntityException;
     List<Contact> findBySurnom(String surnom) throws NoSuchEntityException;

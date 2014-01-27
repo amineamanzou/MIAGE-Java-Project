@@ -63,11 +63,6 @@ public class EntityManagerInMemory<E extends Entity> implements EntityManager<E>
         return entity.isValide();
     }
     
-    @Override
-    public void flush() {
-        
-    }
-    
     private void exists(E entity) throws NoSuchEntityException{
          exists(entity.getId());
     }

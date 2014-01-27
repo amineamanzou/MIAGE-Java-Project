@@ -40,7 +40,7 @@ public class ContactMain {
                         String search = iu.saisirMotCleRecherche();
                         break;
                     case Action.SAVE :
-                        cm.flush();
+                        cm.writeToCSV(cm.findAll());
                         iu.afficherSauvegarde();                    
                         break;
                     case Action.LOAD :
@@ -48,7 +48,7 @@ public class ContactMain {
                        cm.importCsv(path);
                        break;  
                     case Action.EXIT :
-                        cm.flush();
+                        cm.writeToCSV(cm.findAll());
                         iu.afficherSauvegarde();
                         System.exit(0);
                 }
