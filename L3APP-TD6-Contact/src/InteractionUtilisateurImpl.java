@@ -34,7 +34,9 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
         writer.println(Action.UPDATE  +   " => Modifier un contact");
         writer.println(Action.DELETE  +   " => Supprimer un contact");
         writer.println(Action.READ    +   " => Afficher un contact");
-        writer.println(Action.SAVE    +   " => Sauvegarder les changements sur le disque");
+        writer.println(Action.SEARCH  +   " => Rechercher un contact");
+        writer.println(Action.SAVE    +   " => Sauvegarder les changements CSV");
+        writer.println(Action.LOAD    +   " => Importer un fichier CSV");
         writer.println(Action.EXIT    +   " => Quitter");
         writer.println("########################################");
         writer.print("\t => ");
@@ -165,6 +167,12 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
     @Override
     public String saisirMotCleRecherche(){
         writer.print("Veuiller saisir le mot cle recherché : ");
+        return reader.readLine();
+    }
+    
+    @Override
+    public String saisirPath(){
+        writer.print("Entrez le chemin du fichier : ");
         return reader.readLine();
     }
     
