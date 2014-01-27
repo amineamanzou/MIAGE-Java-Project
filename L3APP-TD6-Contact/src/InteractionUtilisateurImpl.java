@@ -159,9 +159,23 @@ public class InteractionUtilisateurImpl implements InteractionUtilisateur{
     }
 
     @Override
-    public String saisirFieldRecherche (){
-        writer.print("Veuillez saisir le type de votre recherche : ");
-        return reader.readString();
+    public Integer saisirFieldRecherche (){
+        writer.println("########################################");
+        writer.println("\t*************************");
+        writer.println("\t*****CONTACT MANAGER*****");
+        writer.println("\t*************************");
+        writer.println("Veuillez saisir le type de votre recherche.");
+        writer.println("########################################");
+        writer.println(ContactAction.NOM +  " => Par nom");
+        writer.println(ContactAction.PRENOM  +   " => Par prenom");
+        writer.println(ContactAction.SURNOM  +   " => Par surnom");
+        writer.println(ContactAction.MAIL  +   " => Par email");
+        writer.println(ContactAction.PHONE    +   " => Par telephone");
+        writer.println(ContactAction.TAG    +   " => Par tag");
+        writer.println(Action.EXIT    +   " => Quitter");
+        writer.println("########################################");
+        writer.print("\t => ");
+        return reader.readInt();
     }
     
     @Override

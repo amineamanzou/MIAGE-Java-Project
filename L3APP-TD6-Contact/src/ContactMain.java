@@ -37,7 +37,11 @@ public class ContactMain {
                         cm.remove(cm.findById(id3));
                         break;
                     case Action.SEARCH :
+                        Integer field = iu.saisirFieldRecherche();
+                        if(field == 0)
+                            break;
                         String search = iu.saisirMotCleRecherche();
+                        iu.afficherListeContact(cm.findBy(field,search));
                         break;
                     case Action.SAVE :
                         cm.writeToCSV(cm.findAll());
@@ -59,4 +63,5 @@ public class ContactMain {
             iu.attenteUtilisateur();
         }while(true);
     }
+    
 }

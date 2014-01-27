@@ -13,7 +13,7 @@ public interface InteractionUtilisateur {
     Integer saisirContactId();    
     int getChoixUtilisateur();
     void attenteUtilisateur();
-    String saisirFieldRecherche ();
+    Integer saisirFieldRecherche ();
     String saisirMotCleRecherche();
     String saisirPath();
     
