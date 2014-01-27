@@ -1,2 +1,2 @@
-Amanzou;Amine;Freestyler;H;Casablanca-Morocco;amine@mail.fr-amineamanzou@gmail.com;0663730923-+33635475513;miage-freestyle
+Amanzou;Amine;Freestyler;H;Casablanca-Morocco;P:amine@mail.fr-M:amineamanzou@gmail.com;P:0663730923-F:+33635475513;miage-freestyle
 Inconnu;Individu;Anonyme;F;Paris-France;;;
