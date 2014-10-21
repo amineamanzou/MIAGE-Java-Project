@@ -31,8 +31,8 @@
                     <td>-- or --</td>
                 </tr>
                 <tr>
-                    <td align="right"><bean:message key="label.search.ssnum"/>:</td>
-                    <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
+                    <td align="right"><bean:message key="label.search.ssNum"/>:</td>
+                    <td><html:text property="ssNum"/> (xxx-xx-xxxx)</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -50,7 +50,7 @@
          </html:form>
 
         <logic:present name="searchEmployee" property="results">
-
+            
             <hr width="100%" size="1" noshade="true">
 
             <bean:size id="size" name="searchEmployee" property="results"/>

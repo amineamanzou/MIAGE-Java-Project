@@ -22,10 +22,10 @@ public final class EmployeeSearchAction extends Action
     ArrayList results;
    
     DynaActionForm searchForm = (DynaActionForm)form;
-   
+    
     // Perform employee search based on the criteria entered.
     String name = (String)searchForm.get("name");
-    String ssNum = (String)searchForm.get("ssnum");
+    String ssNum = (String)searchForm.get("ssNum");
     if (name != null && name.trim().length() > 0) {
       results = service.searchByName(name);
     } else if( ssNum != null && ssNum.trim().length() > 0){

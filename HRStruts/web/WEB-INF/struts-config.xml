@@ -8,7 +8,15 @@
 <struts-config>
     <form-beans>
         <form-bean name="employeeSearchForm"
-                   type="com.hr.struts.view.EmployeeSearchForm"/>
+                   type="org.apache.struts.action.DynaActionForm">
+            <form-property name="name" type="java.lang.String"/>
+            <form-property name="ssNum" type="java.lang.String"/>
+            <form-property name="phone" type="java.lang.String"/>
+            <form-property name="results" type="java.util.ArrayList"/>
+        </form-bean>
+        <form-bean name="employeesShow"
+                   type="org.apache.struts.action.DynaActionForm">
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -17,6 +25,7 @@
 
     <global-forwards>
         <forward name="search" path="searchEmployee.jsp"/>
+        <forward name="showAll" path="showEmployees.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -28,6 +37,14 @@
             scope="request"
             validate="true"
             input="/searchEmployee.jsp">
+            <forward name="succes" path="/succesPage.jsp"/>
+            <forward name="echec" path="/input.jsp"/>
+        </action>
+        <action path="/showEmployees"
+            type="com.hr.struts.controller.EmployeesShowAction"
+            name="employeesShow"
+            scope="request"
+            input="/showEmployees.jsp">
             <forward name="succes" path="/succesPage.jsp"/>
             <forward name="echec" path="/input.jsp"/>
         </action>
