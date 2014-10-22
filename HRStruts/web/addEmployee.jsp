@@ -31,7 +31,7 @@
                     <td>-- or --</td>
                 </tr>
                 <tr>
-                    <td align="right"><bean:message key="label.search.ssnum"/>:</td>
+                    <td align="right"><bean:message key="label.search.ssNum"/>:</td>
                     <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
                 </tr>
                 <tr>

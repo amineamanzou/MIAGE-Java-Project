@@ -1,7 +1,10 @@
 package com.hr.struts.controller;
 
 import com.hr.struts.model.EmployeeManagement;
+import java.sql.SQLException;
 import java.util.ArrayList;  
+import javax.sql.DataSource;
+import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -27,7 +30,10 @@ public final class EmployeeAddAction extends SuperAction
     String name = (String)searchForm.get("name");
     String ssNum = (String)searchForm.get("ssnum");
     String phone = (String)searchForm.get("phone");
-    result = Emp.add(name, ssNum, phone);
+    if (name != null && name.trim().length() > 0 && ssNum != null && ssNum.trim().length() > 0)
+            result = Emp.add(name, ssNum, phone);
+    else 
+        result = false;
     
     searchForm.set("res", result);
     // Forward control to this Action's input page.
