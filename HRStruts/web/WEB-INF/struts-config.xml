@@ -94,6 +94,14 @@
 
     <message-resources parameter="com/struts/ApplicationResource"/>    
     
+    <data-sources>
+        <data-source key="hrstruts">
+        <set-property property="driverClass"
+                   value="com.mysql.jdbc.Driver" />
+        <set-property property="url"
+                   value="jdbc:mysql://localhost/hrstruts" />
+        </data-source>
+    </data-sources>
     <!-- ========================= Tiles plugin ===============================-->
     <!--
     This plugin initialize Tiles definition factory. This later can takes some

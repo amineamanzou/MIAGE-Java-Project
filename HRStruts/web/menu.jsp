@@ -18,6 +18,8 @@
 
        &#149; <html:link forward="search">Search for Employees</html:link><br>
        &#149; <html:link forward="showAll">Show all the Employees</html:link><br>
+       &#149; <html:link forward="add">Add an Employees</html:link><br>
+
        <br>
        <html:errors/> 
 
