@@ -5,6 +5,7 @@
  */
 package com.hr.struts.controller;
 
+import com.hr.struts.model.Manager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -16,12 +17,12 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author pierregaillard
  */
-public abstract class SuperAction extends Action {
+public class SuperAction extends Action {
     
-    @Override
-    public abstract ActionForward execute(ActionMapping mapping,
-     					 ActionForm form,
-    					HttpServletRequest request,
-    					HttpServletResponse response) throws Exception;
+    private final Manager manager;
+    
+    public SuperAction(){
+        this.manager = Manager.getInstance();
+    }
     
 }
