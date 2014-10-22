@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td align="right"><bean:message key="label.search.ssNum"/>:</td>
-                    <td><html:text property="ssNum"/> (xxx-xx-xxxx)</td>
+                    <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
                 </tr>
                 <tr>
                     <td></td>
