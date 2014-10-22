@@ -7,16 +7,45 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="employeeSearchForm"
-                   type="org.apache.struts.action.DynaActionForm">
+        <form-bean name="searchEmployee" type="org.apache.struts.action.DynaActionForm">
             <form-property name="name" type="java.lang.String"/>
-            <form-property name="ssNum" type="java.lang.String"/>
+            <form-property name="ssnum" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
-            <form-property name="results" type="java.util.ArrayList"/>
+            <form-property name="results" type="java.util.List"/>
         </form-bean>
-        <form-bean name="employeesShow"
-                   type="org.apache.struts.action.DynaActionForm">
+        
+        <form-bean name="showEmployees" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="results" type="java.util.List"/>
         </form-bean>
+        
+        <form-bean name="showDepartments" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="results" type="java.util.List"/>
+        </form-bean>
+
+        <form-bean name="addEmployee" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="ssnum" type="java.lang.String"/>
+            <form-property name="name" type="java.lang.String"/>
+            <form-property name="phone" type="java.lang.String"/>
+                <form-property name="res" type="java.lang.Boolean"/>
+        </form-bean>
+        
+        <form-bean name="updateEmployee" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="ssnum" type="java.lang.String"/>
+            <form-property name="firstName" type="java.lang.String"/>
+            <form-property name="lastName" type="java.lang.String"/>
+            <form-property name="gender" type="java.lang.String"/>
+            <form-property name="mail" type="java.lang.String"/>
+            <form-property name="dept_id" type="java.lang.String"/>
+            <form-property name="hiredate" type="java.lang.String"/>
+            <form-property name="salary" type="java.lang.String"/>
+            <form-property name="results" type="java.util.List"/>
+        </form-bean>
+        
+        <form-bean name="deleteEmployee" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="ssnum" type="java.lang.String"/>
+                    <form-property name="res" type="java.lang.Boolean"/>
+        </form-bean>
+
     </form-beans>
     
     <global-exceptions>
@@ -26,6 +55,7 @@
     <global-forwards>
         <forward name="search" path="searchEmployee.jsp"/>
         <forward name="showAll" path="showEmployees.jsp"/>
+        <forward name="add" path="addEmployee.jsp" />
     </global-forwards>
 
     <action-mappings>
@@ -33,18 +63,28 @@
         <action path="/index" forward="/menu.jsp"/>
         <action path="/searchEmployee"
             type="com.hr.struts.controller.EmployeeSearchAction"
-            name="employeeSearchForm"
+            name="searchEmployee"
             scope="request"
-            validate="true"
+            validate="false"
             input="/searchEmployee.jsp">
             <forward name="succes" path="/succesPage.jsp"/>
             <forward name="echec" path="/input.jsp"/>
         </action>
         <action path="/showEmployees"
             type="com.hr.struts.controller.EmployeesShowAction"
-            name="employeesShow"
+            name="showEmployees"
             scope="request"
+            validate="false"
             input="/showEmployees.jsp">
+            <forward name="succes" path="/showEmployees.jsp"/>
+            <forward name="echec" path="/menu.jsp"/>
+        </action>
+        <action path="/addEmployee"
+            type="com.hr.struts.controller.EmployeeAddAction"
+            name="addEmployee"
+            scope="request"
+            validate="false"
+            input="/addEmployee.jsp">
             <forward name="succes" path="/succesPage.jsp"/>
             <forward name="echec" path="/input.jsp"/>
         </action>
@@ -82,7 +122,8 @@
     Paths found in Tiles definitions are relative to the main context.
     -->
     <plug-in className="org.apache.struts.tiles.TilesPlugin" >
-        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+        <set-property property="databases-config" value="/WEB-INF/databases-config.xml" />      
         <set-property property="moduleAware" value="true" />
     </plug-in>
     

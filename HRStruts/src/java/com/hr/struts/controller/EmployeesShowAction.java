@@ -16,9 +16,9 @@ import org.apache.struts.action.DynaActionForm;
 public final class EmployeesShowAction extends Action
 {
   public ActionForward execute(ActionMapping mapping,
-     					 ActionForm form,
-    					HttpServletRequest request,
-    					HttpServletResponse response)
+               ActionForm form,
+              HttpServletRequest request,
+              HttpServletResponse response)
   throws Exception
   {
     EmployeeManagement service = new EmployeeManagement();
