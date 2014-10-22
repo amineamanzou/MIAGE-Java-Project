@@ -12,7 +12,11 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
-   
+
+/**
+ *
+ * @author Amine Amanzou <amineamanzou@gmail.com>
+ */
 public final class EmployeesShowAction extends Action
 {
   public ActionForward execute(ActionMapping mapping,
