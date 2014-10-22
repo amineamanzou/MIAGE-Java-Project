@@ -5,7 +5,6 @@ dist/
 
 # Netbeans Files
 build.xml
-*.properties
 manifest.mf
 
 # Temp file
