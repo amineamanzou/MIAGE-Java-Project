@@ -10,19 +10,10 @@
 
 <html>
     <head>
-        <title><bean:message key="page.title.menu"/></title>
+        <jsp:include page="/blocks/header.jsp" />
     </head>
     <body>
-
-        <font size="+1">
-            <bean:message key="page.title.menu"/>
-        </font>
-        <br>
-        <hr width="100%" noshade="true">
-        <html:link page="/Locale.do?method=english">English</html:link>
-        <html:link page="/Locale.do?method=france">Français</html:link>
-        <br>
-        <hr width="100%" noshade="true">
+        <jsp:include page="/blocks/menuBar.jsp" />
 
        &#149; <html:link forward="search">Search for Employees</html:link><br>
        &#149; <html:link forward="showAll">Show all the Employees</html:link><br>

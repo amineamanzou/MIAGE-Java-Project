@@ -27,7 +27,7 @@ public class LanguageSelectAction extends DispatchAction{
  
 		request.getSession().setAttribute(
 				Globals.LOCALE_KEY, Locale.ENGLISH);
-                System.out.println(Globals.LOCALE_KEY+" "+Locale.ENGLISH);
+                
 		return mapping.findForward("success");
 	}
  
