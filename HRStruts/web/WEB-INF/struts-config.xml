@@ -7,6 +7,9 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="changeLanguage" type="org.apache.struts.action.DynaActionForm">
+        </form-bean>
+        
         <form-bean name="searchEmployee" type="org.apache.struts.action.DynaActionForm">
             <form-property name="name" type="java.lang.String"/>
             <form-property name="ssnum" type="java.lang.String"/>
@@ -59,6 +62,14 @@
     </global-forwards>
 
     <action-mappings>
+        <action
+            path="/Locale"
+            type="com.hr.struts.controller.LanguageSelectAction"
+            name="changeLanguage"
+            parameter="method"
+            validate="false">
+            <forward name="success" path="/menu.jsp"/>
+        </action>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
         <action path="/index" forward="/menu.jsp"/>
         <action path="/searchEmployee"

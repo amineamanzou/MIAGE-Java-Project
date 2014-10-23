@@ -6,14 +6,22 @@
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
 <html>
     <head>
-        <title>Human Resources Portal</title>
+        <title><bean:message key="page.title.menu"/></title>
     </head>
     <body>
 
-        <font size="+1">Human Resources Portal</font><br>
+        <font size="+1">
+            <bean:message key="page.title.menu"/>
+        </font>
+        <br>
+        <hr width="100%" noshade="true">
+        <html:link page="/Locale.do?method=english">English</html:link>
+        <html:link page="/Locale.do?method=france">Français</html:link>
+        <br>
         <hr width="100%" noshade="true">
 
        &#149; <html:link forward="search">Search for Employees</html:link><br>
