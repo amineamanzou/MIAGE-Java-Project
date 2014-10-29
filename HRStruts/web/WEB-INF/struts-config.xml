@@ -58,7 +58,10 @@
     <global-forwards>
         <forward name="search" path="searchEmployee.jsp"/>
         <forward name="showAll" path="showEmployees.jsp"/>
-        <forward name="add" path="addEmployee.jsp" />
+        <forward name="create" path="createEmployee.jsp" />
+        <forward name="update" path="updateEmployee.jsp" />
+        <forward name="delete" path="deleteEmployee.jsp" />
+
     </global-forwards>
 
     <action-mappings>

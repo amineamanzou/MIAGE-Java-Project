@@ -7,8 +7,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
-<title>
-    <bean:message key="page.title.menu"/>
-</title>
-<link rel="stylesheet" href="<html:rewrite page='/css/bootstrap.css'/>" type="text/css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <bean:message key="page.title.menu"/>
+    </title>
+    <link rel="stylesheet" href="<html:rewrite page='/css/bootstrap.css'/>" type="text/css" />
+    
 

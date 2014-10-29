@@ -1,7 +1,7 @@
 <%-- 
-    Document   : searchEmployee
+    Document   : addEmployee
     Created on : 2 oct. 2014, 21:16:06
-    Author     : Amine Amanzou <amineamanzou@gmail.com>
+    Author     : Pierre Gaillard
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
@@ -12,17 +12,17 @@
     <head>
         <jsp:include page="/blocks/header.jsp" />
     </head>
-    <body> 
+    <body>
         <jsp:include page="/blocks/menuBar.jsp" />
         
         <div class="container">
             <div class="page-header">
-                <h1>Portal for Employee Management <small>Search </small></h1>
+                <h1>Portal for Employee Management <small>Create </small></h1>
             </div>
-
+            
             <html:errors/>
 
-            <html:form action="/searchEmployee">
+            <html:form action="/addEmployee">
                 <table>
                     <tr>
                         <td align="right"><bean:message key="label.search.name"/>:</td>
@@ -50,35 +50,6 @@
                     </tr>
                 </table>
              </html:form>
-
-            <logic:present name="searchEmployee" property="results">
-
-                <hr width="100%" size="1" noshade="true">
-
-                <bean:size id="size" name="searchEmployee" property="results"/>
-
-                <logic:equal name="size" value="0">
-                    <center>
-                    <font color="red"><b>No Employees Found</b></font>
-                    </center>
-                </logic:equal>
-                <logic:greaterThan name="size" value="0">
-                    <table border="1">
-                        <tr>
-                            <th>Name</th>
-                            <th>Social Security Number</th>
-                            <th>Phone Number</th>
-                        </tr>
-                        <logic:iterate id="result" name="searchEmployee" property="results">
-                            <tr>
-                                <td><bean:write name="result" property="name"/></td>
-                                <td><bean:write name="result" property="ssNum"/></td>
-                                <td><bean:write name="result" property="phone"/></td>
-                            </tr>
-                        </logic:iterate>
-                    </table>
-                </logic:greaterThan>
-            </logic:present>
         </div>
     </body>
 </html>

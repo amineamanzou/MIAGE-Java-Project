@@ -14,10 +14,31 @@
     </head>
     <body>
         <jsp:include page="/blocks/menuBar.jsp" />
-
-       &#149; <html:link forward="search">Search for Employees</html:link><br>
-       &#149; <html:link forward="showAll">Show all the Employees</html:link><br>
-       &#149; <html:link forward="add">Add an Employees</html:link><br>
+        <div class="jumbotron">
+            <div class="container">
+              <h1>Struts project</h1>
+              <p>This is a project made for the Sorbonne university in the architecture lessons.</p>
+              <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="page-header">
+                <h1>Employees <small>Simple CRUD</small></h1>
+            </div>
+            <div class="well">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <html:link forward="create">Create</html:link>
+                    </li>
+                    <li>
+                        <html:link forward="update">Update</html:link>
+                    </li>
+                    <li>
+                        <html:link forward="delete">Delete</html:link>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
        <br>
        <html:errors/> 

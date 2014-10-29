@@ -11,40 +11,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="/blocks/header.jsp" />
     </head>
     <body>
-        <h1>Show All the Employees</h1>
+        <jsp:include page="/blocks/menuBar.jsp" />
+        <div class="container">
+            <div class="page-header">
+                <h1>Show All the Employees</h1>
+            </div>
+        
        
-        <html:form action="/showEmployees"> 
-            <html:submit/>
-        </html:form>
-       
-        <logic:present name="showEmployees" property="results">
-                  
-         <hr width="100%" size="1" noshade="true"/>
-         <bean:size id="size" name="showEmployees" property="results"/> 
-         <logic:equal name="size" value="0">
-         <center><font color="red"> <b>No employees Found</b>  </font>
-            </center> 
-         </logic:equal>
-    
-        <logic:greaterThan name="size" value="0">
-            <table border="1">
-                <tr>
-                    <th>Name</th>
-                    <th>Social Security Number</th>
-                </tr>
-                <logic:iterate id="result" name="showEmployees" property="results">
+            <html:form action="/showEmployees"> 
+                <html:submit/>
+            </html:form>
+
+            <logic:present name="showEmployees" property="results">
+
+             <hr width="100%" size="1" noshade="true"/>
+             <bean:size id="size" name="showEmployees" property="results"/> 
+             <logic:equal name="size" value="0">
+                <center>
+                    <font color="red"> <b>No employees Found</b>  </font>
+                </center> 
+             </logic:equal>
+
+            <logic:greaterThan name="size" value="0">
+                <table border="1">
                     <tr>
-                        <td><bean:write name="result" property="name"/></td>
-                        <td><bean:write name="result" property="ssNum"/></td>
+                        <th>Name</th>
+                        <th>Social Security Number</th>
                     </tr>
-                </logic:iterate>
-            </table>
-        </logic:greaterThan>
-    
-        </logic:present>
+                    <logic:iterate id="result" name="showEmployees" property="results">
+                        <tr>
+                            <td><bean:write name="result" property="name"/></td>
+                            <td><bean:write name="result" property="ssNum"/></td>
+                        </tr>
+                    </logic:iterate>
+                </table>
+            </logic:greaterThan>
+
+            </logic:present>
+        </div>
     </body>
 </html>
 
