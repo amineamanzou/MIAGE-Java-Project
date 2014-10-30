@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
    
-public final class EmployeeAddAction extends SuperAction
+public final class EmployeeUpdateAction extends SuperAction
 {
   @Override
   public ActionForward execute(ActionMapping mapping,
@@ -27,7 +27,7 @@ public final class EmployeeAddAction extends SuperAction
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
-    String name = (String)searchForm.get("name");
+    String name = (String)searchForm.get("firstName");
     String ssNum = (String)searchForm.get("ssnum");
     String phone = (String)searchForm.get("phone");
     if (name != null && name.trim().length() > 0 && ssNum != null && ssNum.trim().length() > 0)

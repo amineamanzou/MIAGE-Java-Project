@@ -25,7 +25,7 @@
             <form-property name="results" type="java.util.List"/>
         </form-bean>
 
-        <form-bean name="addEmployee" type="org.apache.struts.action.DynaActionForm">
+        <form-bean name="createEmployee" type="org.apache.struts.action.DynaActionForm">
             <form-property name="ssnum" type="java.lang.String"/>
             <form-property name="name" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
@@ -41,6 +41,7 @@
             <form-property name="dept_id" type="java.lang.String"/>
             <form-property name="hiredate" type="java.lang.String"/>
             <form-property name="salary" type="java.lang.String"/>
+            <form-property name="phone" type="java.lang.String"/>
             <form-property name="results" type="java.util.List"/>
         </form-bean>
         
@@ -93,12 +94,21 @@
             <forward name="succes" path="/showEmployees.jsp"/>
             <forward name="echec" path="/menu.jsp"/>
         </action>
-        <action path="/addEmployee"
-            type="com.hr.struts.controller.EmployeeAddAction"
-            name="addEmployee"
+        <action path="/createEmployee"
+            type="com.hr.struts.controller.EmployeeCreateAction"
+            name="createEmployee"
             scope="request"
             validate="false"
-            input="/addEmployee.jsp">
+            input="/createEmployee.jsp">
+            <forward name="succes" path="/succesPage.jsp"/>
+            <forward name="echec" path="/input.jsp"/>
+        </action>
+        <action path="/updateEmployee"
+            type="com.hr.struts.controller.EmployeeUpdateAction"
+            name="updateEmployee"
+            scope="request"
+            validate="false"
+            input="/updateEmployee.jsp">
             <forward name="succes" path="/succesPage.jsp"/>
             <forward name="echec" path="/input.jsp"/>
         </action>

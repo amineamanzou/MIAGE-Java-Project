@@ -22,23 +22,15 @@
             
             <html:errors/>
 
-            <html:form action="/addEmployee">
+            <html:form action="/createEmployee">
                 <table>
                     <tr>
                         <td align="right"><bean:message key="label.search.name"/>:</td>
                         <td><html:text property="name"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td align="right"><bean:message key="label.search.ssNum"/>:</td>
                         <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td align="right"><bean:message key="label.search.phone"/>:</td>
