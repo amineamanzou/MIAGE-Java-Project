@@ -16,8 +16,8 @@
         <jsp:include page="/blocks/menuBar.jsp" />
         <div class="jumbotron">
             <div class="container">
-              <h1>Struts project</h1>
-              <p>This is a project made for the Sorbonne university in the architecture lessons.</p>
+              <h1><bean:message key="page.title.index"/></h1>
+              <p><bean:message key="page.content.index"/></p>
               <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
             </div>
         </div>

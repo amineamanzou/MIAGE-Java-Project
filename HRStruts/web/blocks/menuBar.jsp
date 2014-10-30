@@ -14,13 +14,13 @@
         </a></b>
         <ul class="nav navbar-nav">
             <li>
-                <html:link forward="search">Search for Employees</html:link>
+                <html:link forward="search"><bean:message key="page.title.search" /></html:link>
             </li>
             <li>
-                <html:link forward="showAll">Show all the Employees</html:link>
+                <html:link forward="showAll"><bean:message key="page.title.show" /></html:link>
             </li>
             <li>
-                <a href="/HRStruts">Employees CRUD Menu</a>
+                <a href="/HRStruts"><bean:message key="page.title.crud" /></a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

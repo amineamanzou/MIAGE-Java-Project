@@ -75,6 +75,16 @@ public class EmployeeManagement
         }
         return resultList;
     }
+    
+        public Employee searchById(Integer id) {
+        ArrayList resultList = new ArrayList();
+        for (Employee employee : employees) {
+            if (employee.getId().equals(id)) {
+                return employee;
+            }
+        }
+        return null;
+    }
 
     public boolean delete(Employee get) {
         employees.remove(get);

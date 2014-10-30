@@ -50,7 +50,7 @@
         
         <form-bean name="deleteEmployee" type="org.apache.struts.action.DynaActionForm">
             <form-property name="id" type="java.lang.Integer"/>
-            <form-property name="res" type="java.lang.Boolean"/>
+            <form-property name="results" type="java.lang.Boolean"/>
         </form-bean>
 
     </form-beans>
@@ -65,7 +65,6 @@
         <forward name="create" path="createEmployee.jsp" />
         <forward name="update" path="updateEmployee.jsp" />
         <forward name="delete" path="deleteEmployee.jsp" />
-
     </global-forwards>
 
     <action-mappings>
@@ -112,6 +111,15 @@
             scope="request"
             validate="false"
             input="/updateEmployee.jsp">
+            <forward name="succes" path="/succesPage.jsp"/>
+            <forward name="echec" path="/input.jsp"/>
+        </action>
+        <action path="/deleteEmployee"
+            type="com.hr.struts.controller.EmployeeDeleteAction"
+            name="deleteEmployee"
+            scope="request"
+            validate="false"
+            input="/deleteEmployee.jsp">
             <forward name="succes" path="/succesPage.jsp"/>
             <forward name="echec" path="/input.jsp"/>
         </action>

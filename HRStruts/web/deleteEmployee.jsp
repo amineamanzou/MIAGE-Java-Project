@@ -22,8 +22,15 @@
             <div class="alert alert-danger">
                 Cette action irréversible va également supprimer l'ensemble des informations associées !
             </div>
-            <html:form action="/createEmployee">
-               <html:hidden property="id" value="1" />
+            <html:form action="/deleteEmployee">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        Id
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="id"/>
+                    </div>
+                </div>
                <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
                <a href="#" class="btn btn-default">Annuler</a> 
             </html:form>

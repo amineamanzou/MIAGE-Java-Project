@@ -30,7 +30,7 @@ public final class EmployeeUpdateAction extends SuperAction
     Integer id = (Integer)searchForm.get("id");
     String firstName = (String)searchForm.get("firstName");
     String lastName = (String)searchForm.get("lastName");
-    String ssNum = (String)searchForm.get("ssnum");
+    String ssNum = (String)searchForm.get("ssNum");
     String phone = (String)searchForm.get("phone");
     if (lastName != null && lastName.trim().length() > 0 &&
             firstName != null && lastName.trim().length() > 0 &&

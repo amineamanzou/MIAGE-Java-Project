@@ -1,6 +1,7 @@
 package com.hr.struts.controller;
 
 import com.hr.struts.model.EmployeeManagement;
+import com.hr.struts.model.entities.Employee;
 import java.sql.SQLException;
 import java.util.ArrayList;  
 import javax.sql.DataSource;
@@ -12,7 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
    
-public final class EmployeeCreateAction extends SuperAction
+public final class EmployeeDeleteAction extends SuperAction
 {
   @Override
   public ActionForward execute(ActionMapping mapping,
@@ -23,22 +24,17 @@ public final class EmployeeCreateAction extends SuperAction
   {
     EmployeeManagement Emp = new EmployeeManagement();
     Boolean result;
-   
+    
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
     Integer id = (Integer)searchForm.get("id");
-    String firstName = (String)searchForm.get("firstName");
-    String lastName = (String)searchForm.get("lastName");
-    String ssNum = (String)searchForm.get("ssNum");
-    String phone = (String)searchForm.get("phone");
-    if (lastName != null && lastName.trim().length() > 0 &&
-            firstName != null && lastName.trim().length() > 0 &&
-                    ssNum != null && ssNum.trim().length() > 0)
-            result = Emp.add(id, firstName, lastName, ssNum, phone);
+    if (id != null)
+        result = Emp.delete(Emp.searchById(id));
     else
         result = false;
     
+    searchForm.set("results", result);
     // Forward control to this Action's input page.
     return mapping.getInputForward();
   }
