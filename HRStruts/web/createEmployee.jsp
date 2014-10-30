@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- or --</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td align="right"><bean:message key="label.search.ssNum"/>:</td>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- or --</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td align="right"><bean:message key="label.search.phone"/>:</td>
