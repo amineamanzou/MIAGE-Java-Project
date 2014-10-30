@@ -38,13 +38,27 @@
             <logic:greaterThan name="size" value="0">
                 <table border="1">
                     <tr>
-                        <th>Name</th>
-                        <th>Social Security Number</th>
+                        <th>Id</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Social Security Number</th>
+                            <th>Phone Number</th>
+                            <th>Mail</th>
+                            <th>Gender</th>
+                            <th>Hire Date</th>
+                            <th>Salary</th>
                     </tr>
                     <logic:iterate id="result" name="showEmployees" property="results">
                         <tr>
-                            <td><bean:write name="result" property="name"/></td>
+                            <td><bean:write name="result" property="id"/></td>
+                            <td><bean:write name="result" property="firstName"/></td>
+                            <td><bean:write name="result" property="lastName"/></td>
                             <td><bean:write name="result" property="ssNum"/></td>
+                            <td><bean:write name="result" property="phone"/></td>
+                            <td><bean:write name="result" property="mail"/></td>
+                            <td><bean:write name="result" property="gender"/></td>
+                            <td><bean:write name="result" property="hiredate"/></td>
+                            <td><bean:write name="result" property="salary"/></td>
                         </tr>
                     </logic:iterate>
                 </table>

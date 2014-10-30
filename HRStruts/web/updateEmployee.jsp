@@ -26,7 +26,15 @@
             <html:form action="/updateEmployee">
                 <div class="form-group">
                     <label class="col-sm-2 control-label required" for="form_username">
-                        <bean:message key="label.search.name"/>
+                        Id
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="id"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.firstName"/>
                     </label>
                     <div class="col-sm-10">
                         <html:text property="firstName"/>
@@ -34,10 +42,18 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.lastName"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="lastName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
                         <bean:message key="label.search.ssNum"/> 
                     </label>
                     <div class="col-sm-10">
-                        <html:text property="ssnum"/> (xxx-xx-xxxx)
+                        <html:text property="ssNum"/> (xxx-xx-xxxx)
                     </div>
                 </div>
                 <div class="form-group">

@@ -23,24 +23,53 @@
             <html:errors/>
 
             <html:form action="/createEmployee">
-                <table>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.name"/>:</td>
-                        <td><html:text property="name"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.ssNum"/>:</td>
-                        <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
-                    </tr>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.phone"/>:</td>
-                        <td><html:text property="phone"/> (xxxxxxxxxx)</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><html:submit/></td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        Id
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="id"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.firstName"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="firstName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.lastName"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="lastName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.ssNum"/> 
+                    </label>
+                    <div class="col-sm-10">
+                        <html:text property="ssNum"/> (xxx-xx-xxxx)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="form_username">
+                        <bean:message key="label.search.phone"/>
+                    </label>
+                    <div class="col-sm-10">
+                         <html:text property="phone"/> (xxxxxxxxxx)
+                    </div>
+                </div>
+                <br><br><br><br><br>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <a href="#" class="btn btn-default">Annuler</a>
+                    </div>
+                </div>
              </html:form>
         </div>
     </body>

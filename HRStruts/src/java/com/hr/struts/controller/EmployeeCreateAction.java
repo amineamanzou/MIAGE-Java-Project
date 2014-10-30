@@ -27,15 +27,18 @@ public final class EmployeeCreateAction extends SuperAction
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
-    String name = (String)searchForm.get("name");
+    Integer id = (Integer)searchForm.get("id");
+    String firstName = (String)searchForm.get("firstName");
+    String lastName = (String)searchForm.get("lastName");
     String ssNum = (String)searchForm.get("ssnum");
     String phone = (String)searchForm.get("phone");
-    if (name != null && name.trim().length() > 0 && ssNum != null && ssNum.trim().length() > 0)
-            result = Emp.add(name, ssNum, phone);
-    else 
+    if (lastName != null && lastName.trim().length() > 0 &&
+            firstName != null && lastName.trim().length() > 0 &&
+                    ssNum != null && ssNum.trim().length() > 0)
+            result = Emp.add(id, firstName, lastName, ssNum, phone);
+    else
         result = false;
     
-    searchForm.set("res", result);
     // Forward control to this Action's input page.
     return mapping.getInputForward();
   }

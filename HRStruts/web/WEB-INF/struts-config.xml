@@ -11,8 +11,9 @@
         </form-bean>
         
         <form-bean name="searchEmployee" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="name" type="java.lang.String"/>
-            <form-property name="ssnum" type="java.lang.String"/>
+            <form-property name="firstName" type="java.lang.String"/>
+            <form-property name="lastName" type="java.lang.String"/>
+            <form-property name="ssNum" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
             <form-property name="results" type="java.util.List"/>
         </form-bean>
@@ -20,25 +21,27 @@
         <form-bean name="showEmployees" type="org.apache.struts.action.DynaActionForm">
             <form-property name="results" type="java.util.List"/>
         </form-bean>
-        
-        <form-bean name="showDepartments" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="results" type="java.util.List"/>
-        </form-bean>
 
         <form-bean name="createEmployee" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="ssnum" type="java.lang.String"/>
-            <form-property name="name" type="java.lang.String"/>
-            <form-property name="phone" type="java.lang.String"/>
-                <form-property name="res" type="java.lang.Boolean"/>
-        </form-bean>
-        
-        <form-bean name="updateEmployee" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="ssnum" type="java.lang.String"/>
+            <form-property name="id" type="java.lang.Integer"/>
+            <form-property name="ssNum" type="java.lang.String"/>
             <form-property name="firstName" type="java.lang.String"/>
             <form-property name="lastName" type="java.lang.String"/>
             <form-property name="gender" type="java.lang.String"/>
             <form-property name="mail" type="java.lang.String"/>
-            <form-property name="dept_id" type="java.lang.String"/>
+            <form-property name="hiredate" type="java.lang.String"/>
+            <form-property name="salary" type="java.lang.String"/>
+            <form-property name="phone" type="java.lang.String"/>
+            <form-property name="results" type="java.util.List"/>
+        </form-bean>
+        
+        <form-bean name="updateEmployee" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="id" type="java.lang.Integer"/>
+            <form-property name="ssNum" type="java.lang.String"/>
+            <form-property name="firstName" type="java.lang.String"/>
+            <form-property name="lastName" type="java.lang.String"/>
+            <form-property name="gender" type="java.lang.String"/>
+            <form-property name="mail" type="java.lang.String"/>
             <form-property name="hiredate" type="java.lang.String"/>
             <form-property name="salary" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
@@ -46,8 +49,8 @@
         </form-bean>
         
         <form-bean name="deleteEmployee" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="ssnum" type="java.lang.String"/>
-                    <form-property name="res" type="java.lang.Boolean"/>
+            <form-property name="id" type="java.lang.Integer"/>
+            <form-property name="res" type="java.lang.Boolean"/>
         </form-bean>
 
     </form-beans>

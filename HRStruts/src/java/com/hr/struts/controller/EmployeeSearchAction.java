@@ -27,10 +27,14 @@ public final class EmployeeSearchAction extends SuperAction
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
-    String name = (String)searchForm.get("name");
-    String ssNum = (String)searchForm.get("ssnum");
-    if (name != null && name.trim().length() > 0) {
-      results = service.searchByName(name);
+    String firstName = (String)searchForm.get("firstName");
+    String lastName = (String)searchForm.get("lastName");
+
+    String ssNum = (String)searchForm.get("ssNum");
+    if (firstName != null && firstName.trim().length() > 0) {
+      results = service.searchByFirstName(firstName);
+    } else if (lastName != null && lastName.trim().length() > 0) {
+      results = service.searchByLastName(lastName);
     } else if( ssNum != null && ssNum.trim().length() > 0){
       results = service.searchBySsNum(ssNum.trim());
     } else {

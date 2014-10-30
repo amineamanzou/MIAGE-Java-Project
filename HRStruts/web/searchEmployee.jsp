@@ -25,8 +25,16 @@
             <html:form action="/searchEmployee">
                 <table>
                     <tr>
-                        <td align="right"><bean:message key="label.search.name"/>:</td>
-                        <td><html:text property="name"/></td>
+                        <td align="right"><bean:message key="label.search.firstName"/>:</td>
+                        <td><html:text property="firstName"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>-- or --</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><bean:message key="label.search.lastName"/>:</td>
+                        <td><html:text property="lastName"/> </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -34,7 +42,7 @@
                     </tr>
                     <tr>
                         <td align="right"><bean:message key="label.search.ssNum"/>:</td>
-                        <td><html:text property="ssnum"/> (xxx-xx-xxxx)</td>
+                        <td><html:text property="ssNum"/> (xxx-xx-xxxx)</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -65,15 +73,27 @@
                 <logic:greaterThan name="size" value="0">
                     <table border="1">
                         <tr>
-                            <th>Name</th>
+                            <th>Id</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
                             <th>Social Security Number</th>
                             <th>Phone Number</th>
+                            <th>Mail</th>
+                            <th>Gender</th>
+                            <th>Hire Date</th>
+                            <th>Salary</th>
                         </tr>
                         <logic:iterate id="result" name="searchEmployee" property="results">
                             <tr>
-                                <td><bean:write name="result" property="name"/></td>
+                                <td><bean:write name="result" property="id"/></td>
+                                <td><bean:write name="result" property="firstName"/></td>
+                                <td><bean:write name="result" property="lastName"/></td>
                                 <td><bean:write name="result" property="ssNum"/></td>
                                 <td><bean:write name="result" property="phone"/></td>
+                                <td><bean:write name="result" property="mail"/></td>
+                                <td><bean:write name="result" property="gender"/></td>
+                                <td><bean:write name="result" property="hiredate"/></td>
+                                <td><bean:write name="result" property="salary"/></td>
                             </tr>
                         </logic:iterate>
                     </table>
