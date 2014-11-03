@@ -79,8 +79,8 @@
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
         <action path="/index" forward="/menu.jsp"/>
         <action path="/searchEmployee"
-            type="com.hr.struts.controller.EmployeeSearchAction"
-            parameter="searchEmployee"
+            type="com.hr.struts.controller.EmployeeAction"
+            parameter="search"
             name="searchEmployee"
             scope="request"
             validate="false"
@@ -89,8 +89,8 @@
             <forward name="echec" path="/input.jsp"/>
         </action>
         <action path="/showEmployees"
-            type="com.hr.struts.controller.EmployeesShowAction"
-            parameter="searchEmployee"
+            type="com.hr.struts.controller.EmployeeAction"
+            parameter="show"
             name="showEmployees"
             scope="request"
             validate="false"

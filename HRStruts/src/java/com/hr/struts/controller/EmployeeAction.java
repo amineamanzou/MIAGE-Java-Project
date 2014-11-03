@@ -56,10 +56,10 @@ public final class EmployeeAction extends SuperAction {
     					HttpServletResponse response)
   throws Exception
   {
-    IEmployeeManagement service = super.getEmployeeManagement();
+    EmployeeManagement service = new EmployeeManagement();
     ArrayList results;
    
-    EmployeesShowForm showForm = (EmployeesShowForm) form;
+    DynaActionForm showForm = (DynaActionForm) form;
    
     // Perform the show all the employees function.
     results = service.findAll();
@@ -77,11 +77,9 @@ public final class EmployeeAction extends SuperAction {
         saveErrors(request, errors);
       }
     }
-    else {
-        // Place search results in EmployeesShowForm for access by JSP.
-        showForm.setResults(results);
-    }
+
     // Transmission a la vue appropriee
+    showForm.set("results", results);
     return (mapping.findForward(cible));
   }
 } 
