@@ -3,6 +3,7 @@ package com.hr.struts.controller;
 import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
 import java.util.ArrayList;  
+import static java.util.Collections.list;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import org.apache.struts.action.DynaActionForm;
    
 public final class EmployeeAction extends SuperAction {
 
-    public ActionForward search(ActionMapping mapping, ActionForm form,
+  public ActionForward search(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ActionErrors errors = new ActionErrors();
@@ -51,8 +52,7 @@ public final class EmployeeAction extends SuperAction {
   public ActionForward show(ActionMapping mapping,
      					 ActionForm form,
     					HttpServletRequest request,
-    					HttpServletResponse response)
-  throws Exception
+    					HttpServletResponse response) throws Exception
   {
     EmployeeManagement service = new EmployeeManagement();
     ArrayList results;
@@ -79,5 +79,79 @@ public final class EmployeeAction extends SuperAction {
     // Transmission a la vue appropriee
     showForm.set("results", results);
     return (mapping.findForward(cible));
+  }
+
+public ActionForward add(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception
+  {
+    IEmployeeManagement Emp = super.getEmployeeManagement();
+    Boolean result;
+   
+    DynaActionForm searchForm = (DynaActionForm)form;
+   
+    // Perform employee search based on the criteria entered.
+    Integer id = (Integer)searchForm.get("id");
+    String firstName = (String)searchForm.get("firstName");
+    String lastName = (String)searchForm.get("lastName");
+    String ssNum = (String)searchForm.get("ssNum");
+    String phone = (String)searchForm.get("phone");
+    if (lastName != null && lastName.trim().length() > 0 &&
+            firstName != null && lastName.trim().length() > 0 &&
+                    ssNum != null && ssNum.trim().length() > 0)
+            result = Emp.add(id, firstName, lastName, ssNum, phone);
+    else
+        result = false;
+    
+    // Forward control to this Action's input page.
+    return mapping.getInputForward();
+  }
+
+public ActionForward delete(ActionMapping mapping,
+     					 ActionForm form,
+    					HttpServletRequest request,
+    					HttpServletResponse response) throws Exception
+  {
+    IEmployeeManagement Emp = super.getEmployeeManagement();
+    Boolean result;
+    
+    DynaActionForm searchForm = (DynaActionForm)form;
+   
+    // Perform employee search based on the criteria entered.
+    Integer id = (Integer)searchForm.get("id");
+    if (id != null)
+        result = Emp.delete(Emp.searchById(id));
+    else
+        result = false;
+    
+    searchForm.set("results", result);
+    // Forward control to this Action's input page.
+    return mapping.getInputForward();
+  }
+
+public ActionForward update(ActionMapping mapping,
+     					 ActionForm form,
+    					HttpServletRequest request,
+    					HttpServletResponse response) throws Exception
+  {
+    IEmployeeManagement Emp = super.getEmployeeManagement();
+    Boolean result;
+   
+    DynaActionForm searchForm = (DynaActionForm)form;
+   
+    // Perform employee search based on the criteria entered.
+    Integer id = (Integer)searchForm.get("id");
+    String firstName = (String)searchForm.get("firstName");
+    String lastName = (String)searchForm.get("lastName");
+    String ssNum = (String)searchForm.get("ssNum");
+    String phone = (String)searchForm.get("phone");
+    if (lastName != null && lastName.trim().length() > 0 &&
+            firstName != null && lastName.trim().length() > 0 &&
+                    ssNum != null && ssNum.trim().length() > 0)
+            result = Emp.update(id, firstName, lastName, ssNum, phone);
+    else
+        result = false;
+    
+    searchForm.set("results", result);
+    // Forward control to this Action's input page.
+    return mapping.getInputForward();
   }
 } 

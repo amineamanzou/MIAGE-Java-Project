@@ -12,7 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
-   
+   //Obsolète (TP 5.1 & 5.2)
+
 public final class EmployeeDeleteAction extends SuperAction
 {
   @Override
