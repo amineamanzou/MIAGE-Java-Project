@@ -1,56 +1,87 @@
+package com.hr.struts.controller;
 
-import com.hr.struts.controller.SuperAction;
-
+import com.hr.struts.model.EmployeeManagement;
+import com.hr.struts.model.IEmployeeManagement;
+import com.hr.struts.view.EmployeesShowForm;
+import java.util.ArrayList;  
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.DynaActionForm;
+import org.apache.struts.actions.MappingDispatchAction;
+   
 public final class EmployeeAction extends SuperAction {
-    //faire une classe pour chq action
-    //dans le browser, form action='search?method=search'
 
-    public ActionForward execute(ActionMapping map, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        Object method = request.getParameter("method");
+    public ActionForward search(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        EmployeeSearchService service = new EmployeeSearchService();
-        ArrayList results = null;
+        ActionErrors errors = new ActionErrors();
+        IEmployeeManagement employeeManagement = super.getEmployeeManagement();
+        List results;
+
         DynaActionForm searchForm = (DynaActionForm) form;
-        ActionErrors errors = null;
-       
-        switch (method.toString()) {
-            case "searchEmployee":
-                SearchEmployee se=new SearchEmployee(service);
-                errors = se.searchEmployee(searchForm,request);
-                break;
 
-            case "showDepartments":
-                results=service.getDepartements();
-                searchForm.set("results", results);
-                break;
-                
-            case "addEmployee":                
-                AddEmployee add_emp=new AddEmployee(service);
-                errors = add_emp.addEmployee(searchForm,request);
-                break;
-
-            case "deleteEmployee":
-                DeleteEmployee delete_emp=new DeleteEmployee(service);
-                errors = delete_emp.deleteEmployee(searchForm,request);
-                break;
-
-            case "updateSearchEmployee":
-                UpdateEmployee update_emp=new UpdateEmployee(service);
-                errors = update_emp.searchEmployee(searchForm,request);
-                break;
-
-            case "updateEmployee":
-                update_emp=new UpdateEmployee(service);
-               errors= update_emp.updateEmploye(searchForm,request);
-                break;
-
-            default:
-                results = service.getAllEmployee();
-                searchForm.set("results", results);     
+        String name = searchForm.getString("firstName");
+        String ssnum = searchForm.getString("ssNum");
+        if (name != null && name.trim().length() > 0) {
+            results = employeeManagement.searchByFirstName(name);
+        } else if (ssnum != null && ssnum.trim().length() > 0) {
+            try {
+                results = (List) employeeManagement.searchBySsNum(ssnum);
+            } catch (Exception e) {
+                errors.add(null, new ActionMessage(e.getMessage()));
+                results = new ArrayList();
+            } finally {
+                this.saveErrors(request, errors);
+            }
+        } else {
+            errors.add(null, new ActionMessage("Veuillez remplir au moins un champs"));
+            results = new ArrayList();
         }
-        saveErrors(request, errors);
-        return map.getInputForward();
+        searchForm.getMap().clear();
+        searchForm.set("results", results);
+
+        return mapping.getInputForward();
     }
-}
+    
+  public ActionForward show(ActionMapping mapping,
+     					 ActionForm form,
+    					HttpServletRequest request,
+    					HttpServletResponse response)
+  throws Exception
+  {
+    IEmployeeManagement service = super.getEmployeeManagement();
+    ArrayList results;
+   
+    EmployeesShowForm showForm = (EmployeesShowForm) form;
+   
+    // Perform the show all the employees function.
+    results = service.findAll();
+    
+    // Cible par defaut
+    String cible = new String("succes");
+
+    // Cible en cas d'echec
+    if (results == null ) {
+      cible = new String("echec");
+      ActionMessages errors = new ActionMessages();
+      errors.add(null, new ActionMessage("error.show.employees.notfound"));
+      // Signalement des erreurs a la page d'origine
+      if (!errors.isEmpty()) {
+        saveErrors(request, errors);
+      }
+    }
+    else {
+        // Place search results in EmployeesShowForm for access by JSP.
+        showForm.setResults(results);
+    }
+    // Transmission a la vue appropriee
+    return (mapping.findForward(cible));
+  }
+} 

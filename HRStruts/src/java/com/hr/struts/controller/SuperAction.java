@@ -5,6 +5,8 @@
  */
 package com.hr.struts.controller;
 
+import com.hr.struts.model.EmployeeManagement;
+import com.hr.struts.model.IEmployeeManagement;
 import com.hr.struts.model.Manager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +21,8 @@ import org.apache.struts.actions.MappingDispatchAction;
  * @author pierregaillard
  */
 public class SuperAction extends MappingDispatchAction {
-    
-    private final Manager manager;
-    
-    public SuperAction(){
-        this.manager = Manager.getInstance();
+        
+    public IEmployeeManagement getEmployeeManagement(){
+        return EmployeeManagement.getInstance();
     }
 }
