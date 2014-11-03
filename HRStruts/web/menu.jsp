@@ -18,7 +18,7 @@
             <div class="container">
               <h1><bean:message key="page.title.index"/></h1>
               <p><bean:message key="page.content.index"/></p>
-              <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+              <p><a class="btn btn-primary btn-lg" role="button"><bean:message key="page.content.button"/></a></p>
             </div>
         </div>
         <div class="container">
