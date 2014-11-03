@@ -12,17 +12,17 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.MappingDispatchAction;
 
 /**
  *
  * @author pierregaillard
  */
-public class SuperAction extends Action {
+public class SuperAction extends MappingDispatchAction {
     
     private final Manager manager;
     
     public SuperAction(){
         this.manager = Manager.getInstance();
     }
-    
 }
