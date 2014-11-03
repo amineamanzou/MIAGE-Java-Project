@@ -15,7 +15,8 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.actions.MappingDispatchAction;
-   
+
+//Class qui regroupe toutes les actions. TP 6
 public final class EmployeeAction extends SuperAction {
 
     public ActionForward search(ActionMapping mapping, ActionForm form,

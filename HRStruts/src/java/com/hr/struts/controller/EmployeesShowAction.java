@@ -15,6 +15,8 @@ import org.apache.struts.action.DynaActionForm;
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
+//Obsolète (TP 5.1 & 5.2)
+
 public final class EmployeesShowAction extends SuperAction
 {
   public ActionForward execute(ActionMapping mapping,
