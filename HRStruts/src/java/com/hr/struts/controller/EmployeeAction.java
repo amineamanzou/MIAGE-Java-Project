@@ -1,7 +1,7 @@
 package com.hr.struts.controller;
 
-import com.hr.struts.model.EmployeeManagement;
-import com.hr.struts.model.IEmployeeManagement;
+import com.hr.struts.model.EmployeeDAO;
+import com.hr.struts.model.IEmployeeDAO;
 import java.util.ArrayList;  
 import static java.util.Collections.list;
 import java.util.List;
@@ -21,7 +21,7 @@ public final class EmployeeAction extends SuperAction {
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ActionErrors errors = new ActionErrors();
-        IEmployeeManagement employeeManagement = super.getEmployeeManagement();
+        IEmployeeDAO employeeManagement = super.getEmployeeManagement();
         List results;
 
         DynaActionForm searchForm = (DynaActionForm) form;
@@ -54,7 +54,7 @@ public final class EmployeeAction extends SuperAction {
     					HttpServletRequest request,
     					HttpServletResponse response) throws Exception
   {
-    EmployeeManagement service = new EmployeeManagement();
+    EmployeeDAO service = new EmployeeDAO();
     ArrayList results;
    
     DynaActionForm showForm = (DynaActionForm) form;
@@ -83,7 +83,7 @@ public final class EmployeeAction extends SuperAction {
 
 public ActionForward add(ActionMapping mapping,ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception
   {
-    IEmployeeManagement Emp = super.getEmployeeManagement();
+    IEmployeeDAO Emp = super.getEmployeeManagement();
     Boolean result;
    
     DynaActionForm searchForm = (DynaActionForm)form;
@@ -110,7 +110,7 @@ public ActionForward delete(ActionMapping mapping,
     					HttpServletRequest request,
     					HttpServletResponse response) throws Exception
   {
-    IEmployeeManagement Emp = super.getEmployeeManagement();
+    IEmployeeDAO Emp = super.getEmployeeManagement();
     Boolean result;
     
     DynaActionForm searchForm = (DynaActionForm)form;
@@ -132,7 +132,7 @@ public ActionForward update(ActionMapping mapping,
     					HttpServletRequest request,
     					HttpServletResponse response) throws Exception
   {
-    IEmployeeManagement Emp = super.getEmployeeManagement();
+    IEmployeeDAO Emp = super.getEmployeeManagement();
     Boolean result;
    
     DynaActionForm searchForm = (DynaActionForm)form;

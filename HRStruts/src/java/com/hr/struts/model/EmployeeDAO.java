@@ -9,9 +9,9 @@ import java.util.List;
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
-public class EmployeeManagement implements IEmployeeManagement
+public class EmployeeDAO implements IEmployeeDAO
 {
-    private static volatile EmployeeManagement instance = null;
+    private static volatile EmployeeDAO instance = null;
     /* Hard-coded sample data. Normally this would come from a real data source: database    */
     private static List<Employee> employees = new ArrayList<>(Arrays.asList(
         new Employee(1,"Bob","Davidson", "123-45-6789", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
@@ -22,15 +22,15 @@ public class EmployeeManagement implements IEmployeeManagement
         new Employee(6,"Jim","Davidson", "444-44-4444", "44444444444", "male", "mail@test.com", "06/12/2006", "30023")
     ));
     
-    public final static EmployeeManagement getInstance() {
-        if (EmployeeManagement.instance == null) {
-           synchronized(EmployeeManagement.class) {
-             if (EmployeeManagement.instance == null) {
-               EmployeeManagement.instance = new EmployeeManagement();
+    public final static EmployeeDAO getInstance() {
+        if (EmployeeDAO.instance == null) {
+           synchronized(EmployeeDAO.class) {
+             if (EmployeeDAO.instance == null) {
+               EmployeeDAO.instance = new EmployeeDAO();
              }
            }
         }
-        return EmployeeManagement.instance;
+        return EmployeeDAO.instance;
     }
        
     // Search for employees by firstname.

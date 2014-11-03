@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author pierregaillard
  */
-public interface IEmployeeManagement {
+public interface IEmployeeDAO {
     
     // Search for employees by firstname.
     public ArrayList searchByFirstName(String name);

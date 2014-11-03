@@ -5,8 +5,8 @@
  */
 package com.hr.struts.controller;
 
-import com.hr.struts.model.EmployeeManagement;
-import com.hr.struts.model.IEmployeeManagement;
+import com.hr.struts.model.EmployeeDAO;
+import com.hr.struts.model.IEmployeeDAO;
 import com.hr.struts.model.Manager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ import org.apache.struts.actions.MappingDispatchAction;
  */
 public class SuperAction extends MappingDispatchAction {
         
-    public IEmployeeManagement getEmployeeManagement(){
-        return EmployeeManagement.getInstance();
+    public IEmployeeDAO getEmployeeManagement(){
+        return EmployeeDAO.getInstance();
     }
 }
