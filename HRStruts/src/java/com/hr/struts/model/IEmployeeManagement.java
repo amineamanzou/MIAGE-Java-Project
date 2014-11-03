@@ -13,8 +13,10 @@ import java.util.ArrayList;
  * @author pierregaillard
  */
 public interface IEmployeeManagement {
-     // Search for employees by firstname.
+    
+    // Search for employees by firstname.
     public ArrayList searchByFirstName(String name);
+    
     // Search for employees by lastname.
     public ArrayList searchByLastName(String name);
    
@@ -27,7 +29,7 @@ public interface IEmployeeManagement {
     // Search for employee by mail adress.
     public ArrayList searchByMail(String mail);
     
-        public Employee searchById(Integer id);
+    public Employee searchById(Integer id);
 
     public boolean delete(Employee get);
 

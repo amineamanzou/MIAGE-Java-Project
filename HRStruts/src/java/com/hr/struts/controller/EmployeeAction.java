@@ -2,7 +2,6 @@ package com.hr.struts.controller;
 
 import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
-import com.hr.struts.view.EmployeesShowForm;
 import java.util.ArrayList;  
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
-import org.apache.struts.actions.MappingDispatchAction;
-
-//Class qui regroupe toutes les actions. TP 6
+   
 public final class EmployeeAction extends SuperAction {
 
     public ActionForward search(ActionMapping mapping, ActionForm form,
