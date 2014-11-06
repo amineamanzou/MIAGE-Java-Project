@@ -35,8 +35,7 @@ public class MysqlPlugin implements PlugIn {
         Properties properties = new Properties(); 
 
         try {
-            FileInputStream fis
-                    = new FileInputStream(getFilePath());
+            InputStream fis = servlet.getServletContext().getResourceAsStream(getFilePath());
 
             properties.load(fis);
             e.setProperties(properties);
