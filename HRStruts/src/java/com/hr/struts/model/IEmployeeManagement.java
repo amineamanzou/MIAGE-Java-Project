@@ -6,13 +6,17 @@
 package com.hr.struts.model;
 
 import com.hr.struts.model.entities.Employee;
+import java.sql.Connection;
 import java.util.ArrayList;
+import org.apache.struts.action.ActionServlet;
 
 /**
  *
  * @author pierregaillard
  */
 public interface IEmployeeManagement {
+    
+    public Connection getConnection(ActionServlet servlet);
     
     // Search for employees by firstname.
     public ArrayList searchByFirstName(String name);

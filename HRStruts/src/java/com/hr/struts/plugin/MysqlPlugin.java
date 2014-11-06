@@ -1,5 +1,6 @@
 package com.hr.struts.plugin;
 
+import com.hr.struts.model.EmployeeManagement;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,14 +26,15 @@ public class MysqlPlugin implements PlugIn {
         filePath = f;
     }
 
+    @Override
     public void init(ActionServlet servlet, ModuleConfig applicationConfig)
             throws javax.servlet.ServletException {
-
+        EmployeeManagement e = new EmployeeManagement();
+        
         System.out.println("---->Le plug-in démarre<----");
-        Properties properties = new Properties();
+        Properties properties = new Properties(); 
 
         try {
-
             FileInputStream fis
                     = new FileInputStream(getFilePath());
 
@@ -46,16 +48,13 @@ public class MysqlPlugin implements PlugIn {
             System.err.println("---->User " + rProperties.getProperty("user"));
             System.err.println("---->Password " + rProperties.getProperty("password"));
         } catch (FileNotFoundException fnfe) {
-
             throw new ServletException(fnfe.getMessage());
         } catch (IOException ioe) {
-
             throw new ServletException(ioe.getMessage());
         }
     }
 
     public void destroy() {
-
         System.out.println("---->Le plug-in s'arr�te<----");
     }
 }

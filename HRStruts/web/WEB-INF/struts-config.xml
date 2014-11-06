@@ -179,9 +179,9 @@
         <set-property property="moduleAware" value="true" />
     </plug-in>
     
-     <plug-in className="com.hr.struts.plugin" >
-        <set-property property="filePath" value="//Users//pierregaillard//Desktop//MIAGE-Java-Project//HRStruts//web//WEB-INF" />
-     </plug-in>
+    <plug-in className="com.hr.struts.plugin.MysqlPlugin" >
+        <set-property property="filePath" value="/WEB-INF/database.properties" />
+    </plug-in>
     
     <!-- ========================= Validator plugin ================================= -->
     <plug-in className="org.apache.struts.validator.ValidatorPlugIn">

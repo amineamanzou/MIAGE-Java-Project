@@ -1,9 +1,16 @@
 package com.hr.struts.model;
 
 import com.hr.struts.model.entities.Employee;
+import com.hr.struts.plugin.MysqlPlugin;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+import org.apache.struts.action.ActionServlet;
 
 /**
  *
@@ -33,6 +40,30 @@ public class EmployeeManagement implements IEmployeeManagement
         return EmployeeManagement.instance;
     }
        
+    @Override
+    public Connection getConnection(ActionServlet servlet){
+        
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Properties bddProperties = (Properties) servlet.getServletContext().getAttribute(MysqlPlugin.PROPERTIES);
+            String bdd = bddProperties.getProperty("database");
+            String user = bddProperties.getProperty("user");
+            String pwd = bddProperties.getProperty("password");
+            Connection cn = DriverManager.getConnection(bdd, user, pwd);
+            Statement selectAllState = cn.createStatement();
+            ResultSet result = selectAllState.executeQuery("SELECT * FROM employee");
+            while (result.next()) {
+                String nom = result.getString("last_name");
+                System.out.println(nom);
+            }
+            return cn;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
     // Search for employees by firstname.
     @Override
     public ArrayList searchByFirstName(String name) {
