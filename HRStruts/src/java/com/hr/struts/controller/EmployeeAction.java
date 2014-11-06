@@ -2,9 +2,7 @@ package com.hr.struts.controller;
 
 import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
-import com.hr.struts.model.Manager;
 import java.util.ArrayList;  
-import static java.util.Collections.list;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
