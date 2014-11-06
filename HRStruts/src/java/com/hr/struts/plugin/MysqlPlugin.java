@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionServlet;
 
 public class MysqlPlugin implements PlugIn {
 
-    public static final String PROPERTIES = "PROPERTIES";
+    public static final String MODELE = "MODELE";
     private String filePath = null;
 
     public String getFilePath() {
@@ -39,11 +39,11 @@ public class MysqlPlugin implements PlugIn {
                     = new FileInputStream(getFilePath());
 
             properties.load(fis);
-
+            e.setProperties(properties);
             ServletContext context = servlet.getServletContext();
-            context.setAttribute(PROPERTIES, properties);
+            context.setAttribute(MODELE, e);
 
-            Properties rProperties = (Properties) context.getAttribute(PROPERTIES);
+            Properties rProperties = (Properties) context.getAttribute(MODELE);
             System.err.println("---->Database " + rProperties.getProperty("database"));
             System.err.println("---->User " + rProperties.getProperty("user"));
             System.err.println("---->Password " + rProperties.getProperty("password"));

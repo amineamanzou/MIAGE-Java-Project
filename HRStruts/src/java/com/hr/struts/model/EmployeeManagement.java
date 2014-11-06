@@ -1,130 +1,214 @@
 package com.hr.struts.model;
 
 import com.hr.struts.model.entities.Employee;
-import com.hr.struts.plugin.MysqlPlugin;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
-import org.apache.struts.action.ActionServlet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
  */
-public class EmployeeManagement implements IEmployeeManagement
-{
+public class EmployeeManagement implements IEmployeeManagement {
+
+    Properties properties = new Properties();
+
     private static volatile EmployeeManagement instance = null;
-    /* Hard-coded sample data. Normally this would come from a real data source: database    */
-    private static List<Employee> employees = new ArrayList<>(Arrays.asList(
-        new Employee(1,"Bob","Davidson", "123-45-6789", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
-        new Employee(2,"Mary","Williams", "987-65-4321", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
-        new Employee(3,"Jim","Smith", "111-11-1111", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
-        new Employee(4,"Beverly","Harris", "222-22-2222", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
-        new Employee(5,"Thomas","Frank", "333-33-3333", "01244324254", "male", "mail@test.com", "06/12/2006", "30023"),
-        new Employee(6,"Jim","Davidson", "444-44-4444", "44444444444", "male", "mail@test.com", "06/12/2006", "30023")
-    ));
-    
+
     public final static EmployeeManagement getInstance() {
         if (EmployeeManagement.instance == null) {
-           synchronized(EmployeeManagement.class) {
-             if (EmployeeManagement.instance == null) {
-               EmployeeManagement.instance = new EmployeeManagement();
-             }
-           }
+            synchronized (EmployeeManagement.class) {
+                if (EmployeeManagement.instance == null) {
+                    EmployeeManagement.instance = new EmployeeManagement();
+                }
+            }
         }
         return EmployeeManagement.instance;
     }
-       
+
     @Override
-    public Connection getConnection(ActionServlet servlet){
-        
+    public Connection getConnection() throws SQLException {
+
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            Properties bddProperties = (Properties) servlet.getServletContext().getAttribute(MysqlPlugin.PROPERTIES);
-            String bdd = bddProperties.getProperty("database");
-            String user = bddProperties.getProperty("user");
-            String pwd = bddProperties.getProperty("password");
-            Connection cn = DriverManager.getConnection(bdd, user, pwd);
-            Statement selectAllState = cn.createStatement();
-            ResultSet result = selectAllState.executeQuery("SELECT * FROM employee");
-            while (result.next()) {
-                String nom = result.getString("last_name");
-                System.out.println(nom);
-            }
-            return cn;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println(ex.getMessage());
+            Class.forName(properties.getProperty("driver"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        String bdd = properties.getProperty("database");
+        String user = properties.getProperty("user");
+        String pwd = properties.getProperty("password");
+        Connection cn = DriverManager.getConnection(bdd, user, pwd);
+        return cn;
+
     }
-    
+
     // Search for employees by firstname.
     @Override
-    public ArrayList searchByFirstName(String name) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-           if (employee.getFirstName().toUpperCase().contains(name.toUpperCase())) {
-                resultList.add(employee);
-           }
+    public ArrayList searchByFirstName(String name) throws SQLException{
+        Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE NAME LIKE \\'%\" + name + \"%\\'");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String ssNum = rs.getString("ssNum");
+                String phone = rs.getString("phone");
+                Employee tmp = new Employee(firstName,ssNum,phone);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                cn.close();
+            }
         }
-        return resultList;
+        
+        return resultat;
     }
-    
+
     // Search for employees by lastname.
     @Override
     public ArrayList searchByLastName(String name) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-           if (employee.getLastName().toUpperCase().contains(name.toUpperCase())) {
-                resultList.add(employee);
-           }
+         Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE LASTNAME LIKE \\'%\" + name + \"%\\'");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String ssNum = rs.getString("ssNum");
+                String phone = rs.getString("phone");
+                Employee tmp = new Employee(firstName,ssNum,phone);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        return resultList;
+        
+        return resultat;
     }
-   
+
     // Search for employee by social security number.
     @Override
     public ArrayList searchBySsNum(String ssNum) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-            if (employee.getSsNum().equals(ssNum)) {
-                resultList.add(employee);
+        Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE SSNUM LIKE \\'%\" + ssNum + \"%\\'");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String sNum = rs.getString("ssNum");
+                String phone = rs.getString("phone");
+                Employee tmp = new Employee(firstName,sNum,phone);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return resultList;
-    }
         
+        return resultat;
+    }
+
     // Search for employee by phone number.
     @Override
     public ArrayList searchByPhone(String phone) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-            if (employee.getPhone().equals(phone)) {
-                resultList.add(employee);
+         Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE PHONE LIKE \\'%\" + phone + \"%\\'");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String ssNum = rs.getString("ssNum");
+                String tel = rs.getString("phone");
+                Employee tmp = new Employee(firstName,ssNum,tel);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return resultList;
+        
+        return resultat;
     }
-    
-    
+
     // Search for employee by mail adress.
     @Override
     public ArrayList searchByMail(String mail) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-            if (employee.getMail().equals(mail)) {
-                resultList.add(employee);
+        Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE MAIL LIKE \\'%\" + mail + \"%\\'");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String ssNum = rs.getString("ssNum");
+                String phone = rs.getString("phone");
+                Employee tmp = new Employee(firstName,ssNum,phone);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return resultList;
+        
+        return resultat;
     }
-    
+
     @Override
     public Employee searchById(Integer id) {
         ArrayList resultList = new ArrayList();
@@ -136,6 +220,8 @@ public class EmployeeManagement implements IEmployeeManagement
         return null;
     }
 
+    
+    //TODO
     @Override
     public boolean delete(Employee get) {
         employees.remove(get);
@@ -164,5 +250,10 @@ public class EmployeeManagement implements IEmployeeManagement
             }
         }
         return true;
+    }
+
+    @Override
+    public void setProperties(Properties p) {
+        this.properties = p;
     }
 }

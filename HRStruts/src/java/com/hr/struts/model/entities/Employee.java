@@ -23,6 +23,12 @@ public class Employee
         this.hiredate = hiredate;
         this.salary = salary;
     }
+    
+    public Employee(String firstName, String ssNum, String phone) {
+        this.firstName = firstName;
+        this.ssNum = ssNum;
+        this.phone = phone;
+    }
 
     public Employee() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

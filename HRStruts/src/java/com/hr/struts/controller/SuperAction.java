@@ -16,7 +16,9 @@ import org.apache.struts.actions.MappingDispatchAction;
 public class SuperAction extends MappingDispatchAction {
     
     public IEmployeeManagement getEmployeeManagement(){
-        return EmployeeManagement.getInstance();
+        return (IEmployeeManagement)this.getServlet().getServletContext().getAttribute("MODELE");
     }
+    
+    
     
 }
