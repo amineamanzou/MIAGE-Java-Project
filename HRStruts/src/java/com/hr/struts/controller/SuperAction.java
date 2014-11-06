@@ -8,12 +8,9 @@ package com.hr.struts.controller;
 import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
 import com.hr.struts.model.Manager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import org.apache.struts.actions.MappingDispatchAction;
 
 /**
@@ -22,7 +19,17 @@ import org.apache.struts.actions.MappingDispatchAction;
  */
 public class SuperAction extends MappingDispatchAction {
         
+    public Manager getManager(){
+        try {
+            return Manager.getInstance();
+        } catch (NamingException ex) {
+            Logger.getLogger(SuperAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public IEmployeeManagement getEmployeeManagement(){
         return EmployeeManagement.getInstance();
     }
+    
 }

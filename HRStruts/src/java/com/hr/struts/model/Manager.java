@@ -6,8 +6,11 @@
 package com.hr.struts.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -16,11 +19,6 @@ import java.sql.SQLException;
 public final class Manager {
  
     private static volatile Manager instance = null;
-
-    private String host = "localhost:3306";
-    private String database = "employees";
-    private String user = "root";
-    private String passwd = "root";
  
     /**
      * Constructor
@@ -32,8 +30,9 @@ public final class Manager {
     /**
      * Method that return the instance of the singleton
      * @return the instance of manager.
+     * @throws javax.naming.NamingException
      */
-    public final static Manager getInstance() {
+    public final static Manager getInstance() throws NamingException {
         if (Manager.instance == null) {
            synchronized(Manager.class) {
              if (Manager.instance == null) {
@@ -52,24 +51,9 @@ public final class Manager {
 		e.printStackTrace();
 		return;
 	}
- 
 	System.out.println("MySQL JDBC Driver Registered!");
-	Connection connection = null;
- 
-	try {
-		connection = DriverManager.getConnection("jdbc:mysql://" + this.host + "/" + this.database, this.user, this.passwd);
- 
-	} catch (SQLException e) {
-		System.out.println("Connection Failed! Check output console");
-		e.printStackTrace();
-		return;
-	}
- 
-	if (connection != null) {
-		System.out.println("You made it, take control your database now!");
-	} else {
-		System.out.println("Failed to make connection!");
-	}
+        
+        /* TODO */
+        
     }
-    
 }

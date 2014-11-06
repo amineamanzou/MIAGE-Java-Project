@@ -135,16 +135,16 @@
     <message-resources parameter="com/struts/ApplicationResource"/>    
    
     
-<data-source type="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" key="hrstruts" >
-            <set-property property="driverClassName" value="com.mysql.jdbc.Driver" />
-            <set-property property="url" value="jdbc:mysql://localhost:3306/hrstruts" />
-            <set-property property="user" value="root" />
-            <set-property property="password" value="root" />
-            <set-property property="defaultAutoCommit" value="false" />
-            <set-property property="defaultReadOnly" value="false" />
-            <set-property property="maxActive" value="10" />
-            <set-property property="maxWait" value="5000" />
-</data-source>
+    <data-source type="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" key="hrstruts" >
+        <set-property property="driverClassName" value="com.mysql.jdbc.Driver" />
+        <set-property property="url" value="jdbc:mysql://localhost:3306/hrstruts" />
+        <set-property property="user" value="root" />
+        <set-property property="password" value="root" />
+        <set-property property="defaultAutoCommit" value="false" />
+        <set-property property="defaultReadOnly" value="false" />
+        <set-property property="maxActive" value="10" />
+        <set-property property="maxWait" value="5000" />
+    </data-source>
 
     <!-- ========================= Tiles plugin ===============================-->
     <!--
