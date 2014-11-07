@@ -11,7 +11,7 @@ package com.hr.struts.model;
  */
 public class Factory {
 
-    public Object instantiate (String NomModelClass){ 
+    public static Object instantiate (String NomModelClass){ 
         try {
             Class cls = Class.forName(NomModelClass);
             Object obj = cls.newInstance();

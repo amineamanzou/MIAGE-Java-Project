@@ -43,8 +43,7 @@ public class MysqlPlugin implements PlugIn {
 
         try {
             //Cherche le fichier en dynamique
-            Factory f = new Factory();
-            IEmployeeManagement employeeModel = (IEmployeeManagement) f.instantiate(modelEmployee);
+            IEmployeeManagement employeeModel = (IEmployeeManagement) Factory.instantiate(modelEmployee);
             InputStream fis = servlet.getServletContext().getResourceAsStream(getFilePath());
 
             properties.load(fis);

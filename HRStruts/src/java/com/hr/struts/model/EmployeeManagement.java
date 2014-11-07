@@ -83,7 +83,10 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE lastName LIKE \'" + name + "\'");
+            String request = "SELECT * FROM db_hr.EMPLOYEE WHERE lastName LIKE \'" + name + "\'";
+            ResultSet rs = state.executeQuery(request);
+            System.out.println(request);
+            System.out.println(rs);
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
