@@ -5,7 +5,6 @@
  */
 package com.hr.struts.controller;
 
-import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
 import org.apache.struts.actions.MappingDispatchAction;
 

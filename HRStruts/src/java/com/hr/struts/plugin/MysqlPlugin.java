@@ -1,10 +1,12 @@
 package com.hr.struts.plugin;
 
 import com.hr.struts.model.EmployeeManagement;
+import com.hr.struts.model.IEmployeeManagement;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletContext;
@@ -29,7 +31,7 @@ public class MysqlPlugin implements PlugIn {
     @Override
     public void init(ActionServlet servlet, ModuleConfig applicationConfig)
             throws javax.servlet.ServletException {
-        EmployeeManagement e = new EmployeeManagement();
+        IEmployeeManagement e = new EmployeeManagement();
         
         System.out.println("---->Le plug-in démarre<----");
         Properties properties = new Properties(); 

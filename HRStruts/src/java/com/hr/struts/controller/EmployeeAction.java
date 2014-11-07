@@ -1,6 +1,5 @@
 package com.hr.struts.controller;
 
-import com.hr.struts.model.EmployeeManagement;
 import com.hr.struts.model.IEmployeeManagement;
 import java.util.ArrayList;  
 import java.util.List;
@@ -53,13 +52,13 @@ public final class EmployeeAction extends SuperAction {
     					HttpServletRequest request,
     					HttpServletResponse response) throws Exception
   {
-    EmployeeManagement service = new EmployeeManagement();
+    IEmployeeManagement employeeManagement = super.getEmployeeManagement();
     ArrayList results;
    
     DynaActionForm showForm = (DynaActionForm) form;
    
     // Perform the show all the employees function.
-    results = service.findAll();
+    results = employeeManagement.findAll();
     
     // Cible par defaut
     String cible = new String("succes");

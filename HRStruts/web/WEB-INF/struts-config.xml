@@ -180,7 +180,7 @@
     </plug-in>
     
     <plug-in className="com.hr.struts.plugin.MysqlPlugin" >
-        <set-property property="filePath" value="/Users/pierregaillard/Desktop/MIAGE-Java-Project/HRStruts/web/WEB-INF/database.properties" />
+        <set-property property="filePath" value="/WEB-INF/database.properties" />
     </plug-in>
     
     <!-- ========================= Validator plugin ================================= -->
