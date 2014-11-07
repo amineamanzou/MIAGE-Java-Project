@@ -2,7 +2,6 @@ package com.hr.struts.model;
 
 import com.hr.struts.model.entities.Employee;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -36,23 +39,15 @@ public class EmployeeManagement implements IEmployeeManagement {
 
     @Override
     public Connection getConnection(){
-
         try {
-            Class.forName(properties.getProperty("driver"));
-        } catch (ClassNotFoundException ex) {
+            Context initContext = new InitialContext();
+            DataSource data = (DataSource) initContext.lookup("jdbc/HRStruts");
+            return data.getConnection();
+
+        } catch (NamingException | SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String bdd = properties.getProperty("database");
-        String user = properties.getProperty("user");
-        String pwd = properties.getProperty("password");
-        Connection cn = null;
-        try {
-            cn = DriverManager.getConnection(bdd, user, pwd);
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return cn;
-
+        return null;
     }
 
     // Search for employees by firstname.
@@ -64,7 +59,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT * FROM EMPLOYEE WHERE firstName LIKE \'" + name + "\'");
+            ResultSet rs = state.executeQuery("SELECT * FROM db_hr.EMPLOYEE WHERE firstName LIKE \'" + name + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
