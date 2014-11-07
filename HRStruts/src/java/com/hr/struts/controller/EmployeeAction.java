@@ -117,7 +117,7 @@ public ActionForward delete(ActionMapping mapping,
     // Perform employee search based on the criteria entered.
     Integer id = (Integer)searchForm.get("id");
     if (id != null)
-        result = Emp.delete(Emp.searchById(id));
+        result = Emp.delete(id);
     else
         result = false;
     

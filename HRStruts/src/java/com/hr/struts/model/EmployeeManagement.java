@@ -57,7 +57,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE NAME LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE name LIKE \\'%\" + name + \"%\\'");
             while (rs.next()) {
                 String firstName = rs.getString("name");
                 String ssNum = rs.getString("ssNum");
@@ -210,50 +210,113 @@ public class EmployeeManagement implements IEmployeeManagement {
     }
 
     @Override
-    public Employee searchById(Integer id) {
-        ArrayList resultList = new ArrayList();
-        for (Employee employee : employees) {
-            if (employee.getId().equals(id)) {
-                return employee;
+    public ArrayList findAll() {
+        Connection cn = null;
+        ArrayList resultat = new ArrayList();
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES");
+            while (rs.next()) {
+                String firstName = rs.getString("name");
+                String ssNum = rs.getString("ssNum");
+                String phone = rs.getString("phone");
+                Employee tmp = new Employee(firstName,ssNum,phone);
+           resultat.add(tmp);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return null;
-    }
-
-    
-    //TODO
-    @Override
-    public boolean delete(Employee get) {
-        employees.remove(get);
-        return true;
-    }
-
-    @Override
-    public ArrayList findAll() {
-        return (ArrayList) employees;
-    }
+        
+        return resultat;    }
 
     @Override
     public boolean add(Integer id, String firstName, String lastName, String ssNum, String phone) {
-        employees.add(new Employee(id, firstName, lastName, ssNum, phone, null, null, null, null));
-        return true;
+         Connection cn = null;
+         Boolean resultat = null;
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            //à completer
+            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYES VALUES (\\'%\" + name + \"%\\')");
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        return resultat;
     }
 
     @Override
     public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone) {
-        for (Employee employee : employees) {
-            if (employee.getId().equals(id)) {
-                employee.setFirstName(firstName);
-                employee.setLastName(lastName);
-                employee.setSsNum(ssNum);
-                employee.setPhone(phone);
+                Connection cn = null;
+         Boolean resultat = null;
+
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            //à completer
+            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYES VALUES (\\'%\" + name + \"%\\')");
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return true;
+        
+        return resultat;
     }
 
     @Override
     public void setProperties(Properties p) {
         this.properties = p;
     }
+
+    @Override
+    public Boolean delete(Integer id) {
+     Connection cn = null;
+     Boolean resultat = null;
+        try {
+            cn = this.getConnection();
+            Statement state = cn.createStatement();
+            ResultSet rs = state.executeQuery("DELETE FROM EMPLOYES WHERE ID LIKE \\'%\" + id + \"%\\'");
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        return resultat;    }
 }

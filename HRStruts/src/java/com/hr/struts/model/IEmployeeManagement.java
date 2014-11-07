@@ -37,14 +37,12 @@ public interface IEmployeeManagement {
     // Search for employee by mail adress.
     public ArrayList searchByMail(String mail);
     
-    public Employee searchById(Integer id);
-
-    public boolean delete(Employee get);
-
     public ArrayList findAll();
     
     public boolean add(Integer id, String firstName, String lastName, String ssNum, String phone);
 
     public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone);
+
+    public Boolean delete(Integer id);
 
 }

@@ -42,10 +42,6 @@ public class MysqlPlugin implements PlugIn {
             ServletContext context = servlet.getServletContext();
             context.setAttribute(MODELE, e);
 
-            Properties rProperties = (Properties) context.getAttribute(MODELE);
-            System.err.println("---->Database " + rProperties.getProperty("database"));
-            System.err.println("---->User " + rProperties.getProperty("user"));
-            System.err.println("---->Password " + rProperties.getProperty("password"));
         } catch (FileNotFoundException fnfe) {
             throw new ServletException(fnfe.getMessage());
         } catch (IOException ioe) {
