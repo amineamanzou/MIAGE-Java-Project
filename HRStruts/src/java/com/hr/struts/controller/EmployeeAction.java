@@ -87,15 +87,18 @@ public ActionForward add(ActionMapping mapping,ActionForm form,HttpServletReques
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
-    Integer id = (Integer)searchForm.get("id");
     String firstName = (String)searchForm.get("firstName");
     String lastName = (String)searchForm.get("lastName");
     String ssNum = (String)searchForm.get("ssNum");
     String phone = (String)searchForm.get("phone");
+    String gender = (String)searchForm.get("gender");
+    String hireDate = (String)searchForm.get("hireDate");
+    String mail = (String)searchForm.get("mail");
+    String salary = (String)searchForm.get("salary");
     if (lastName != null && lastName.trim().length() > 0 &&
             firstName != null && lastName.trim().length() > 0 &&
                     ssNum != null && ssNum.trim().length() > 0)
-            result = Emp.add(id, firstName, lastName, ssNum, phone);
+            result = Emp.add(firstName, lastName, ssNum, phone, gender, mail, hireDate, salary);
     else
         result = false;
     
@@ -141,10 +144,14 @@ public ActionForward update(ActionMapping mapping,
     String lastName = (String)searchForm.get("lastName");
     String ssNum = (String)searchForm.get("ssNum");
     String phone = (String)searchForm.get("phone");
+    String gender = (String)searchForm.get("gender");
+    String hireDate = (String)searchForm.get("hireDate");
+    String mail = (String)searchForm.get("mail");
+    String salary = (String)searchForm.get("salary");
     if (lastName != null && lastName.trim().length() > 0 &&
             firstName != null && lastName.trim().length() > 0 &&
                     ssNum != null && ssNum.trim().length() > 0)
-            result = Emp.update(id, firstName, lastName, ssNum, phone);
+            result = Emp.update(id, firstName, lastName, ssNum, phone, gender, mail, hireDate, salary);
     else
         result = false;
     

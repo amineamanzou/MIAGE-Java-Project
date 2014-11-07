@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.struts.action.DynaActionForm;
 
 /**
  *
@@ -64,7 +65,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT * FROM EMPLOYEE WHERE firstName LIKE \'" + name + "\'");
+            ResultSet rs = state.executeQuery("SELECT * FROM db_hr.EMPLOYEE WHERE firstName LIKE \'" + name + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -88,7 +89,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE lastName LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE lastName LIKE \'" + name + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -112,7 +113,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE ssNum LIKE \\'%\" + ssNum + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE ssNum LIKE \'" + ssNum + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -136,7 +137,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE phone LIKE \\'%\" + phone + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE phone LIKE \'" + phone + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -160,7 +161,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE mail LIKE \\'%\" + mail + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE mail LIKE \'" + mail + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -183,7 +184,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
@@ -198,7 +199,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         return resultat;    }
 
     @Override
-    public boolean add(Integer id, String firstName, String lastName, String ssNum, String phone) {
+    public boolean add(String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hireDate, String salary) {
         Connection cn = null;
         Boolean resultat = null;
 
@@ -206,7 +207,8 @@ public class EmployeeManagement implements IEmployeeManagement {
             cn = this.getConnection();
             Statement state = cn.createStatement();
             //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYEE VALUES (\\'%\" + name + \"%\\')");
+            ResultSet rs = state.executeQuery("INSERT INTO `employee` (`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`) VALUES " +
+                                                "(NULL, "+ ssNum + ", "+ firstName + ", "+ lastName + ", "+ gender + ", "+ phone + ", "+ mail + ", "+ hireDate + ", "+ salary + ", NULL);");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,7 +220,7 @@ public class EmployeeManagement implements IEmployeeManagement {
     }
 
     @Override
-    public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone) {
+    public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hireDate, String salary) {
         Connection cn = null;
         Boolean resultat = null;
 
@@ -226,7 +228,8 @@ public class EmployeeManagement implements IEmployeeManagement {
             cn = this.getConnection();
             Statement state = cn.createStatement();
             //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYEE VALUES (\\'%\" + name + \"%\\')");
+            ResultSet rs = state.executeQuery("INSERT INTO `employee` (`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`) VALUES " +
+                                                "(NULL, "+ ssNum + ", "+ firstName + ", "+ lastName + ", "+ gender + ", "+ phone + ", "+ mail + ", "+ hireDate + ", "+ salary + ", NULL);");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -249,7 +252,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("DELETE FROM EMPLOYEE WHERE ID LIKE \\'%\" + id + \"%\\'");
+            ResultSet rs = state.executeQuery("DELETE FROM db_hr.EMPLOYEE WHERE ID LIKE \\'%\" + id + \"%\\'");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);

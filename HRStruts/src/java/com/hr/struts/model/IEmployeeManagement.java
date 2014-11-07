@@ -36,9 +36,9 @@ public interface IEmployeeManagement {
     
     public ArrayList findAll();
     
-    public boolean add(Integer id, String firstName, String lastName, String ssNum, String phone);
+    public boolean add(String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hireDate, String salary);
 
-    public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone);
+    public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hireDate, String salary);
 
     public Boolean delete(Integer id);
 
