@@ -1,9 +1,8 @@
 package com.hr.struts.plugin;
 
-import com.hr.struts.model.EmployeeManagement;
+import com.hr.struts.model.Factory;
 import com.hr.struts.model.IEmployeeManagement;
 import java.util.Properties;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +18,7 @@ public class MysqlPlugin implements PlugIn {
 
     public static final String MODELE = "MODELE";
     private String filePath = null;
+    private String modelEmployee;
 
     public String getFilePath() {
         return filePath;
@@ -28,22 +28,30 @@ public class MysqlPlugin implements PlugIn {
         filePath = f;
     }
 
+    public String getModelEmployee() {
+        return modelEmployee;
+    }
+
+    public void setModelEmployee(String modelEmployee) {
+        this.modelEmployee = modelEmployee;
+    }
+
     @Override
     public void init(ActionServlet servlet, ModuleConfig applicationConfig)
             throws javax.servlet.ServletException {
-        IEmployeeManagement e = new EmployeeManagement();
-        
+
         System.out.println("---->Le plug-in démarre<----");
-        Properties properties = new Properties(); 
+        Properties properties = new Properties();
 
         try {
-            //Cherche le fichier en dynamique 
+            //Cherche le fichier en dynamique
+            Factory f = new Factory();
+            IEmployeeManagement employeeModel = (IEmployeeManagement) f.instantiate(modelEmployee);
             InputStream fis = servlet.getServletContext().getResourceAsStream(getFilePath());
 
             properties.load(fis);
-            e.setProperties(properties);
-            ServletContext context = servlet.getServletContext();
-            context.setAttribute(MODELE, e);
+            employeeModel.setProperties(properties);
+            servlet.getServletContext().setAttribute("modelEmployee", employeeModel);
 
         } catch (FileNotFoundException fnfe) {
             throw new ServletException(fnfe.getMessage());

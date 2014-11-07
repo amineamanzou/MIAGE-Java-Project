@@ -181,6 +181,8 @@
     
     <plug-in className="com.hr.struts.plugin.MysqlPlugin" >
         <set-property property="filePath" value="/WEB-INF/database.properties" />
+        <set-property property="modelEmployee"
+                      value="com.hr.struts.model.EmployeeManagement" />
     </plug-in>
     
     <!-- ========================= Validator plugin ================================= -->
