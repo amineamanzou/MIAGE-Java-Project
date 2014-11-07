@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletContext;
 
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
@@ -16,7 +15,6 @@ import org.apache.struts.action.ActionServlet;
 
 public class MysqlPlugin implements PlugIn {
 
-    public static final String MODELE = "MODELE";
     private String filePath = null;
     private String modelEmployee;
 
@@ -61,6 +59,6 @@ public class MysqlPlugin implements PlugIn {
     }
 
     public void destroy() {
-        System.out.println("---->Le plug-in s'arr�te<----");
+        System.out.println("---->Le plug-in s'arrete<----");
     }
 }
