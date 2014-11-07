@@ -19,9 +19,10 @@ public class EmployeeManagement implements IEmployeeManagement {
 
     private Properties properties = new Properties();
 
-    private static volatile EmployeeManagement instance = null;
+    /*private static volatile EmployeeManagement instance = null;*/
 
-   /* public final static EmployeeManagement getInstance() {
+   /* 
+    public final static EmployeeManagement getInstance() {
         if (EmployeeManagement.instance == null) {
             synchronized (EmployeeManagement.class) {
                 if (EmployeeManagement.instance == null) {
@@ -30,7 +31,8 @@ public class EmployeeManagement implements IEmployeeManagement {
             }
         }
         return EmployeeManagement.instance;
-    } */
+    } 
+    */
 
     @Override
     public Connection getConnection(){
@@ -58,32 +60,20 @@ public class EmployeeManagement implements IEmployeeManagement {
     public ArrayList searchByFirstName(String name){
         Connection cn = null;
         ArrayList resultat = new ArrayList();
-
+        
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE first_name LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE firstName LIKE \\'%\" + name + \"%\\'" );
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                String ssNum = rs.getString("ssNum");
-                Employee tmp = new Employee(id, ssNum);
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -98,28 +88,16 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE first_name LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE lastName LIKE \\'%\" + name + \"%\\'");
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                String ssNum = rs.getString("ssNum");
-                Employee tmp = new Employee(id, ssNum);
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -134,27 +112,16 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE SSNUM LIKE \\'%\" + ssNum + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE ssNum LIKE \\'%\" + ssNum + \"%\\'");
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                Employee tmp = new Employee(id, rs.getString("ssNum"));
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -169,28 +136,16 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE PHONE LIKE \\'%\" + phone + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE phone LIKE \\'%\" + phone + \"%\\'");
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                String ssNum = rs.getString("ssNum");
-                Employee tmp = new Employee(id, ssNum);
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -205,28 +160,16 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE MAIL LIKE \\'%\" + mail + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE mail LIKE \\'%\" + mail + \"%\\'");
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                String ssNum = rs.getString("ssNum");
-                Employee tmp = new Employee(id, ssNum);
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -242,34 +185,22 @@ public class EmployeeManagement implements IEmployeeManagement {
             Statement state = cn.createStatement();
             ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE");
             while (rs.next()) {
-                Integer id = rs.getInt("id");
-                String ssNum = rs.getString("ssNum");
-                Employee tmp = new Employee(id, ssNum);
-                tmp.setFirstName(rs.getString("firstName"));
-                tmp.setLastName(rs.getString("lastName"));
-                tmp.setMail(rs.getString("mail"));
-                tmp.setPhone(rs.getString("phone"));
-           resultat.add(tmp);
+                Employee tmp = this.rowToEmployee(rs);
+                resultat.add(tmp);
             }
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;    }
 
     @Override
     public boolean add(Integer id, String firstName, String lastName, String ssNum, String phone) {
-         Connection cn = null;
-         Boolean resultat = null;
+        Connection cn = null;
+        Boolean resultat = null;
 
         try {
             cn = this.getConnection();
@@ -280,13 +211,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -294,8 +219,8 @@ public class EmployeeManagement implements IEmployeeManagement {
 
     @Override
     public boolean update(Integer id, String firstName, String lastName, String ssNum, String phone) {
-                Connection cn = null;
-         Boolean resultat = null;
+        Connection cn = null;
+        Boolean resultat = null;
 
         try {
             cn = this.getConnection();
@@ -306,13 +231,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
         return resultat;
@@ -335,14 +254,33 @@ public class EmployeeManagement implements IEmployeeManagement {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(cn != null) {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            this.closeConnection(cn);
         }
         
-        return resultat;    }
+        return resultat;    
+    }
+    
+    private void closeConnection(Connection cn){
+        if(cn != null) {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private Employee rowToEmployee(ResultSet rs) throws SQLException{
+        Integer id = rs.getInt("id");
+        String ssNum = rs.getString("ssNum");
+        Employee e = new Employee(id, ssNum);
+        e.setFirstName(rs.getString("firstName"));
+        e.setLastName(rs.getString("lastName"));
+        e.setMail(rs.getString("mail"));
+        e.setPhone(rs.getString("phone"));
+        e.setGender(rs.getString("gender"));
+        e.setHiredate(rs.getString("hireDate"));
+        e.setSalary(rs.getString("salary"));
+        return e;
+    }
 }
