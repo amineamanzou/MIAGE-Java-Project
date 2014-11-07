@@ -37,6 +37,7 @@ public class MysqlPlugin implements PlugIn {
         Properties properties = new Properties(); 
 
         try {
+            //Cherche le fichier en dynamique 
             InputStream fis = servlet.getServletContext().getResourceAsStream(getFilePath());
 
             properties.load(fis);
