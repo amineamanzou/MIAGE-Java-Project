@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  */
 public class EmployeeManagement implements IEmployeeManagement {
 
-    Properties properties = new Properties();
+    private Properties properties = new Properties();
 
     private static volatile EmployeeManagement instance = null;
 
-    public final static EmployeeManagement getInstance() {
+   /* public final static EmployeeManagement getInstance() {
         if (EmployeeManagement.instance == null) {
             synchronized (EmployeeManagement.class) {
                 if (EmployeeManagement.instance == null) {
@@ -30,10 +30,10 @@ public class EmployeeManagement implements IEmployeeManagement {
             }
         }
         return EmployeeManagement.instance;
-    }
+    } */
 
     @Override
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection(){
 
         try {
             Class.forName(properties.getProperty("driver"));
@@ -43,14 +43,19 @@ public class EmployeeManagement implements IEmployeeManagement {
         String bdd = properties.getProperty("database");
         String user = properties.getProperty("user");
         String pwd = properties.getProperty("password");
-        Connection cn = DriverManager.getConnection(bdd, user, pwd);
+        Connection cn = null;
+        try {
+            cn = DriverManager.getConnection(bdd, user, pwd);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return cn;
 
     }
 
     // Search for employees by firstname.
     @Override
-    public ArrayList searchByFirstName(String name) throws SQLException{
+    public ArrayList searchByFirstName(String name){
         Connection cn = null;
         ArrayList resultat = new ArrayList();
 
@@ -73,7 +78,11 @@ public class EmployeeManagement implements IEmployeeManagement {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if(cn != null) {
-                cn.close();
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         

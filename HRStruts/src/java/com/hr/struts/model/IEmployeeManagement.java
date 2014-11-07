@@ -5,12 +5,9 @@
  */
 package com.hr.struts.model;
 
-import com.hr.struts.model.entities.Employee;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import org.apache.struts.action.ActionServlet;
 
 /**
  *
@@ -20,10 +17,10 @@ public interface IEmployeeManagement {
     
     public void setProperties (Properties p);
     
-    public Connection getConnection() throws SQLException;
+    public Connection getConnection();
     
     // Search for employees by firstname.
-    public ArrayList searchByFirstName(String name) throws SQLException;
+    public ArrayList searchByFirstName(String name);
     
     // Search for employees by lastname.
     public ArrayList searchByLastName(String name);
