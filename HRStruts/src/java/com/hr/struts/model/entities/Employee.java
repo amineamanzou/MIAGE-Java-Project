@@ -12,6 +12,11 @@ public class Employee
     private String hiredate;
     private String salary;
 
+    public Employee(Integer id, String ssNum) {
+        this.id = id;
+        this.ssNum = ssNum;
+    }
+    
     public Employee(Integer id, String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hiredate, String salary) {
         this.id = id;
         this.firstName = firstName;
@@ -22,12 +27,6 @@ public class Employee
         this.mail = mail;
         this.hiredate = hiredate;
         this.salary = salary;
-    }
-    
-    public Employee(String firstName, String ssNum, String phone) {
-        this.firstName = firstName;
-        this.ssNum = ssNum;
-        this.phone = phone;
     }
 
     public Employee() {

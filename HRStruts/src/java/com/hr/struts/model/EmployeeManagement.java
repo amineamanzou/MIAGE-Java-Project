@@ -57,12 +57,15 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE name LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE first_name LIKE \\'%\" + name + \"%\\'");
             while (rs.next()) {
-                String firstName = rs.getString("name");
+                Integer id = rs.getInt("id");
                 String ssNum = rs.getString("ssNum");
-                String phone = rs.getString("phone");
-                Employee tmp = new Employee(firstName,ssNum,phone);
+                Employee tmp = new Employee(id, ssNum);
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -86,12 +89,15 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE LASTNAME LIKE \\'%\" + name + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE first_name LIKE \\'%\" + name + \"%\\'");
             while (rs.next()) {
-                String firstName = rs.getString("name");
+                Integer id = rs.getInt("id");
                 String ssNum = rs.getString("ssNum");
-                String phone = rs.getString("phone");
-                Employee tmp = new Employee(firstName,ssNum,phone);
+                Employee tmp = new Employee(id, ssNum);
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -119,12 +125,14 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE SSNUM LIKE \\'%\" + ssNum + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE SSNUM LIKE \\'%\" + ssNum + \"%\\'");
             while (rs.next()) {
-                String firstName = rs.getString("name");
-                String sNum = rs.getString("ssNum");
-                String phone = rs.getString("phone");
-                Employee tmp = new Employee(firstName,sNum,phone);
+                Integer id = rs.getInt("id");
+                Employee tmp = new Employee(id, rs.getString("ssNum"));
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -152,12 +160,15 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE PHONE LIKE \\'%\" + phone + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE PHONE LIKE \\'%\" + phone + \"%\\'");
             while (rs.next()) {
-                String firstName = rs.getString("name");
+                Integer id = rs.getInt("id");
                 String ssNum = rs.getString("ssNum");
-                String tel = rs.getString("phone");
-                Employee tmp = new Employee(firstName,ssNum,tel);
+                Employee tmp = new Employee(id, ssNum);
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -185,12 +196,15 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES WHERE MAIL LIKE \\'%\" + mail + \"%\\'");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE WHERE MAIL LIKE \\'%\" + mail + \"%\\'");
             while (rs.next()) {
-                String firstName = rs.getString("name");
+                Integer id = rs.getInt("id");
                 String ssNum = rs.getString("ssNum");
-                String phone = rs.getString("phone");
-                Employee tmp = new Employee(firstName,ssNum,phone);
+                Employee tmp = new Employee(id, ssNum);
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -217,12 +231,15 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYES");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM EMPLOYEE");
             while (rs.next()) {
-                String firstName = rs.getString("name");
+                Integer id = rs.getInt("id");
                 String ssNum = rs.getString("ssNum");
-                String phone = rs.getString("phone");
-                Employee tmp = new Employee(firstName,ssNum,phone);
+                Employee tmp = new Employee(id, ssNum);
+                tmp.setFirstName(rs.getString("firstName"));
+                tmp.setLastName(rs.getString("lastName"));
+                tmp.setMail(rs.getString("mail"));
+                tmp.setPhone(rs.getString("phone"));
            resultat.add(tmp);
             }
           
@@ -249,7 +266,7 @@ public class EmployeeManagement implements IEmployeeManagement {
             cn = this.getConnection();
             Statement state = cn.createStatement();
             //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYES VALUES (\\'%\" + name + \"%\\')");
+            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYEE VALUES (\\'%\" + name + \"%\\')");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,7 +292,7 @@ public class EmployeeManagement implements IEmployeeManagement {
             cn = this.getConnection();
             Statement state = cn.createStatement();
             //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYES VALUES (\\'%\" + name + \"%\\')");
+            ResultSet rs = state.executeQuery("INSERT INTO EMPLOYEE VALUES (\\'%\" + name + \"%\\')");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,7 +321,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("DELETE FROM EMPLOYES WHERE ID LIKE \\'%\" + id + \"%\\'");
+            ResultSet rs = state.executeQuery("DELETE FROM EMPLOYEE WHERE ID LIKE \\'%\" + id + \"%\\'");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);

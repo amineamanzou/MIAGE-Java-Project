@@ -7,7 +7,7 @@
 #
 # Hôte: 127.0.0.1 (MySQL 5.6.10)
 # Base de données: db_hr
-# Temps de génération: 2014-11-07 09:15:59 +0000
+# Temps de génération: 2014-11-07 10:25:45 +0000
 # ************************************************************
 
 
@@ -26,7 +26,7 @@
 DROP TABLE IF EXISTS `department`;
 
 CREATE TABLE `department` (
-  `dept_id` smallint(6) NOT NULL,
+  `dept_id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `location` varchar(20) NOT NULL,
   PRIMARY KEY (`dept_id`)
@@ -52,26 +52,29 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `employee`;
 
 CREATE TABLE `employee` (
-  `ssnum` varchar(11) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
-  `first_name` varchar(20) NOT NULL,
-  `gender` char(1) NOT NULL,
-  `dep_id` smallint(6) NOT NULL,
-  `hiredate` date NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ssNum` char(20) DEFAULT NULL,
+  `firstName` char(20) DEFAULT NULL,
+  `lastName` char(20) DEFAULT NULL,
+  `gender` char(20) DEFAULT NULL,
+  `phone` char(20) DEFAULT NULL,
+  `mail` char(100) DEFAULT NULL,
+  `hireDate` date DEFAULT NULL,
   `salary` decimal(8,2) DEFAULT NULL,
-  PRIMARY KEY (`ssnum`)
+  `department_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `department_id` (`department_id`),
+  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`dept_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
 
-INSERT INTO `employee` (`ssnum`, `last_name`, `first_name`, `gender`, `dep_id`, `hiredate`, `salary`)
+INSERT INTO `employee` (`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`)
 VALUES
-	('001-01-0001','Gaillard','Pierre','M',1,'1910-01-01',117000.00),
-	('002-01-0002','Mazo','Ivan','M',2,'1995-12-01',6000.00),
-	('003-01-0003','Pena','Ana','F',3,'1990-01-01',7000.00),
-	('004-04-0003','Amanzou','Amine','M',1,'1991-02-19',55000.50),
-	('004-04-0005','Jean','Neymar','M',4,'1990-01-30',1.50);
+	(1,'0001-01-0001','Amanzou','Amine','M','0665432012','amineamanzou@gmail.com','1991-02-19',120000.00,1),
+	(2,'0002-02-0002','Neymare','Jean','M','0453672192','jeanNeymar@delarchitecture.com','1989-03-12',76999.99,3),
+	(3,'0003-03-0003','Gaillard','Pierre','F','0999999999','pierregaillard@gmail.com','1900-01-01',2.50,4);
 
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
