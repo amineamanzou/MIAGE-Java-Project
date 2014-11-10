@@ -39,9 +39,10 @@ public class EmployeeManagement implements IEmployeeManagement {
 
     @Override
     public Connection getConnection(){
+        
         try {
             Context initContext = new InitialContext();
-            DataSource data = (DataSource) initContext.lookup("jdbc/HRStruts");
+            DataSource data = (DataSource) initContext.lookup(properties.getProperty("datasource"));
             return data.getConnection();
 
         } catch (NamingException | SQLException ex) {
@@ -77,7 +78,7 @@ public class EmployeeManagement implements IEmployeeManagement {
     // Search for employees by lastname.
     @Override
     public ArrayList searchByLastName(String name) {
-         Connection cn = null;
+        Connection cn = null;
         ArrayList resultat = new ArrayList();
 
         try {
@@ -181,7 +182,7 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE");
+            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM "+properties.getProperty("databaseName")+".EMPLOYEE");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);
