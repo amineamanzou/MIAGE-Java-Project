@@ -1,0 +1,6 @@
+datasource=jdbc/EXAMPLE
+database=jdbc:mysql://HOST:PORT/EXAMPLE?zeroDateTimeBehavior=convertToNull
+databaseName=EXAMPLE
+user=YOURUSER
+password=YOURPASSWORD
+driver=com.example.jdbc.Driver

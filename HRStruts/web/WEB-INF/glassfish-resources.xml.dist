@@ -3,11 +3,11 @@
 <resources>
   <jdbc-resource enabled="true" jndi-name="jdbc/HRStruts" object-type="user" pool-name="connectionPool">
     <description/>
-    <property name="serverName" value="localhost"/>
+    <property name="serverName" value="MYHOST"/>
     <property name="PortNumber" value="3306"/>
-    <property name="DatabaseName" value="db_hr"/>
-    <property name="User" value="root"/>
-    <property name="Password" value="root"/>
+    <property name="DatabaseName" value="DBNAME"/>
+    <property name="User" value="DBUSER"/>
+    <property name="Password" value="DBPASSWD"/>
   </jdbc-resource>
   <jdbc-connection-pool 
       allow-non-component-callers="false" 
@@ -37,8 +37,8 @@
       validate-atmost-once-period-in-seconds="0" 
       wrap-jdbc-objects="false"
   >
-    <property name="URL" value="jdbc:mysql://localhost:3306/db_hr?zeroDateTimeBehavior=convertToNull"/>
-    <property name="User" value="root"/>
-    <property name="Password" value="root"/>
+    <property name="URL" value="jdbc:mysql://MYHOST:3306/DBNAME?zeroDateTimeBehavior=convertToNull"/>
+    <property name="User" value="DBUSER"/>
+    <property name="Password" value="DBPASSWD"/>
   </jdbc-connection-pool>
 </resources>
