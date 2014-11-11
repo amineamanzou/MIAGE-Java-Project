@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,22 +104,31 @@ public class EmployeeManagement implements IEmployeeManagement {
     @Override
     public boolean add(String firstName, String lastName, String ssNum, String phone, String gender, String mail, String hireDate, String salary) {
         Connection cn = null;
-        Boolean resultat = null;
-
+        Boolean result = null;
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date parsed;
+        try {
+            parsed = format.parse(hireDate);
+            java.sql.Date sql = new java.sql.Date(parsed.getTime());
+            hireDate = sql.toString();
+        } catch (ParseException ex) {
+            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO `employee` (`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`) VALUES " +
-                                                "(NULL, "+ ssNum + ", "+ firstName + ", "+ lastName + ", "+ gender + ", "+ phone + ", "+ mail + ", "+ hireDate + ", "+ salary + ", NULL);");
-          
+            result = state.execute("INSERT INTO `employee` "
+                    + "(`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`) VALUES " +
+                    "(NULL, '"+ ssNum + "', '"+ firstName + "', '"+ lastName + "', '"+ gender + "', '"+ phone + "', '"+ mail + "', '"+ hireDate + "', '"+ salary + "', NULL);");
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.closeConnection(cn);
         }
         
-        return resultat;
+        return result;
     }
 
     @Override
