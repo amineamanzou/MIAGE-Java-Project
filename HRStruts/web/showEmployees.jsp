@@ -36,18 +36,22 @@
              </logic:equal>
 
             <logic:greaterThan name="size" value="0">
-                <table border="1">
-                    <tr>
-                        <th>Id</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>Social Security Number</th>
-                            <th>Phone Number</th>
-                            <th>Mail</th>
-                            <th>Gender</th>
-                            <th>Hire Date</th>
-                            <th>Salary</th>
-                    </tr>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th><bean:message key="label.employee.firstName"/></th>
+                            <th><bean:message key="label.employee.lastName"/></th>
+                            <th><bean:message key="label.employee.ssNum"/></th>
+                            <th><bean:message key="label.employee.phone"/></th>
+                            <th><bean:message key="label.employee.mail"/></th>
+                            <th><bean:message key="label.employee.gender"/></th>
+                            <th><bean:message key="label.employee.hireDate"/></th>
+                            <th><bean:message key="label.employee.salary"/></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <logic:iterate id="result" name="showEmployees" property="results">
                         <tr>
                             <td><bean:write name="result" property="id"/></td>
