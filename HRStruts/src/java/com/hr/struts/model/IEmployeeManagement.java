@@ -20,19 +20,7 @@ public interface IEmployeeManagement {
     public Connection getConnection();
     
     // Search for employees by firstname.
-    public ArrayList searchByFirstName(String name);
-    
-    // Search for employees by lastname.
-    public ArrayList searchByLastName(String name);
-   
-    // Search for employee by social security number.
-    public ArrayList searchBySsNum(String ssNum);
-        
-    // Search for employee by phone number.
-    public ArrayList searchByPhone(String phone);
-    
-    // Search for employee by mail adress.
-    public ArrayList searchByMail(String mail);
+    public ArrayList findBy(String column, String arg);
     
     public ArrayList findAll();
     

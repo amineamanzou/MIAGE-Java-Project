@@ -53,113 +53,15 @@ public class EmployeeManagement implements IEmployeeManagement {
 
     // Search for employees by firstname.
     @Override
-    public ArrayList searchByFirstName(String name){
+    public ArrayList findBy(String criteria, String arg){
         Connection cn = null;
         ArrayList resultat = new ArrayList();
         
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT * FROM db_hr.EMPLOYEE WHERE firstName LIKE \'" + name + "\'");
-            while (rs.next()) {
-                Employee tmp = this.rowToEmployee(rs);
-                resultat.add(tmp);
-            }
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.closeConnection(cn);
-        }
-        
-        return resultat;
-    }
-
-    // Search for employees by lastname.
-    @Override
-    public ArrayList searchByLastName(String name) {
-        Connection cn = null;
-        ArrayList resultat = new ArrayList();
-
-        try {
-            cn = this.getConnection();
-            Statement state = cn.createStatement();
-            String request = "SELECT * FROM db_hr.EMPLOYEE WHERE lastName LIKE \'" + name + "\'";
-            ResultSet rs = state.executeQuery(request);
-            System.out.println(request);
-            System.out.println(rs);
-            while (rs.next()) {
-                Employee tmp = this.rowToEmployee(rs);
-                resultat.add(tmp);
-            }
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.closeConnection(cn);
-        }
-        
-        return resultat;
-    }
-
-    // Search for employee by social security number.
-    @Override
-    public ArrayList searchBySsNum(String ssNum) {
-        Connection cn = null;
-        ArrayList resultat = new ArrayList();
-
-        try {
-            cn = this.getConnection();
-            Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE ssNum LIKE \'" + ssNum + "\'");
-            while (rs.next()) {
-                Employee tmp = this.rowToEmployee(rs);
-                resultat.add(tmp);
-            }
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.closeConnection(cn);
-        }
-        
-        return resultat;
-    }
-
-    // Search for employee by phone number.
-    @Override
-    public ArrayList searchByPhone(String phone) {
-         Connection cn = null;
-        ArrayList resultat = new ArrayList();
-
-        try {
-            cn = this.getConnection();
-            Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE phone LIKE \'" + phone + "\'");
-            while (rs.next()) {
-                Employee tmp = this.rowToEmployee(rs);
-                resultat.add(tmp);
-            }
-          
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.closeConnection(cn);
-        }
-        
-        return resultat;
-    }
-
-    // Search for employee by mail adress.
-    @Override
-    public ArrayList searchByMail(String mail) {
-        Connection cn = null;
-        ArrayList resultat = new ArrayList();
-
-        try {
-            cn = this.getConnection();
-            Statement state = cn.createStatement();
-            ResultSet rs = state.executeQuery("SELECT DISTINCT * FROM db_hr.EMPLOYEE WHERE mail LIKE \'" + mail + "\'");
+            ResultSet rs = state.executeQuery("SELECT * FROM "+ properties.getProperty("databaseName") +".EMPLOYEE"
+                    + " WHERE "+ criteria +" LIKE \'" + arg + "\'");
             while (rs.next()) {
                 Employee tmp = this.rowToEmployee(rs);
                 resultat.add(tmp);

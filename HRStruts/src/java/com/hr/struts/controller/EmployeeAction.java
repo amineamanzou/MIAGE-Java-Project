@@ -24,23 +24,38 @@ public final class EmployeeAction extends SuperAction {
 
         DynaActionForm searchForm = (DynaActionForm) form;
 
-        String name = searchForm.getString("firstName");
-        String ssnum = searchForm.getString("ssNum");
-        if (name != null && name.trim().length() > 0) {
-            results = employeeManagement.searchByFirstName(name);
-        } else if (ssnum != null && ssnum.trim().length() > 0) {
-            try {
-                results = (List) employeeManagement.searchBySsNum(ssnum);
-            } catch (Exception e) {
+        String firstName = searchForm.getString("firstName");
+        String ssNum = searchForm.getString("ssNum");
+        String lastName = searchForm.getString("lastName");
+        String phone = searchForm.getString("phone");
+        String mail = searchForm.getString("mail");
+        try {
+            if (firstName != null && firstName.trim().length() > 0) {
+                results = employeeManagement.findBy("firstName",firstName);
+            } 
+            else if (lastName != null && lastName.trim().length() > 0) {
+                results = employeeManagement.findBy("lastName",lastName);
+            }
+            else if (ssNum != null && ssNum.trim().length() > 0) {
+                results = (List) employeeManagement.findBy("ssNum",ssNum);
+            }
+            else if (phone != null && phone.trim().length() > 0){
+                results = (List) employeeManagement.findBy("phone",phone);
+            }
+            else if (mail != null && mail.trim().length() > 0){
+                results = (List) employeeManagement.findBy("mail",mail);
+            }
+            else {
+                errors.add(null, new ActionMessage("Veuillez remplir au moins un champs"));
+                results = new ArrayList();
+            }
+        } catch (Exception e) {
                 errors.add(null, new ActionMessage(e.getMessage()));
                 results = new ArrayList();
-            } finally {
-                this.saveErrors(request, errors);
-            }
-        } else {
-            errors.add(null, new ActionMessage("Veuillez remplir au moins un champs"));
-            results = new ArrayList();
+        } finally {
+            this.saveErrors(request, errors);
         }
+        
         searchForm.getMap().clear();
         searchForm.set("results", results);
 
