@@ -56,6 +56,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.mail"/>
+                    </label>
+                    <div class="col-sm-9">
+                         <html:text property="mail"/> (xxxxxxxxxx)
+                    </div>
+                </div>
+                <div class="form-group">
                     <hr width="100%" size="1" noshade="false">
                 </div>
                 <div class="form-group">
