@@ -24,46 +24,72 @@
 
             <html:form action="/createEmployee">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="form_username">
-                        Id
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.firstName"/>
                     </label>
-                    <div class="col-sm-10">
-                        <html:text property="id"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="form_username">
-                        <bean:message key="label.search.firstName"/>
-                    </label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <html:text property="firstName"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="form_username">
-                        <bean:message key="label.search.lastName"/>
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.lastName"/>
                     </label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <html:text property="lastName"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="form_username">
-                        <bean:message key="label.search.ssNum"/> 
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.ssNum"/> 
                     </label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <html:text property="ssNum"/> (xxx-xx-xxxx)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="form_username">
-                        <bean:message key="label.search.phone"/>
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.phone"/>
                     </label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                          <html:text property="phone"/> (xxxxxxxxxx)
                     </div>
                 </div>
-                <br><br><br><br><br>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >
+                        <bean:message key="label.employee.mail"/>
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="mail"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >
+                        <bean:message key="label.employee.gender"/>
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="gender"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >
+                        <bean:message key="label.employee.hireDate"/> 
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="hireDate"/> (xx/xx/xxxx)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >
+                        <bean:message key="label.employee.salary"/>
+                    </label>
+                    <div class="col-sm-9">
+                         <html:text property="salary"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr width="100%" size="1" noshade="false">
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-success">Enregistrer</button>

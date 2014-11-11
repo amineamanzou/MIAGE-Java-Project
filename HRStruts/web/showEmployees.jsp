@@ -22,7 +22,7 @@
         
        
             <html:form action="/showEmployees"> 
-                <html:submit/>
+                <button type="submit" class="btn btn-success">Afficher</button>
             </html:form>
 
             <logic:present name="showEmployees" property="results">
@@ -59,8 +59,13 @@
                             <td><bean:write name="result" property="gender"/></td>
                             <td><bean:write name="result" property="hiredate"/></td>
                             <td><bean:write name="result" property="salary"/></td>
+                            <td>
+                                <a class="btn btn-info btn-xs" href=""><bean:message key="button.update"/></a>
+                                <a class="btn btn-danger btn-xs" href=""><bean:message key="button.delete"/></a>
+                            </td>
                         </tr>
                     </logic:iterate>
+                    </tbody>
                 </table>
             </logic:greaterThan>
 

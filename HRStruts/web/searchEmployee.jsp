@@ -23,40 +23,46 @@
             <html:errors/>
 
             <html:form action="/searchEmployee">
-                <table>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.firstName"/>:</td>
-                        <td><html:text property="firstName"/></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>-- or --</td>
-                    </tr>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.lastName"/>:</td>
-                        <td><html:text property="lastName"/> </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>-- or --</td>
-                    </tr>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.ssNum"/>:</td>
-                        <td><html:text property="ssNum"/> (xxx-xx-xxxx)</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>-- or --</td>
-                    </tr>
-                    <tr>
-                        <td align="right"><bean:message key="label.search.phone"/>:</td>
-                        <td><html:text property="phone"/> (xxxxxxxxxx)</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><html:submit/></td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.firstName"/>
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="firstName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.lastName"/>
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="lastName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.ssNum"/> 
+                    </label>
+                    <div class="col-sm-9">
+                        <html:text property="ssNum"/> (xxx-xx-xxxx)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required" >
+                        <bean:message key="label.employee.phone"/>
+                    </label>
+                    <div class="col-sm-9">
+                         <html:text property="phone"/> (xxxxxxxxxx)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr width="100%" size="1" noshade="false">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-info">Search</button>
+                    </div>
+                </div>
              </html:form>
 
             <logic:present name="searchEmployee" property="results">
@@ -96,6 +102,7 @@
                                 <td><bean:write name="result" property="salary"/></td>
                             </tr>
                         </logic:iterate>
+                        </tbody>
                     </table>
                 </logic:greaterThan>
             </logic:present>

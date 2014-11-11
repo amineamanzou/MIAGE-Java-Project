@@ -23,13 +23,12 @@
         </form-bean>
 
         <form-bean name="createEmployee" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="id" type="java.lang.Integer"/>
             <form-property name="ssNum" type="java.lang.String"/>
             <form-property name="firstName" type="java.lang.String"/>
             <form-property name="lastName" type="java.lang.String"/>
             <form-property name="gender" type="java.lang.String"/>
             <form-property name="mail" type="java.lang.String"/>
-            <form-property name="hiredate" type="java.lang.String"/>
+            <form-property name="hireDate" type="java.lang.String"/>
             <form-property name="salary" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
             <form-property name="results" type="java.util.List"/>
@@ -42,7 +41,7 @@
             <form-property name="lastName" type="java.lang.String"/>
             <form-property name="gender" type="java.lang.String"/>
             <form-property name="mail" type="java.lang.String"/>
-            <form-property name="hiredate" type="java.lang.String"/>
+            <form-property name="hireDate" type="java.lang.String"/>
             <form-property name="salary" type="java.lang.String"/>
             <form-property name="phone" type="java.lang.String"/>
             <form-property name="results" type="java.lang.Boolean"/>
