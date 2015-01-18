@@ -139,9 +139,11 @@ public class EmployeeManagement implements IEmployeeManagement {
         try {
             cn = this.getConnection();
             Statement state = cn.createStatement();
-            //à completer
-            ResultSet rs = state.executeQuery("INSERT INTO `employee` (`id`, `ssNum`, `firstName`, `lastName`, `gender`, `phone`, `mail`, `hireDate`, `salary`, `department_id`) VALUES " +
-                                                "(NULL, "+ ssNum + ", "+ firstName + ", "+ lastName + ", "+ gender + ", "+ phone + ", "+ mail + ", "+ hireDate + ", "+ salary + ", NULL);");
+            ResultSet rs = state.executeQuery("UPDATE `employee` " 
+                                    + "SET ssNum='"+ ssNum + "', firstName='"+ firstName + "', lastName='"+ lastName 
+                                    + "', gender='"+ gender + "', phone='"+ phone + "', mail='"+ mail 
+                                    + "', hireDate='"+ hireDate + "', salary='"+ salary + "'"
+                                    + " WHERE id="+ id +";");
           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeManagement.class.getName()).log(Level.SEVERE, null, ex);

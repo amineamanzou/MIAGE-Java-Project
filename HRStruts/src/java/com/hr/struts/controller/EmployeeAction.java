@@ -154,7 +154,7 @@ public ActionForward update(ActionMapping mapping,
     DynaActionForm searchForm = (DynaActionForm)form;
    
     // Perform employee search based on the criteria entered.
-    Integer id = (Integer)searchForm.get("id");
+    Integer id = 1;
     String firstName = (String)searchForm.get("firstName");
     String lastName = (String)searchForm.get("lastName");
     String ssNum = (String)searchForm.get("ssNum");
