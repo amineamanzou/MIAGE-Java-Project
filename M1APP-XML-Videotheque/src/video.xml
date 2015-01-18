@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<videotheque>
+	<film annee="1994">
+		<titre>Pulp fiction</titre>
+		<realisateur>Quentin Tarantino</realisateur>
+		<acteurs>
+			<acteur>John Travolta</acteur>
+			<acteur>Uma Thurman</acteur>
+			<acteur>Bruce Willis</acteur>
+			<acteur>Samuel L. Jackson</acteur>
+		</acteurs>
+	</film>
+	<film annee="1962">
+		<titre>Lawrence d'Arabie</titre>
+		<realisateur>David Lean</realisateur>
+		<acteurs>
+			<acteur>Peter O'Toole</acteur>
+			<acteur>Omar Sharif</acteur>
+			<acteur>Alec Guinness</acteur>
+		</acteurs>
+	</film>
+	<film annee="1966">
+		<titre>Le bon, la brute et le truand</titre>
+		<realisateur>Sergio Leone</realisateur>
+		<acteurs>
+			<acteur>Clint Eastwood</acteur>
+			<acteur>Lee Van Cleef</acteur>
+			<acteur>Eli Wallach</acteur>
+		</acteurs>
+	</film>
+	<film annee="1992">
+		<titre>Impitoyable</titre>
+		<realisateur>Clint Eastwood</realisateur>
+		<acteurs>
+			<acteur>Clint Eastwood</acteur>
+			<acteur>Gene Hackman</acteur>
+			<acteur>Morgan Freeman</acteur>
+		</acteurs>
+	</film>
+	<film annee="2000">
+		<titre>Tigres et dragons</titre>
+		<realisateur>Ang Lee</realisateur>
+		<acteurs>
+			<acteur>Chow Yun-fat</acteur>
+			<acteur>Michelle Yeoh</acteur>
+			<acteur>Zhang Ziyi</acteur>
+		</acteurs>
+	</film>
+	<film annee="1990">
+		<titre>Rèves</titre>
+		<realisateur>Akira Kurosawa</realisateur>
+		<acteurs>
+			<acteur>Akira Terao</acteur>
+			<acteur>Mitsouko Baisho</acteur>
+			<acteur>Toshie Negishi</acteur>
+		</acteurs>
+	</film>
+	<film annee="1985">
+		<titre>Pale Rider</titre>
+		<realisateur>Clint Eastwood</realisateur>
+		<acteurs>
+			<acteur>Clint Eastwood</acteur>
+			<acteur>Sidney Penny</acteur>
+			<acteur>Michael Moriarty</acteur>
+			<acteur>Carrie Snodgress</acteur>
+		</acteurs>
+	</film>
+	<film annee="1992">
+		<titre>Reservoir dogs</titre>
+		<realisateur>Quentin Tarantino</realisateur>
+		<acteurs>
+			<acteur>Harvey Keitel</acteur>
+			<acteur>Tim Roth</acteur>
+			<acteur>Michael Madsen</acteur>
+			<acteur>Steve Buscemi</acteur>
+		</acteurs>
+	</film>
+	<film annee="1996">
+		<titre>Une nuit en enfer</titre>
+		<realisateur>Robert Rodriguez</realisateur>
+		<acteurs>
+			<acteur>George Clooney</acteur>
+			<acteur>Quentin Tarantino</acteur>
+			<acteur>Harvey Keitel</acteur>
+		</acteurs>
+	</film>
+	<film annee="1998">
+		<titre>Jackie Brown</titre>
+		<realisateur>Quentin Tarantino</realisateur>
+		<acteurs>
+			<acteur>Pam Grier</acteur>
+			<acteur>Samuel L. Jackson</acteur>
+			<acteur>Robert De Niro</acteur>
+		</acteurs>
+	</film>
+	<film annee="1998">
+		<titre>Bird</titre>
+		<realisateur>Clint Eastwood</realisateur>
+		<acteurs>
+			<acteur>Forest Whitaker</acteur>
+			<acteur>Diane Venora</acteur>
+		</acteurs>
+	</film>
+	<film annee="2009">
+		<titre>Invictus</titre>
+		<realisateur>Clint Eastwood</realisateur>
+		<acteurs>
+			<acteur>Morgan Freeman</acteur>
+			<acteur>Matt Damon</acteur>
+		</acteurs>
+	</film>
+</videotheque>
