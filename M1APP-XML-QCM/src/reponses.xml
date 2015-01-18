@@ -1,0 +1,9 @@
+<questions>
+    <question id="1">
+        <reponse id="5" >A</reponse>
+        <reponse id="6" >B la réponse B</reponse>
+    </question>
+    <question id="2">
+        <reponse id="7" >C</reponse>
+    </question>
+</questions>
