@@ -1,0 +1,67 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+   <xs:element name='formation'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='intitule'/>
+          <xs:element ref='matieres'/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='matieres'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='matiere' maxOccurs='unbounded'/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='matiere'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='intitule'/>
+          <xs:element ref='horaire'/>
+          <xs:element ref='equipe'/>
+         </xs:sequence>
+        <xs:attribute name='code' type='xs:string' use='required'/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='intitule' type='xs:string'/>
+
+   <xs:element name='horaire'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='cm'/>
+          <xs:element ref='td'/>
+          <xs:element ref='tp'/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='cm' type='xs:integer'/>
+   <xs:element name='td' type='xs:integer'/>
+   <xs:element name='tp' type='xs:integer'/>
+
+   <xs:element name='equipe'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='membre' maxOccurs='unbounded'/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='membre'>
+      <xs:complexType>
+         <xs:sequence>
+          <xs:element ref='nom'/>
+          <xs:element ref='prenom'/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name='nom' type='xs:string'/>
+   <xs:element name='prenom' type='xs:string'/>
+
+</xs:schema>

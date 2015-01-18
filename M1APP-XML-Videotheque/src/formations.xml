@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<formations>
+    <formation code="UFR27">
+        <intitule>MIAGE</intitule>
+        <matieres>
+            <matiere code="INF1">
+                <intitule>WEB BDD</intitule>
+                <horaire>
+                    <cm>4</cm>
+                    <td>9</td>
+                    <tp>9</tp>
+                </horaire>
+                <equipe>
+                    <membre>
+                        <nom>Raul</nom>
+                        <prenom>Mazo</prenom>
+                    </membre>
+                    <membre>
+                        <nom>Jean</nom>
+                        <prenom>Neymare</prenom>
+                    </membre>
+                </equipe>
+            </matiere>
+            <matiere code="INF2">
+                <intitule>Developpement</intitule>
+                <horaire>
+                    <cm>6</cm>
+                    <td>10</td>
+                    <tp>5</tp>
+                </horaire>
+                <equipe>
+                    <membre>
+                        <nom>Jian</nom>
+                        <prenom>Lee</prenom>
+                    </membre>
+                    <membre>
+                        <nom>Jean</nom>
+                        <prenom>Neymare</prenom>
+                    </membre>
+                </equipe>
+            </matiere>
+            <matiere code="INF3">
+                <intitule>Java</intitule>
+                <horaire>
+                    <cm>30</cm>
+                    <td>4</td>
+                    <tp>10</tp>
+                </horaire>
+                <equipe>
+                    <membre>
+                        <nom>Hug</nom>
+                        <prenom>Charlotte</prenom>
+                    </membre>
+                    <membre>
+                        <nom>Deneckere</nom>
+                        <prenom>Rebecca</prenom>
+                    </membre>
+                </equipe>
+            </matiere>
+        </matieres>
+    </formation>
+</formations>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!ELEMENT formation     (intitule,matieres)>
+<!ELEMENT matieres (matiere+)>
+<!ELEMENT matiere  (intitule,horaire,equipe)>
+<!ATTLIST matiere code CDATA #REQUIRED>
+<!ELEMENT intitule (#PCDATA)>
+<!ELEMENT horaire (cm,td,tp)>
+<!ELEMENT cm       (#PCDATA)>
+<!ELEMENT td    (#PCDATA)>
+<!ELEMENT tp    (#PCDATA)>
+<!ELEMENT equipe (membre+)>
+<!ELEMENT membre (nom,prenom)>
+<!ELEMENT nom       (#PCDATA)>
+<!ELEMENT prenom    (#PCDATA)>
