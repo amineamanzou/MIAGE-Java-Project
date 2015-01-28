@@ -29,6 +29,7 @@ public class Client {
 
   /**
    * Usage : Username ServerAdress Port
+   * @param args
    */
   public static void main(String[] args) {
     // default values
@@ -37,10 +38,10 @@ public class Client {
     String userName = "Anonymous";
   
     // args
-    if(args.length < 3){
-      userName = args[1];
-      serverAddress = args[2];
-      portNumber = Integer.parseInt(args[3]);
+    if(args.length == 3){
+      userName = args[0];
+      serverAddress = args[1];
+      portNumber = Integer.parseInt(args[2]);
     }
 
     // Create socket
@@ -52,7 +53,9 @@ public class Client {
       display("Error connectiong to server:" + ec);
     }
 
-    String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort();
+    String msg = new String("Connection accepted " 
+            + s.getInetAddress().toString()
+            + ":" + s.getPort());
     display(msg);
 
   }
