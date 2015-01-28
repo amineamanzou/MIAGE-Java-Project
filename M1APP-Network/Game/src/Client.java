@@ -10,7 +10,7 @@ public class Client {
   // for I/O
   private ObjectInputStream sInput;       // to read from the socket
   private ObjectOutputStream sOutput;     // to write on the socket
-  private Socket socket;
+  private static Socket socket;
   
   // info for server
   private String username;
@@ -21,7 +21,7 @@ public class Client {
    *  Constructor call when used from a GUI
    *  in console mode the ClienGUI parameter is null
    */
-  Client(String server, int port, String username) {
+  Client(InetAddress server, int port, String username) {
       this.server = server;
       this.port = port;
       this.username = username;
@@ -38,7 +38,7 @@ public class Client {
   
     // args
     if(args.length < 3){
-      userName = args[1]
+      userName = args[1];
       serverAddress = args[2];
       portNumber = Integer.parseInt(args[3]);
     }
@@ -50,7 +50,6 @@ public class Client {
     }
     catch(Exception ec) {
       display("Error connectiong to server:" + ec);
-      return false;
     }
 
     String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort();
@@ -61,7 +60,7 @@ public class Client {
   /**   
    * To send a message to the console
    */
-  private void display(String msg) {   
+  private static void display(String msg) {   
       System.out.println(msg);      // println in console mode
   }
 
