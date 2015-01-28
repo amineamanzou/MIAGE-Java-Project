@@ -12,3 +12,6 @@ manifest.mf
 
 # Final submitted file
 *.zip
+
+# Compiled file
+*.class
