@@ -66,5 +66,49 @@ public class Client {
   private static void display(String msg) {   
       System.out.println(msg);      // println in console mode
   }
+  
+  /**
+    * To send a message to the server
+    */
+  void sendMessage(ChatMessage msg) {
+    try {
+      sOutput.writeObject(msg);
+    }
+    catch(IOException e) {
+      display("Exception writing to server: " + e);
+    }
+  }
+
+  /*
+   * a class that waits for the message from the server and append them to the JTextArea
+   * if we have a GUI or simply System.out.println() it in console mode
+   */
+  class ListenFromServer extends Thread {
+
+    public void run() {
+      while(true) {
+        try {
+          String msg = (String) sInput.readObject();
+          // if console mode print the message and add back the prompt
+          if(cg == null) {
+            System.out.println(msg);
+            System.out.print("> ");
+          }
+          else {
+            cg.append(msg);
+          }
+        }
+        catch(IOException e) {
+          display("Server has close the connection: " + e);
+          if(cg != null) 
+            cg.connectionFailed();
+          break;
+        }
+        // can't happen with a String object but need the catch anyhow
+        catch(ClassNotFoundException e2) {
+        }
+      }
+    }
+  }
 
 }
