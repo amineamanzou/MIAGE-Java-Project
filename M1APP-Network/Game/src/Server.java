@@ -1,21 +1,42 @@
+<<<<<<< HEAD
+=======
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
+<<<<<<< HEAD
 import java.math.*;
+=======
+
+>>>>>>> FETCH_HEAD
+>>>>>>> FETCH_HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> FETCH_HEAD
+>>>>>>> FETCH_HEAD
 /**
  *
  * @author pierregaillard
  */
 public class Server {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> FETCH_HEAD
     public static void main(String[] args) {
         double draw = (Math.random()*100) % 2;
         int start = (int) draw; //forcément égal à 0 ou 1. 0 => Client commence, 1 Serveur Commence. 
@@ -40,4 +61,5 @@ public class Server {
             System.out.println("Erreur ahah");
         }
     }
+>>>>>>> FETCH_HEAD
 }
