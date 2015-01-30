@@ -18,7 +18,7 @@ public class Main {
      * @throws org.xml.sax.SAXException
      */
     public static void main(String[] args) throws SAXException {
-        if(args.length < 2)
+        if(args.length != 2)
         {
             System.out.println("Error usage : java Qcm ./filenameQuestion ./filenameAnswer");
             System.exit(0);
@@ -42,6 +42,7 @@ public class Main {
             System.out.println("Erreur de parsing");
             System.out.println("Lors de l'appel à parse()");
         } catch (IOException ioe) {
+            ioe.printStackTrace();
             System.out.println("Erreur d'entrée/sortie");
             System.out.println("Lors de l'appel à parse()");
         }
