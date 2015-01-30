@@ -30,8 +30,9 @@ public class Server implements Serializable {
                 ObjectInputStream serverInputStream = new ObjectInputStream(s.getInputStream());
                 ObjectOutputStream serverOutputStream = new ObjectOutputStream(s.getOutputStream());
                 mess = (message) serverInputStream.readObject();
+               
                 String tmp = mess.getMessage();
-
+                
                 
                 //out = new BufferedWriter((new OutputStreamWriter(s.getOutputStream())));
                 // Partie logique à faire côté server

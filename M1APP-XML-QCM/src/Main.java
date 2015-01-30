@@ -9,6 +9,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
+ * @author Pierre Gaillard
  */
 public class Main {
 
