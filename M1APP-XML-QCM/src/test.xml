@@ -1,0 +1,25 @@
+<questions>   
+    <question id="1">        
+        <libelle>La commande permettant de complier une application java est :</libelle>        
+        <reponse id="A" >Ab</reponse>        
+        <reponse id="B" >B la réponse B</reponse>        
+        <reponse id="C" >Csqdf</reponse>        
+        <reponse id="D" >Dsdfsdf</reponse>    
+    </question>    
+    <question id="2">        
+        <libelle>La commande permettant d'executer une application java est :</libelle>        
+        <reponse id="A" >Asdfsfd</reponse>        
+        <reponse id="B" >B la réponse B</reponse>        
+        <reponse id="C" >Cqsdqsd</reponse>        
+        <reponse id="D" >Dqsdqsd</reponse>    
+    </question>
+</questions>
+<reponses>    
+    <corrige id="1">        
+        <correcte id="A" >A</correcte>        
+        <correcte id="B" >B la réponse B</correcte>    
+    </corrige>    
+    <corrige id="2">        
+        <correcte id="C" >C</correcte>    
+    </corrige>
+</reponses>

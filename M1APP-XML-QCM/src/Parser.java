@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +16,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  *
  * @author Amine Amanzou <amineamanzou@gmail.com>
- * @author Pierre Gaillard 
+ * @author Pierre Gaillard Orbit system - Time Machine
  */
 public class Parser extends DefaultHandler {
 
@@ -23,22 +24,26 @@ public class Parser extends DefaultHandler {
     private StringBuffer buffer;
     private Map<Integer, List<Integer>> bonneReponse;
     private int question;
-
+    public String[] tabRep;
+    
     public Parser() {
         super();
         buffer = new StringBuffer();
         bonneReponse = new TreeMap<>();
     }
 
+    public String[] getTabRep() {
+        return tabRep;
+    }
+    
     @Override
-
     public void startDocument() throws SAXException {
-        System.out.println("C'est parti !!!");
+        System.out.println("");
     }
 
     @Override
     public void endDocument() throws SAXException {
-        System.out.println("Et hop, c'est fini !!!");
+        System.out.println("");
     }
 
     @Override
@@ -53,31 +58,63 @@ public class Parser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName,
             Attributes attributes) throws SAXException {
         if (qName.equals("question")) {
-            System.out.println("------------------------");
+            System.out.println("------------------------------------------------------------------------");
             question = Integer.parseInt(attributes.getValue("id"));
             System.out.println("Question n° : " + question);
-            bonneReponse.put(question, new ArrayList());
-            //if(Integer.parseInt(attributes.getValue("correction")) == 1) {
-            //}
+        }
+        
+        if (qName.equals("corrige")) {
+            System.out.println("Correction de la question numéro "+ attributes.getValue("id"));
+            System.out.println(tabRep);
+            // Affichage des réponses utilisateurs (tabRep)
+        }
+        
+        if (qName.equals("correcte")) {
+            // Comparaison avec la liste utilisateurs (tabRep & BonneRéponse) & stocke en mémoire true/false
         }
 
         if (qName.equals("question") || qName.equals("reponses")
-                || qName.equals("questionnaire")) {
+                || qName.equals("questions")) {
             buffer = null;
         } else {
             buffer = new StringBuffer();
+        }
+        if (qName.equals("reponse")) {
+            System.out.print("\t " + attributes.getValue("id") + ") ");
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-        if (qName.equals("intitule")) {
+        if (qName.equals("libelle")) {
             System.out.println("Intitulé question : " + buffer);
             buffer = null;
         }
+        
+        if (qName.equals("correcte")) {
+            // Affiche la réponse concernée 
+        }
+                
+        if (qName.equals("corrige")) {
+            //Affichage du résultat pour l'utilisateur (bon ou faux) compare de tabRep (réponse util) et bonneRéponse
+            System.out.println("Vous avez donc " + " " + " à cette question !");
+            buffer = null;
+        }
+               
         if (qName.equals("reponse")) {
-            System.out.println("Réponse : " + buffer);
+            System.out.println(buffer);
+            buffer = null;
+        }
+        
+        if (qName.equals("reponses")) {
+            //Affichage des compteurs (bonne réponses, mauvaises réponses, réponses vides
+            buffer = null;
+        }
+        
+        if (qName.equals("questions")) {
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("Fin du questionnaire !");
             buffer = null;
         }
 
@@ -85,28 +122,13 @@ public class Parser extends DefaultHandler {
             try {
                 InputStreamReader ist = new InputStreamReader(System.in);
                 BufferedReader br = new BufferedReader(ist);
-                System.out.print("Réponse : ");
+                System.out.print("Votre réponse (vide ou séparées par des virgules) : ");
                 String reponse = br.readLine();
+
                 boolean co = true;
                 reponse = reponse.trim();
-                String[] tabRep = reponse.split(",");
-                List<Integer> reponses = bonneReponse.get(question);
-                int nbCorrecte = reponses.size();
-
-                for (String rep : tabRep) {
-                    if (reponses.contains(Integer.parseInt(rep))) {
-                        nbCorrecte--;
-                    } else {
-                        co = false;
-                    }
-                }
-
-                if (nbCorrecte == 0 && co) {
-                    System.out.println("bonne réponse");
-                } else {
-                    System.out.println("Mauvaise réponse");
-                }
-                System.out.println("Les réponses étaient : " + reponses);
+                tabRep = reponse.split(",");
+                
             } catch (IOException ex) {
                 Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
             }

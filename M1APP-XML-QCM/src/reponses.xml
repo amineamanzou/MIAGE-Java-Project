@@ -1,9 +1,9 @@
-<questions>
-    <question id="1">
-        <reponse id="5" >A</reponse>
-        <reponse id="6" >B la réponse B</reponse>
-    </question>
-    <question id="2">
-        <reponse id="7" >C</reponse>
-    </question>
-</questions>
+<reponses>
+    <corrige id="1">
+        <correcte id="A" >A</correcte>
+        <correcte id="B" >B la réponse B</correcte>
+    </corrige>
+    <corrige id="2">
+        <correcte id="C" >C</correcte>
+    </corrige>
+</reponses>
