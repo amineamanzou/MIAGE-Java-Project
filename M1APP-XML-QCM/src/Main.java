@@ -29,8 +29,9 @@ public class Main {
      * @param args the command line arguments
      * @throws org.xml.sax.SAXException
      */
-    public static void main(String[] args) throws SAXException, Exception {
-        if (args.length < 2) {
+    public static void main(String[] args) throws SAXException {
+        if(args.length != 2)
+        {
             System.out.println("Error usage : java Qcm ./filenameQuestion ./filenameAnswer");
             System.exit(0);
         }
@@ -44,8 +45,6 @@ public class Main {
 
             File questions = new File(args[0]);
             File answers = new File(args[1]);
-            File output = Readfiles.appendFiles(questions.getAbsolutePath(), answers.getAbsolutePath());
-
             Parser gestionnaire = new Parser();
             parseur.parse(questions, gestionnaire);
             String[] tabrep = gestionnaire.getTabRep();
@@ -58,6 +57,10 @@ public class Main {
         } catch (SAXException se) {
             se.printStackTrace();
             System.out.println("Erreur de parsing");
+            System.out.println("Lors de l'appel à parse()");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            System.out.println("Erreur d'entrée/sortie");
             System.out.println("Lors de l'appel à parse()");
         }
     }
