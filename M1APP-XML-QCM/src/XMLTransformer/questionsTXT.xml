@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet href="questionsTXT.xsl" type="text/xsl" ?>
+<questions>
+    <question id="1">
+        <libelle>La commande permettant de complier une application java est :</libelle>
+        <reponse id="A" >java</reponse>
+        <reponse id="B" >javacc</reponse>
+        <reponse id="C" >yaml</reponse>
+        <reponse id="D" >javac</reponse>
+    </question>
+    <question id="2">
+        <libelle>La commande permettant d'executer une application java est :</libelle>
+        <reponse id="A" >gcc</reponse>
+        <reponse id="B" >kv</reponse>
+        <reponse id="C" >git</reponse>
+        <reponse id="D" >compile</reponse>
+    </question>
+</questions>

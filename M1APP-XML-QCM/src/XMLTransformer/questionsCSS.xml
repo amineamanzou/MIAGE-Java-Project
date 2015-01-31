@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet href="questions.css" type="text/css" ?>
+<questions>
+    <question id="1">
+        <libelle>La commande permettant de complier une application java est :</libelle>
+        <reponse id="5" >A</reponse>
+        <reponse id="6" >B la réponse B</reponse>
+        <reponse id="7" >C</reponse>
+        <reponse id="8" >D</reponse>
+    </question>
+    <question id="2">
+        <libelle>La commande permettant d'executer une application java est :</libelle>
+        <reponse id="5" >A</reponse>
+        <reponse id="6" >B la réponse B</reponse>
+        <reponse id="7" >C</reponse>
+        <reponse id="8" >D</reponse>
+    </question>
+</questions>
