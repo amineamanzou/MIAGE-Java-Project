@@ -10,10 +10,18 @@ and open the template in the editor.
 */
 
 <style type="text/css">
-    questions , question {}
+    questions , 
+    question {}
+    libelle {
+        font-weight: bold;
+        margin: 0px 0px 0px 10px;
+    }
     reponse{
         display:block;
         width:30%;
-        background-color:teal;
+        background-color:blue;
+    }
+    reponse:hover{
+        background-color:red;
     }
 </style>

@@ -1,0 +1,13 @@
+
+Question N°1 : La commande permettant de complier une application java est :
+A ) java
+B ) javacc
+C ) yaml
+D ) javac
+
+Question N°2 : La commande permettant d'executer une application java est :
+A ) gcc
+B ) kv
+C ) git
+D ) compile
+
